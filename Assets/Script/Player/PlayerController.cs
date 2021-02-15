@@ -15,23 +15,43 @@ public class PlayerController : MonoBehaviour
 
     Keyboard _kb;
     Mouse _mb;
+    Vector2 _mousePos;
+    Rigidbody2D _rb;
+    Camera _cam;
+    Vector3 _camOffset;
+    Quaternion _camRotOffset;
+    Vector3 _dumpSpeed;
 
     void Start()
     {
         _kb = Keyboard.current;
         _mb = Mouse.current;
+        _rb = GetComponent<Rigidbody2D>();
 
         _currentSeedCombo = new Queue<SeedTypes>();
 
         InitializeDictionaries();
+
+        _cam = Camera.main;
+        _camOffset = _cam.transform.position;
+        _camRotOffset = _cam.transform.rotation;
     }
 
     void Update()
     {
-        CheckMovement();
         CheckMouseLook();
         CheckSeedInput();
         CheckMouseInput();
+    }
+
+    void FixedUpdate()
+    {
+        CheckMovement();
+    }
+
+    void LateUpdate()
+    {
+        _cam.transform.position = transform.position + _camOffset;
     }
 
     void InitializeDictionaries()
@@ -59,12 +79,38 @@ public class PlayerController : MonoBehaviour
 
     void CheckMovement()
     {
+        Vector2 movementVector = Vector2.zero;
 
+        if (_kb.wKey.isPressed)
+        {
+            movementVector += new Vector2(transform.up.x * movementSpeed * Time.fixedDeltaTime, transform.up.y * movementSpeed * Time.fixedDeltaTime);
+        }
+
+        if (_kb.sKey.isPressed)
+        {
+            movementVector -= new Vector2(transform.up.x * movementSpeed * Time.fixedDeltaTime, transform.up.y * movementSpeed * Time.fixedDeltaTime);
+        }
+
+        if (_kb.aKey.isPressed)
+        {
+            movementVector -= new Vector2(transform.right.x * movementSpeed * Time.fixedDeltaTime, transform.right.y * movementSpeed * Time.fixedDeltaTime);
+        }
+
+        if (_kb.dKey.isPressed)
+        {
+            movementVector += new Vector2(transform.right.x * movementSpeed * Time.fixedDeltaTime, transform.right.y * movementSpeed * Time.fixedDeltaTime);
+        }
+
+        _rb.MovePosition(_rb.position + movementVector);
     }
 
     void CheckMouseLook()
     {
+        _mousePos = _mb.position.ReadValue();
 
+        Vector3 targetDir = Camera.main.ScreenToWorldPoint(_mousePos) - transform.position;
+        float angle = (Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg) - 90f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     void CheckMouseInput()
