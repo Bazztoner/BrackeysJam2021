@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     public float movementSpeed;
     public Dictionary<SeedTypes, bool> unlockedSeeds;
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void InitializeDictionaries()
     {
+        //Remember to put false in everything except Base for the final game
         unlockedSeeds = new Dictionary<SeedTypes, bool>
         {
             { SeedTypes.Base, true },
@@ -109,8 +110,8 @@ public class PlayerController : MonoBehaviour
     {
         _mousePos = _mb.position.ReadValue();
 
-        Vector3 targetDir = Camera.main.ScreenToWorldPoint(_mousePos) - transform.position;
-        float angle = (Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg) - 90f;
+        var targetDir = Camera.main.ScreenToWorldPoint(_mousePos) - transform.position;
+        var angle = (Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg) - 90f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 

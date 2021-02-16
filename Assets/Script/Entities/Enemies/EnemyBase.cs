@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using FSM;
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : Entity
 {
     public float maxHP, movementSpeed;
     protected float _currentHP;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
 
     public float damage;
 
@@ -15,9 +15,16 @@ public class BaseProjectile : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    public void SpawnProjectile(Vector3 position, Vector3 direction)
     {
-        _rb.MovePosition(transform.up * speed * Time.deltaTime);
+        transform.position = position;
+        transform.up = direction;
+        //owner = entityOwner
+    }
+
+    void FixedUpdate()
+    {
+        _rb.MovePosition(transform.up * speed * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
