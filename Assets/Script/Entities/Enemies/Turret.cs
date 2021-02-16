@@ -76,6 +76,7 @@ public class Turret : EnemyBase
             if (_currentAttackCooldown >= attackCooldown)
             {
                 //shoot dir transform.up
+                Shoot();
                 _currentAttackCooldown = 0;
             }
             else _currentAttackCooldown += Time.deltaTime;
@@ -124,6 +125,11 @@ public class Turret : EnemyBase
     public void Die()
     {
         ProcessInput(Inputs.Die);
+    }
+    protected override void Shoot()
+    {
+        var instancedProjectile = GameObject.Instantiate(projectile, muzzle.transform.position, Quaternion.identity);
+        instancedProjectile.SpawnProjectile(muzzle.transform.position, transform.up, this);
     }
 
     //Sensor checking

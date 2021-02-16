@@ -36,6 +36,9 @@ public class PlayerController : Entity
         //Normally 0, 2.46, -10
         _camOffset = _cam.transform.position;
         _camRotOffset = _cam.transform.rotation;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        
     }
 
     void Update()
@@ -198,6 +201,11 @@ public class PlayerController : Entity
     public void GetNewSeed(SeedTypes newSeed)
     {
         unlockedSeeds[newSeed] = true;
+    }
+
+    public override void TakeDamage(float dmg)
+    {
+        //implement later
     }
 }
 

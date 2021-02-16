@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1849184871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1849184872}
+  m_Layer: 9
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1849184872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849184871}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.607, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6114224831810510098}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2457853085303914353
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,7 @@ GameObject:
   - component: {fileID: 6677188042546818122}
   - component: {fileID: 8393878998167262464}
   - component: {fileID: 4996944279734333844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2457853085303914353}
   m_LocalRotation: {x: 0.00000010442847, y: 0.70710677, z: 0.7071069, w: 0.00000014674846}
-  m_LocalPosition: {x: -0.59000075, y: 0.7100017, z: -3.2399998}
+  m_LocalPosition: {x: -0.603, y: 0.7100017, z: -3.2399998}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6114224831810510098}
@@ -91,7 +121,7 @@ GameObject:
   - component: {fileID: 6003490075559426810}
   - component: {fileID: 6003490075559426811}
   - component: {fileID: 919132147741341206}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ScoutShip
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -110,6 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6677188042546818122}
+  - {fileID: 1849184872}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,7 +205,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 15
   movementSpeed: 0.4
-  projectile: {fileID: 0}
+  projectile: {fileID: 3678966045819775343, guid: 2fd94f7d3102725409ad6a5ce206de74,
+    type: 3}
+  muzzle: {fileID: 1849184872}
   distanceToEngage: 10
   directionMovementCheckTime: 0.5
   hoverSpeed: 1

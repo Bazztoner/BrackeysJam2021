@@ -40,6 +40,7 @@ public class ScoutShip : EnemyBase
     protected override void Start()
     {
         base.Start();
+        if (muzzle == null) muzzle = transform.Find("Muzzle");
         InitFsm();
     }
 
@@ -229,13 +230,18 @@ public class ScoutShip : EnemyBase
         transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
         //do shooting
-
+        Shoot();
         //get mini-stunned
         yield return new WaitForSeconds(afterAttackStun);
 
-
         _isAttacking = false;
         AttackEnd();
+    }
+
+    protected override void Shoot()
+    {
+        var instancedProjectile = GameObject.Instantiate(projectile, muzzle.transform.position, Quaternion.identity);
+        instancedProjectile.SpawnProjectile(muzzle.transform.position, transform.up, this);
     }
 
     IEnumerator AttackCooldownHandler()

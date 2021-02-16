@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1350041568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350041569}
+  m_Layer: 9
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350041569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350041568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.549, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8901151702108059599}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8901151702108059594
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,10 +42,10 @@ GameObject:
   - component: {fileID: 8901151702108059592}
   - component: {fileID: 8901151702108059593}
   - component: {fileID: 8901151702108059598}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,6 +61,7 @@ Transform:
   m_LocalScale: {x: 1.00785, y: 1.00785, z: 1.00785}
   m_Children:
   - {fileID: 8901151703837407888}
+  - {fileID: 1350041569}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,7 +116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 30
   movementSpeed: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 3678966045819775343, guid: 2fd94f7d3102725409ad6a5ce206de74,
+    type: 3}
+  muzzle: {fileID: 1350041569}
   rotationSpeed: 90
   attackCooldown: 0.5
   attackRange: 10
@@ -99,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8901151703837407888}
   - component: {fileID: 8901151703837407895}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

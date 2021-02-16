@@ -13,6 +13,9 @@ public abstract class EnemyBase : Entity
     public BaseProjectile projectile;
     protected PlayerController _player;
 
+    [Header("Point where the projectiles spawn")]
+    public Transform muzzle;
+
     protected float CurrentHP
     {
         get => _currentHP;
@@ -41,7 +44,9 @@ public abstract class EnemyBase : Entity
 
     }
 
-    public virtual void TakeDamage(float dmg)
+    protected abstract void Shoot();
+
+    public override void TakeDamage(float dmg)
     {
         CurrentHP -= dmg;
     }
