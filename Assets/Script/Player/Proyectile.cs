@@ -11,7 +11,7 @@ public class Proyectile : BaseProjectile
     [SerializeField]
     SO_SeedCombos combos;
 
-    List<Effect> effects;
+    List<Effect> effects = new List<Effect>();
 
     [SerializeField]
     LayerMask enemyLayer, scenaryLayer;

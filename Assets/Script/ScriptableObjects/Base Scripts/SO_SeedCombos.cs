@@ -5,6 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Combos", menuName = "New Seed-combo")]
 public class SO_SeedCombos : ScriptableObject
 {
+    GameObject proyectile;
+
+    public void Initialize(Proyectile _proyectile)
+    {
+        proyectile = _proyectile.gameObject;
+    }
+
     public void ComboBaseRoot()
     {
 
