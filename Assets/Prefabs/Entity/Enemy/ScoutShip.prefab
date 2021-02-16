@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2457853085303914353}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.61, y: -0.64, z: -3.24}
+  m_LocalRotation: {x: 0.00000010442847, y: 0.70710677, z: 0.7071069, w: 0.00000014674846}
+  m_LocalPosition: {x: -0.59000075, y: 0.7100017, z: -3.2399998}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6114224831810510098}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 270, y: 0, z: -179.99998}
 --- !u!33 &8393878998167262464
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 6114224831810510098}
   - component: {fileID: 6003490075559426810}
   - component: {fileID: 6003490075559426811}
+  - component: {fileID: 919132147741341206}
   m_Layer: 0
   m_Name: ScoutShip
   m_TagString: Untagged
@@ -104,7 +105,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6886504913652697000}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 3.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -159,3 +160,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2488133, y: 1.0725703}
   m_EdgeRadius: 0
+--- !u!114 &919132147741341206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886504913652697000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42ea473427ccb54391c64b82e6d0d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 15
+  movementSpeed: 0.4
+  projectile: {fileID: 0}
+  distanceToEngage: 10
+  directionMovementCheckTime: 0.5
+  hoverSpeed: 1
+  attackCooldown: 2
+  attackPerc: 15
+  attackRange: 7
+  attackChannelTime: 1
+  dashDuration: 0.5
+  dashForce: 7.5
+  afterAttackStun: 1
