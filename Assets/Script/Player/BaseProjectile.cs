@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody2D _rb;
 
     public float damage;
 
     public float speed;
 
-    private void Awake()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void Update()
     {
-        rb.MovePosition(transform.up * speed * Time.deltaTime);
+        _rb.MovePosition(transform.up * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
         Destroy(gameObject);
