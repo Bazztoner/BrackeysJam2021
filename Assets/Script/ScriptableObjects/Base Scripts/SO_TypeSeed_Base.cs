@@ -7,15 +7,25 @@ public class SO_TypeSeed_Base : SO_TypeSeed_Generic
 {
     public Effect knockBack;
 
-    public override void Define(int amount, Transform objPos)
+    public override void Define(int amount, Proyectile _proyectile)
     {
-        base.Define(amount, objPos);
+        base.Define(amount, _proyectile);
 
         knockBack = new Effect(TypeOfEffect.KnocBack, parameter);
         specialEffect = knockBack;
     }
 
-    public override void Behaviour()
+    public override void Create()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Impact()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Traverse()
     {
         throw new System.NotImplementedException();
     }

@@ -16,7 +16,7 @@ public class Proyectile : BaseProjectile
     [SerializeField]
     LayerMask enemyLayer, scenaryLayer;
 
-    event Action onImpact, onTraverse;
+    event Action onCreate, onImpact, onTraverse;
 
     public void DefineCombo(SeedTypes type, int amount)
     {
@@ -24,7 +24,7 @@ public class Proyectile : BaseProjectile
         {
             if (i == (int) type)
             {
-                seeds[i].Define(amount, gameObject.transform);
+                seeds[i].Define(amount, this);
             }
         }
 
@@ -40,10 +40,10 @@ public class Proyectile : BaseProjectile
                 effects.Add(seeds[2].specialEffect);
                 break;
             case SeedTypes.Bouncer:
-                onImpact += seeds[3].Behaviour;
+                onImpact += seeds[3].Impact;
                 break;
             case SeedTypes.Seeker:
-                onTraverse += seeds[4].Behaviour;
+                onTraverse += seeds[4].Traverse;
                 break;
             case SeedTypes.Parasite:
                 effects.Add(seeds[5].specialEffect);
@@ -242,20 +242,29 @@ public class Proyectile : BaseProjectile
         }
     }
 
+    public void OnCreate()
+    {
+        if (onCreate != null)
+        {
+            OnCreate();
+        }
+    }
+
     private new void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.LayerMatchesWith(enemyLayer.value))
         {
+            EnemyBase _enemy = collision.collider.gameObject.GetComponent<EnemyBase>();
+
+            _enemy.RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
+
             for (int i = 0; i < effects.Count; i++)
             {
-                //collision.collider.gameObject.GetComponent<EnemyBase>().
+                _enemy.RecieveEffect(effects[i]);
             }
         }
-
-        if (collision.collider.gameObject.LayerMatchesWith(scenaryLayer.value))
-        {
-            OnImpact();
-        }
+        
+        OnImpact();
     }
 
     private void Update()

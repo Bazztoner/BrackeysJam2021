@@ -23,7 +23,9 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
     [SerializeField]
     Sprite sprSeed;
 
-    internal Transform pos;
+    internal Proyectile proyectile;
+
+    internal Transform tfmProyectil;
 
     public Effect specialEffect;
 
@@ -31,9 +33,10 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
 
     public float variationRate;
 
-    public virtual void Define(int amount, Transform objPos)
+    public virtual void Define(int amount, Proyectile _proyectile)
     {
-        pos = objPos;
+        proyectile = _proyectile;
+        tfmProyectil = proyectile.gameObject.transform;
 
         float value = variationRate;
 
@@ -45,7 +48,9 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
         }
     }
 
-    public abstract void Behaviour();
+    public abstract void Create();
+    public abstract void Traverse();
+    public abstract void Impact();
 }
 
 public class Effect
