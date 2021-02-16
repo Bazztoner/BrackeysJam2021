@@ -11,45 +11,57 @@ public class Proyectile : BaseProjectile
     [SerializeField]
     SO_SeedCombos combos;
 
-    public static event Action onCreate, onTraverse, onImpact;
+    List<Effect> effects;
+
+    [SerializeField]
+    LayerMask enemyLayer, scenaryLayer;
+
+    event Action onImpact, onTraverse;
 
     public void DefineCombo(SeedTypes type, int amount)
     {
+        for (int i = 0; i < seeds.Count; i++)
+        {
+            if (i == (int) type)
+            {
+                seeds[i].Define(amount, gameObject.transform);
+            }
+        }
+
         switch (type)
         {
-            // Revisar los comportamientos específicos
-            // y asignarlos como EventListeners cuando corresponda.
-
             case SeedTypes.Base:
-                onCreate += seeds[0].Define;
+                effects.Add(seeds[0].specialEffect);
                 break;
             case SeedTypes.Root:
-                onCreate += seeds[0].Define;
+                effects.Add(seeds[1].specialEffect);
                 break;
             case SeedTypes.Explosive:
-                onCreate += seeds[0].Define;
+                effects.Add(seeds[2].specialEffect);
                 break;
             case SeedTypes.Bouncer:
-                onCreate += seeds[0].Define;
+                onImpact += seeds[3].Behaviour;
                 break;
             case SeedTypes.Seeker:
-                onCreate += seeds[0].Define;
+                onTraverse += seeds[4].Behaviour;
                 break;
             case SeedTypes.Parasite:
-                onCreate += seeds[0].Define;
+                effects.Add(seeds[5].specialEffect);
+                break;
+            default:
                 break;
         }
     }
 
-    public void DefineCombination(SeedTypes i, SeedTypes j)
+    public void DefineCombination(SeedTypes _i, SeedTypes _j)
     {
-        switch (i)
+        switch (_i)
         {
             case SeedTypes.Base:
-                switch (j)
+                switch (_j)
                 {
                     case SeedTypes.Root:
-                        combos.ComboBaseRoot();
+                        combos.ComboBaseRoot(); // Modify SeedBase
                         break;
                     case SeedTypes.Explosive:
                         combos.ComboBaseExplosive();
@@ -66,7 +78,7 @@ public class Proyectile : BaseProjectile
                 }
                 break;
             case SeedTypes.Root:
-                switch (j)
+                switch (_j)
                 {
                     case SeedTypes.Explosive:
                         combos.ComboRootExplosive();
@@ -83,7 +95,7 @@ public class Proyectile : BaseProjectile
                 }
                 break;
             case SeedTypes.Explosive:
-                switch (j)
+                switch (_j)
                 {
                     case SeedTypes.Bouncer:
                         combos.ComboExplosiveBouncer();
@@ -97,7 +109,7 @@ public class Proyectile : BaseProjectile
                 }
                 break;
             case SeedTypes.Bouncer:
-                switch (j)
+                switch (_j)
                 {
                     case SeedTypes.Seeker:
                         combos.ComboBouncerSeeker();
@@ -108,7 +120,7 @@ public class Proyectile : BaseProjectile
                 }
                 break;
             case SeedTypes.Seeker:
-                switch (j)
+                switch (_j)
                 {
                     case SeedTypes.Parasite:
                         combos.ComboSeekerParasite();
@@ -214,18 +226,40 @@ public class Proyectile : BaseProjectile
         }
     }
 
-    void OnCreate()
+    public void OnImpact()
     {
-        if (onCreate != null) onCreate();
+        if (onImpact != null)
+        {
+            onImpact();
+        }
     }
 
-    void OnTraverse()
+    public void OnTraverse()
     {
-        if (onTraverse != null) onTraverse();
+        if (onTraverse != null)
+        {
+            onTraverse();
+        }
     }
 
-    void OnImpact()
+    private new void OnCollisionEnter2D(Collision2D collision)
     {
-        if (onImpact != null) onImpact();
+        if (collision.collider.gameObject.LayerMatchesWith(enemyLayer.value))
+        {
+            for (int i = 0; i < effects.Count; i++)
+            {
+                //collision.collider.gameObject.GetComponent<EnemyBase>().
+            }
+        }
+
+        if (collision.collider.gameObject.LayerMatchesWith(scenaryLayer.value))
+        {
+            OnImpact();
+        }
+    }
+
+    private void Update()
+    {
+        OnTraverse();
     }
 }

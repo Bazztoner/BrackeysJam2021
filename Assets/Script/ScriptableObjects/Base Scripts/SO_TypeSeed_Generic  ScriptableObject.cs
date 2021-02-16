@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SO_TypeSeed_Generic : ScriptableObject
+public abstract class SO_TypeSeed_Generic : ScriptableObject
 {
     [Tooltip("Type-seed name.")]
     [SerializeField]
@@ -23,20 +23,59 @@ public class SO_TypeSeed_Generic : ScriptableObject
     [SerializeField]
     Sprite sprSeed;
 
-    public virtual void Define()
-    {
+    internal Transform pos;
 
-    }
+    public Effect specialEffect;
 
-    public virtual float DefineDamage(int amount)
+    public float parameter;
+
+    public float variationRate;
+
+    public virtual void Define(int amount, Transform objPos)
     {
-        float baseDamage = damage;
+        pos = objPos;
+
+        float value = variationRate;
 
         for (int i = 0; i < amount; i++)
         {
-            baseDamage += (damage - i);
-        }
+            float _parameter = parameter;
 
-        return baseDamage;
+            parameter += (_parameter * (i * value));
+        }
     }
+
+    public abstract void Behaviour();
+}
+
+public class Effect
+{
+    public TypeOfEffect type;
+
+    public float modifier1, modifier2;
+
+    public Effect(TypeOfEffect _effect, float _mod1)
+    {
+        type = _effect;
+
+        modifier1 = _mod1;
+    }
+
+    public Effect(TypeOfEffect _effect, float _mod1, float _mod2)
+    {
+        type = _effect;
+
+        modifier1 = _mod1;
+
+        modifier2 = _mod2;
+    }
+}
+
+public enum TypeOfEffect
+{
+    Damage,
+    KnocBack,
+    Stun,
+    DamageOverTime,
+    MindControl
 }

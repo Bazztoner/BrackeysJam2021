@@ -51,5 +51,27 @@ public abstract class EnemyBase : Entity
         CurrentHP -= dmg;
     }
 
+    public void RecieveEffect(Effect _effect)
+    {
+        switch (_effect.type)
+        {
+            case TypeOfEffect.Damage:
+                TakeDamage(_effect.modifier1);
+                break;
+            case TypeOfEffect.KnocBack:
 
+                break;
+            case TypeOfEffect.Stun:
+
+                break;
+            case TypeOfEffect.DamageOverTime:
+
+                break;
+            case TypeOfEffect.MindControl:
+
+                break;
+            default:
+                break;
+        }
+    }
 }

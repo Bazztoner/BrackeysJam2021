@@ -54,6 +54,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 83c33cc8d1d2c7e47904173caee06646, type: 2}
   - {fileID: 11400000, guid: 15cab9401278d444cac76d78b2b12cb6, type: 2}
   combos: {fileID: 11400000, guid: 45c9a6bbfd1a5c14699eb2db7e2ade13, type: 2}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  scenaryLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!50 &7071998372725636848
 Rigidbody2D:
   serializedVersion: 4
