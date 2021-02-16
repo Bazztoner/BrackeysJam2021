@@ -12,6 +12,8 @@ public class BaseProjectile : MonoBehaviour
 
     protected Entity _owner;
 
+    public Entity Owner { get => _owner; protected set => _owner = value; }
+
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -21,14 +23,13 @@ public class BaseProjectile : MonoBehaviour
     {
         transform.position = position;
         transform.up = direction;
-        //owner = entityOwner
     }
 
     public virtual void SpawnProjectile(Vector3 position, Vector3 direction, Entity owner)
     {
         transform.position = position;
         transform.up = direction;
-        _owner = owner;
+        Owner = owner;
     }
 
     protected virtual void FixedUpdate()
