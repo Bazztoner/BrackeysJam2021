@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 15
   movementSpeed: 0.4
-  projectile: {fileID: 3678966045819775343, guid: 2fd94f7d3102725409ad6a5ce206de74,
+  projectile: {fileID: 3678966045819775343, guid: 0548203578da0314cba411bea9a72e19,
     type: 3}
   muzzle: {fileID: 1849184872}
   distanceToEngage: 10

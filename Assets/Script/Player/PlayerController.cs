@@ -36,10 +36,12 @@ public class PlayerController : Entity
     Vector3 _camOffset;
     Quaternion _camRotOffset;
     Vector3 _dumpSpeed;
+    ComboSystem _comboSystem;
 
     void Start()
     {
         CurrentHP = maxHP;
+        _comboSystem = GetComponent<ComboSystem>();
 
         _kb = Keyboard.current;
         _mb = Mouse.current;
@@ -78,6 +80,7 @@ public class PlayerController : Entity
     void InitializeDictionaries()
     {
         //Remember to put false in everything except Base for the final game
+        //Root will get unlocked on the first level, tho
         unlockedSeeds = new Dictionary<SeedTypes, bool>
         {
             { SeedTypes.Base, true },
@@ -147,12 +150,14 @@ public class PlayerController : Entity
             }
 
             print("Combo: " + st);
-            GetComponent<ComboSystem>().DefineCombo(_currentSeedCombo);
+            _comboSystem.DefineCombo(_currentSeedCombo);
             _currentSeedCombo = new Queue<SeedTypes>();
+            UIManager.Instance.ClearCombo();
         }
         else if (_mb.rightButton.wasPressedThisFrame)
         {
             //delete queue
+            UIManager.Instance.ClearCombo();
             _currentSeedCombo = new Queue<SeedTypes>();
             print("Combo was emptied");
         }
@@ -199,7 +204,7 @@ public class PlayerController : Entity
         if (_currentSeedCombo.Count < maxCombo)
         {
             _currentSeedCombo.Enqueue(addTo);
-            //add graphics to UI
+            UIManager.Instance.AddSeedToCombo(_currentSeedCombo.Count - 1, addTo);
         }
         else
         {

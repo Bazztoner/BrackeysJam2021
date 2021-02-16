@@ -202,9 +202,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &328968332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700753656038101250, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &415717152 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4128059990065450879, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &511054237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700753656104986788, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
     type: 3}
   m_PrefabInstance: {fileID: 6700753657213440931}
   m_PrefabAsset: {fileID: 0}
@@ -297,6 +321,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726625041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700753657277874047, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &947921637
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +414,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1053921933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700753656832317568, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1345850784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6700753657092205024, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1553710433
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +468,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 415717152}
+  comboSlots:
+  - {fileID: 726625041}
+  - {fileID: 511054237}
+  - {fileID: 328968332}
+  - {fileID: 1053921933}
+  - {fileID: 1345850784}
+  seedImages:
+  - {fileID: 21300000, guid: 49da1fe8727f98945baaac3ca8a3232b, type: 3}
+  - {fileID: 21300000, guid: dd08174a863a85f49b22b00fd3284dec, type: 3}
+  - {fileID: 21300000, guid: c74e0b3fe5f8171499c5ca569148806e, type: 3}
+  - {fileID: 21300000, guid: e2576ad0257f40a4a98c6d25b86ba4ab, type: 3}
+  - {fileID: 21300000, guid: 884d426c82c98b4439896663aa1e88a0, type: 3}
+  - {fileID: 21300000, guid: d95773c07e00d9d4cb40047d52d6dba0, type: 3}
 --- !u!4 &1553710435
 Transform:
   m_ObjectHideFlags: 0
@@ -745,12 +818,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919132147741341206, guid: e7c74063873ba6d4ca63515ae65a08c4,
-        type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 3678966045819775343, guid: 0548203578da0314cba411bea9a72e19,
-        type: 3}
     - target: {fileID: 6114224831810510098, guid: e7c74063873ba6d4ca63515ae65a08c4,
         type: 3}
       propertyPath: m_RootOrder
