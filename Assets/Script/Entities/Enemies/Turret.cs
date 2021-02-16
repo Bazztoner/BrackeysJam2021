@@ -6,6 +6,9 @@ using FSM;
 
 public class Turret : EnemyBase
 {
+    //Force pos
+    public Vector3 startingPosition;
+
     //FSM
 
     //Idle
@@ -29,6 +32,7 @@ public class Turret : EnemyBase
     protected override void Start()
     {
         base.Start();
+        startingPosition = transform.position;
         InitFsm();
     }
 
@@ -87,6 +91,7 @@ public class Turret : EnemyBase
         death.OnEnter += x =>
         {
             //BOOM!
+            Destroy(gameObject);
         };
 
         //-----------------------------------------FSM INIT-------------------------------------------//
@@ -102,11 +107,14 @@ public class Turret : EnemyBase
     {
         CheckSensors();
         _stateMachine.Update();
+        _rb.velocity = Vector2.zero;
     }
 
     protected override void FixedUpdate()
     {
         _stateMachine.FixedUpdate();
+        _rb.velocity = Vector2.zero;
+        _rb.MovePosition(startingPosition);
     }
 
     public override void TakeDamage(float dmg)

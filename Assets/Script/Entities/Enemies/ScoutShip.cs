@@ -128,7 +128,7 @@ public class ScoutShip : EnemyBase
         //death
         death.OnEnter += x =>
         {
-
+            Destroy(gameObject);
         };
 
         //-----------------------------------------FSM INIT-------------------------------------------//
