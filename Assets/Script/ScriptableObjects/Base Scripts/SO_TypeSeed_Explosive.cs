@@ -5,45 +5,48 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Explosive", menuName = "New Explosive Seed")]
 public class SO_TypeSeed_Explosive : SO_TypeSeed_Generic
 {
-    public float parameter2;
-
-    public float variationRate2;
-
     public float area;
 
     public float variationArea;
 
     public Effect damageOverTime;
 
-    public override void Define(int amount, Transform objPos)
+    public override void Define(int amount, Proyectile _proyectile)
     {
-        pos = objPos;
+        proyectile = _proyectile;
+        tfmProyectil = proyectile.gameObject.transform;
 
         for (int i = 0; i < amount; i++)
         {
             float _parameter = parameter;
-            float _parameter2 = parameter2;
             float _variationArea = variationArea;
 
             parameter += (_parameter * (i * variationRate));
-            parameter2 += (_parameter2 * (i * variationRate2));
             area += (_variationArea * (i * variationArea));
         }
-
-        damageOverTime = new Effect(TypeOfEffect.KnocBack, parameter, parameter2);
-        specialEffect = damageOverTime;
     }
 
-    public override void Behaviour()
+    public override void Create()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(pos.position, area);
+        throw new System.NotImplementedException();
+    }
 
-        EnemyBase enemy = null;
+    public override void Traverse()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Impact()
+    {
+        Collider2D[] targets = Physics2D.OverlapCircleAll(tfmProyectil.position, area);
 
         foreach (var target in targets)
         {
-            if (target.GetComponent<EnemyBase>())
+            EnemyBase enemy = target.GetComponent<EnemyBase>() ? target.GetComponent<EnemyBase>() : null;
+
+            if (enemy != null)
             {
+                enemy.RecieveEffect(new Effect(TypeOfEffect.Damage, parameter));
             }
         }
     }
