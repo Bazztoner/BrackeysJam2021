@@ -38,7 +38,7 @@ public class PlayerController : Entity
         _camRotOffset = _cam.transform.rotation;
 
         Cursor.lockState = CursorLockMode.Confined;
-        
+
     }
 
     void Update()
@@ -120,7 +120,7 @@ public class PlayerController : Entity
 
     void CheckMouseInput()
     {
-        if (_mb.leftButton.wasPressedThisFrame)
+        if (_mb.leftButton.wasPressedThisFrame && _currentSeedCombo != null && _currentSeedCombo.Any())
         {
             //shoot shit
             string st = "";
@@ -137,15 +137,7 @@ public class PlayerController : Entity
         {
             //delete queue
             _currentSeedCombo = new Queue<SeedTypes>();
-            print("Queue was emptied");
-
-            string st = "";
-            foreach (var item in _currentSeedCombo)
-            {
-                st += item.ToString() + " ";
-            }
-
-            print("Combo:" + st);
+            print("Combo was emptied");
         }
     }
 
