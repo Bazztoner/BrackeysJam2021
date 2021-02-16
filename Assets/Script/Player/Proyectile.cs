@@ -6,22 +6,7 @@ using UnityEngine;
 public class Proyectile : BaseProjectile
 {
     [SerializeField]
-    SO_TypeSeed_Base seedBase;
-
-    [SerializeField]
-    SO_TypeSeed_Rooter seedRoot;
-
-    [SerializeField]
-    SO_TypeSeed_Explosive seedExplosive;
-
-    [SerializeField]
-    SO_TypeSeed_Bouncer seedBouncer;
-
-    [SerializeField]
-    SO_TypeSeed_Seeker seedSeeker;
-
-    [SerializeField]
-    SO_TypeSeed_Parasyte seedParasite;
+    List<SO_TypeSeed_Generic> seeds;
 
     [SerializeField]
     SO_SeedCombos combos;
@@ -32,23 +17,26 @@ public class Proyectile : BaseProjectile
     {
         switch (type)
         {
+            // Revisar los comportamientos específicos
+            // y asignarlos como EventListeners cuando corresponda.
+
             case SeedTypes.Base:
-                onCreate += seedBase.Define;
+                onCreate += seeds[0].Define;
                 break;
             case SeedTypes.Root:
-                seedRoot.DefineDamage(amount);
+                onCreate += seeds[0].Define;
                 break;
             case SeedTypes.Explosive:
-                seedExplosive.DefineDamage(amount);
+                onCreate += seeds[0].Define;
                 break;
             case SeedTypes.Bouncer:
-                seedBouncer.DefineDamage(amount);
+                onCreate += seeds[0].Define;
                 break;
             case SeedTypes.Seeker:
-                seedSeeker.DefineDamage(amount);
+                onCreate += seeds[0].Define;
                 break;
             case SeedTypes.Parasite:
-                seedParasite.DefineDamage(amount);
+                onCreate += seeds[0].Define;
                 break;
         }
     }
@@ -132,32 +120,73 @@ public class Proyectile : BaseProjectile
 
     public void SetSpeed(SeedTypes type)
     {
-        switch (type)
+        for (int i = 0; i < seeds.Count; i++)
         {
-            case SeedTypes.Base:
-                if (seedBase.speed > speed) speed = seedBase.speed;
-                break;
-            case SeedTypes.Root:
-                if (seedRoot.speed > speed) speed = seedRoot.speed;
-                break;
-            case SeedTypes.Explosive:
-                if (seedExplosive.speed > speed) speed = seedExplosive.speed;
-                break;
-            case SeedTypes.Bouncer:
-                if (seedBouncer.speed > speed) speed = seedBouncer.speed;
-                break;
-            case SeedTypes.Seeker:
-                if (seedSeeker.speed > speed) speed = seedSeeker.speed;
-                break;
-            case SeedTypes.Parasite:
-                if (seedParasite.speed > speed) speed = seedParasite.speed;
-                break;
+            if (seeds[i].Equals(type))
+            {
+                if (seeds[i].speed > speed) speed = seeds[i].speed;
+            }
         }
     }
 
-    public void SetDamage(int[] amount)
+    public void SetDamage(SeedTypes[] _seeds)
     {
-        //PAra cada SeedType, sumar sustractivamente el daño, al daño total.
+        int[] amounts = new int[6] { 0, 0, 0, 0, 0, 0 };
+
+        for (int i = 0; i < _seeds.Length; i++)
+        {
+            for (int j = 0; j < seeds.Count; j++)
+            {
+                if (_seeds[i].Equals((SeedTypes) j))
+                {
+                    amounts[j]++;
+                }
+            }
+        }
+
+        List<float> damages = new List<float>();
+
+        List<SeedTypes> comboSeeds = new List<SeedTypes>();
+
+        for (int i = 0; i < amounts.Length; i++)
+        {
+            if (amounts[i] > 0)
+            {
+                for (int j = 0; j < amounts[i]; j++)
+                {
+                    damages.Add(seeds[i].damage);
+                    comboSeeds.Add((SeedTypes)i);
+                }
+            }
+        }
+
+        for (int i = 1; i < damages.Count; i++)
+        {
+            for (int j = 0; j < damages.Count - 1; j++)
+            {
+                float _dmg;
+                SeedTypes _st;
+
+                if (damages[i] > damages[j])
+                {
+                    _dmg = damages[j];
+                    _st = comboSeeds[j];
+
+                    damages[j] = damages[i];
+                    comboSeeds[j] = comboSeeds[i];
+
+                    damages[i] = _dmg;
+                    comboSeeds[i] = _st;
+                }
+            }
+        }
+
+        int repetition;
+
+        for (int i = 0; i < comboSeeds.Count; i++)
+        {
+
+        }
     }
 
     void OnCreate()

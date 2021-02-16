@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
             }
 
             print("Combo: " + st);
+            GetComponent<ComboSystem>().DefineCombo(_currentSeedCombo);
             _currentSeedCombo = new Queue<SeedTypes>();
         }
         else if (_mb.rightButton.wasPressedThisFrame)

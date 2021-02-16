@@ -59,5 +59,7 @@ public class ComboSystem : MonoBehaviour
                 }
             }
         }
+
+        proyectile.SetDamage(seeds);
     }
 }
