@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         InitializeDictionaries();
 
         _cam = Camera.main;
+        //Normally 0, 2.46, -10
         _camOffset = _cam.transform.position;
         _camRotOffset = _cam.transform.rotation;
     }
