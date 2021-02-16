@@ -53,61 +53,6 @@ public class Proyectile : BaseProjectile
         }
     }
 
-    public void SetSpeed(SeedTypes type)
-    {
-        switch (type)
-        {
-            case SeedTypes.Base:
-                if (seedBase.speed > speed) speed = seedBase.speed;
-                break;
-            case SeedTypes.Root:
-                if (seedRoot.speed > speed) speed = seedRoot.speed;
-                break;
-            case SeedTypes.Explosive:
-                if (seedExplosive.speed > speed) speed = seedExplosive.speed;
-                break;
-            case SeedTypes.Bouncer:
-                if (seedBouncer.speed > speed) speed = seedBouncer.speed;
-                break;
-            case SeedTypes.Seeker:
-                if (seedSeeker.speed > speed) speed = seedSeeker.speed;
-                break;
-            case SeedTypes.Parasite:
-                if (seedParasite.speed > speed) speed = seedParasite.speed;
-                break;
-        }
-    }
-
-    public void SetDamage(int[] amount)
-    {
-        float maxDamage = 0f;
-
-        for (int i = 0; i < amount.Length; i++)
-        {
-            switch ((SeedTypes) i)
-            {
-                case SeedTypes.Base:
-                    if (seedBase.damage > maxDamage) maxDamage = seedBase.damage;
-                    break;
-                case SeedTypes.Root:
-                    if (seedRoot.damage > maxDamage) maxDamage = seedRoot.damage;
-                    break;
-                case SeedTypes.Explosive:
-                    if (seedExplosive.damage > maxDamage) maxDamage = seedExplosive.damage;
-                    break;
-                case SeedTypes.Bouncer:
-                    if (seedBouncer.damage > maxDamage) maxDamage = seedBouncer.damage;
-                    break;
-                case SeedTypes.Seeker:
-                    if (seedSeeker.damage > maxDamage) maxDamage = seedSeeker.damage;
-                    break;
-                case SeedTypes.Parasite:
-                    if (seedParasite.damage > maxDamage) maxDamage = seedParasite.damage;
-                    break;
-            }
-        }
-    }
-
     public void DefineCombination(SeedTypes i, SeedTypes j)
     {
         switch (i)
@@ -183,6 +128,36 @@ public class Proyectile : BaseProjectile
                 }
                 break;
         }
+    }
+
+    public void SetSpeed(SeedTypes type)
+    {
+        switch (type)
+        {
+            case SeedTypes.Base:
+                if (seedBase.speed > speed) speed = seedBase.speed;
+                break;
+            case SeedTypes.Root:
+                if (seedRoot.speed > speed) speed = seedRoot.speed;
+                break;
+            case SeedTypes.Explosive:
+                if (seedExplosive.speed > speed) speed = seedExplosive.speed;
+                break;
+            case SeedTypes.Bouncer:
+                if (seedBouncer.speed > speed) speed = seedBouncer.speed;
+                break;
+            case SeedTypes.Seeker:
+                if (seedSeeker.speed > speed) speed = seedSeeker.speed;
+                break;
+            case SeedTypes.Parasite:
+                if (seedParasite.speed > speed) speed = seedParasite.speed;
+                break;
+        }
+    }
+
+    public void SetDamage(int[] amount)
+    {
+        //PAra cada SeedType, sumar sustractivamente el daño, al daño total.
     }
 
     void OnCreate()
