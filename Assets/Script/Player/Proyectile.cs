@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Proyectile : MonoBehaviour
+public class Proyectile : BaseProjectile
 {
     [SerializeField]
     SO_TypeSeed_Base seedBase;
@@ -27,10 +27,6 @@ public class Proyectile : MonoBehaviour
     SO_SeedCombos combos;
 
     public static event Action onCreate, onTraverse, onImpact;
-
-    float damage;
-
-    float speed;
 
     public void DefineCombo(SeedTypes type, int amount)
     {

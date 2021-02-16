@@ -6,6 +6,8 @@ public class BaseProjectile : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    public float damage;
+
     public float speed;
 
     private void Awake()
