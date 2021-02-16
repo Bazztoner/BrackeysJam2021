@@ -211,10 +211,10 @@ public class PlayerController : Entity
 
 public enum SeedTypes
 {
-    Base,
-    Root,
-    Explosive,
-    Bouncer,
-    Seeker,
-    Parasite
+    Base = 0,
+    Root = 1,
+    Explosive = 2,
+    Bouncer = 3,
+    Seeker = 4,
+    Parasite = 5
 }

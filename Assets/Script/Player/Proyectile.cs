@@ -122,7 +122,7 @@ public class Proyectile : BaseProjectile
     {
         for (int i = 0; i < seeds.Count; i++)
         {
-            if (seeds[i].Equals(type))
+            if (i.Equals((int)type))
             {
                 if (seeds[i].speed > speed) speed = seeds[i].speed;
             }
@@ -181,11 +181,36 @@ public class Proyectile : BaseProjectile
             }
         }
 
-        int repetition;
+        List<int> repetitions = new List<int>();
 
-        for (int i = 0; i < comboSeeds.Count; i++)
+        List<SeedTypes> seedDamage = new List<SeedTypes>();
+
+        int repIndex = 0;
+
+        seedDamage.Add(comboSeeds[0]);
+
+        repetitions.Add(1);
+
+        for (int i = 1; i < comboSeeds.Count; i++)
         {
+            if (comboSeeds[i].Equals(comboSeeds[i - 1]))
+            {
+                repetitions[repIndex]++;
+            }
+            else
+            {
+                repetitions.Add(1);
+                seedDamage.Add(comboSeeds[i]);
+                repIndex++;
+            }
+        }
 
+        for (int i = 0; i < repetitions.Count; i++)
+        {
+            for (int j = 0; j < repetitions[i]; j++)
+            {
+                damage += (seeds[(int)seedDamage[i]].damage - j);
+            }
         }
     }
 

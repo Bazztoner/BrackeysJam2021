@@ -45,6 +45,7 @@ public class ComboSystem : MonoBehaviour
             }
 
             proyectile.DefineCombo((SeedTypes)i, amount[i]);
+            proyectile.SetSpeed((SeedTypes)i);
 
             if (amount[i] > 0)
             {
