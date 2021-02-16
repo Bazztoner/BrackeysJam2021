@@ -251,11 +251,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.4712267
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -675,40 +675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739075, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.8753445
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739075, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.85227203
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739075, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.00075018406
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739075, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.19761658
-      objectReference: {fileID: 0}
     - target: {fileID: 5495714350737739084, guid: 0431a36066139b64db2f9be4228ee55a,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739084, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5495714351288139746, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0431a36066139b64db2f9be4228ee55a, type: 3}
