@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5495714350737739075}
   - component: {fileID: 5495714350737739072}
   - component: {fileID: 2084100155}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -62,7 +62,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007843375, y: 0.3256631}
+  m_Offset: {x: -0.00075018406, y: 0.19761658}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -73,7 +73,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5284457, y: 1.4435096}
+  m_Size: {x: 0.8753445, y: 0.85227203}
   m_EdgeRadius: 0
 --- !u!50 &5495714350737739072
 Rigidbody2D:
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5495714351288139747}
   - component: {fileID: 5495714351288139744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
