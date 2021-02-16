@@ -14,18 +14,29 @@ public class SO_TypeSeed_Generic : ScriptableObject
     string description;
 
     [Tooltip("Type-seed proyectile form base speed.")]
-    [SerializeField]
-    float speed;
-
-    [Tooltip("Type-seed proyectile form life-span.")]
-    [SerializeField]
-    float life;
+    public float speed;
 
     [Tooltip("Type-seed proyectile form base damage.")]
-    [SerializeField]
-    float damage;
+    public float damage;
 
     [Tooltip("Sprite for the proyectile.")]
     [SerializeField]
     Sprite sprSeed;
+
+    public virtual void Define()
+    {
+
+    }
+
+    public virtual float DefineDamage(int amount)
+    {
+        float baseDamage = damage;
+
+        for (int i = 0; i < amount; i++)
+        {
+            baseDamage += (damage - i);
+        }
+
+        return baseDamage;
+    }
 }
