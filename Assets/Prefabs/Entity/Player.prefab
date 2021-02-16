@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   maxCombo: 5
+  maxHP: 100
 --- !u!61 &5495714350737739075
 BoxCollider2D:
   m_ObjectHideFlags: 0

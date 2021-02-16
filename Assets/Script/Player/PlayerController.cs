@@ -13,6 +13,21 @@ public class PlayerController : Entity
     Queue<SeedTypes> _currentSeedCombo;
     public byte maxCombo;
 
+    public int maxHP;
+    int _currentHP;
+
+    public int CurrentHP
+    {
+        get => _currentHP;
+        private set
+        {
+            _currentHP = value;
+            if (_currentHP <= 0) _currentHP = 0;
+            else if (_currentHP >= maxHP) _currentHP = maxHP;
+        }
+    }
+
+
     Keyboard _kb;
     Mouse _mb;
     Vector2 _mousePos;
@@ -24,6 +39,8 @@ public class PlayerController : Entity
 
     void Start()
     {
+        CurrentHP = maxHP;
+
         _kb = Keyboard.current;
         _mb = Mouse.current;
         _rb = GetComponent<Rigidbody2D>();
@@ -197,6 +214,9 @@ public class PlayerController : Entity
 
     public override void TakeDamage(float dmg)
     {
+        CurrentHP -= Mathf.RoundToInt(dmg);
+
+        UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
         //implement later
     }
 }
