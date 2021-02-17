@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ff9799133fc2841940a249502477a2, type: 3}
   m_Name: Explosive
   m_EditorClassIdentifier: 
-  name: 
+  name: Blowawayer
   description: 
   speed: 2
   damage: 8
   sprSeed: {fileID: 0}
+  area: 5
+  variationArea: 0.75
+  amountKnockBack: 5
+  variationKnockBack: 0.5

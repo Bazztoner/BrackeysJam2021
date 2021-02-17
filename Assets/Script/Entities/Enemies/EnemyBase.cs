@@ -53,7 +53,7 @@ public abstract class EnemyBase : Entity
 
     public virtual void RecieveEffect(Effect _effect)
     {
-        //print($"{gameObject.name} is suffering from {_effect.type} effect.");
+        print($"{gameObject.name} is suffering from {_effect.type} effect.");
 
         switch (_effect.type)
         {
@@ -73,17 +73,25 @@ public abstract class EnemyBase : Entity
 
                 break;
             case TypeOfEffect.Mutate:
-                switch (_effect.modifier1)
+                switch ((SeedTypes) _effect.modifier1)
                 {
-                    case 1:
+                    case SeedTypes.Base:
                         break;
-                    case 2:
+                    case SeedTypes.Root:
                         break;
-                    case 3:
+                    case SeedTypes.Explosive:
+                        break;
+                    case SeedTypes.Bouncer:
+                        break;
+                    case SeedTypes.Seeker:
+                        break;
+                    case SeedTypes.Parasite:
                         break;
                     default:
                         break;
                 }
+                break;
+            case TypeOfEffect.TickBoom:
                 break;
             default:
                 break;

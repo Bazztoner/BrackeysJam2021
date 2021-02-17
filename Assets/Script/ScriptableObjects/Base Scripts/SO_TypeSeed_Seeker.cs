@@ -5,31 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Seeker", menuName = "New Seeker Seed")]
 public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
 {
-    float perfectAim;
+    [Range(0f, .9f)]
+    public float initialPrecision;
 
-    float precision;
+    [Range(0f, .9f)]
+    public float precisionChange;
 
-    public override void Define(int amount, Proyectile _proyectile)
+    public Vector3 Seek()
     {
-        perfectAim = (parameter * 5f);
-
-        base.Define(amount, _proyectile);
-
-        precision = parameter;
-    }
-
-    public override void Create()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Traverse()
-    {
-        float realAim = (1f / perfectAim) * precision;
+        Vector3 dir = tfmProyectil.up;
 
         EnemyBase[] enemies = FindObjectsOfType<EnemyBase>();
-
-        Debug.Log(enemies.Length);
 
         if (enemies.Length >= 1)
         {
@@ -39,22 +25,27 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
             {
                 Vector3 curEnemy = enemies[i].gameObject.transform.position;
 
-                if (Vector3.Distance(closestEnemy, tfmProyectil.position) < Vector3.Distance(curEnemy, tfmProyectil.position))
+                if (Vector3.Distance(curEnemy, tfmProyectil.position) < Vector3.Distance(closestEnemy, tfmProyectil.position))
                 {
-                    closestEnemy = enemies[i].gameObject.transform.position;
+                    closestEnemy = curEnemy;
                 }
             }
 
-            Vector3 dir = closestEnemy - tfmProyectil.position;
+            float _realAim = initialPrecision;
+            float _precision = precisionChange;
 
-            Debug.Log(realAim);
+            for (int i = 1; i < amount; i++)
+            {
+                _precision = (_precision * precisionChange);
+                _realAim += _precision;
+            }
 
-            tfmProyectil.up = Vector3.Lerp(tfmProyectil.up, dir, realAim);
+            Vector3 dirInit = dir;
+            Vector3 dirEnd = Vector3.Normalize(closestEnemy - tfmProyectil.position);
+
+            dir = Vector3.Lerp(dirInit, dirEnd, _realAim);
         }
-    }
 
-    public override void Impact()
-    {
-        throw new System.NotImplementedException();
+        return dir;
     }
 }

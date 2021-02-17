@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a9501dfcc4d7d4f9f007cb8fe3be21, type: 3}
   m_Name: Parasyte
   m_EditorClassIdentifier: 
-  name: 
+  name: Neuroeatering
   description: 
   speed: 5
   damage: 1
   sprSeed: {fileID: 0}
+  baseMinControlDuration: 3
+  rateMindcontrolIncrease: 0.75

@@ -5,28 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rooter", menuName = "New Rooter Seed")]
 public class SO_TypeSeed_Rooter : SO_TypeSeed_Generic
 {
-    public Effect stun;
+    public float tickStun;
 
-    public override void Define(int amount, Proyectile _proyectile)
+    public float stunChangeRate;
+
+    public Effect GetStun()
     {
-        base.Define(amount, _proyectile);
+        float _tickStun = tickStun;
+        float _stunChangeRate = stunChangeRate;
 
-        stun = new Effect(TypeOfEffect.Stun, parameter);
-        specialEffect = stun;
-    }
+        for (int i = 1; i < amount; i++)
+        {
+            _stunChangeRate = (_stunChangeRate * stunChangeRate);
+            _tickStun += _stunChangeRate;
+        }
 
-    public override void Create()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Traverse()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Impact()
-    {
-        throw new System.NotImplementedException();
+        return new Effect(TypeOfEffect.Stun, _tickStun);
     }
 }
