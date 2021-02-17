@@ -12,7 +12,7 @@ public class ComboSystem : MonoBehaviour
 
     int[] amount = new int[6];
 
-    public void DefineCombo(Queue<SeedTypes> _combo)
+    public Proyectile DefineCombo(Queue<SeedTypes> _combo)
     {
         proyectile = Instantiate(prefabProyectile).GetComponent<Proyectile>();
 
@@ -62,5 +62,7 @@ public class ComboSystem : MonoBehaviour
         }
 
         proyectile.SetDamage(seeds);
+
+        return proyectile;
     }
 }

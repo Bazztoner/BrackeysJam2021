@@ -11,7 +11,7 @@ public class SO_TypeSeed_Base : SO_TypeSeed_Generic
     {
         base.Define(amount, _proyectile);
 
-        knockBack = new Effect(TypeOfEffect.KnocBack, parameter);
+        knockBack = new Effect(TypeOfEffect.KnockBack, parameter);
         specialEffect = knockBack;
     }
 

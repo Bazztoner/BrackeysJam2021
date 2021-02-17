@@ -16,10 +16,10 @@ public abstract class EnemyBase : Entity
     [Header("Point where the projectiles spawn")]
     public Transform muzzle;
 
-    protected float CurrentHP
+    public float CurrentHP
     {
         get => _currentHP;
-        set
+        protected set
         {
             _currentHP = value;
             if (_currentHP > maxHP) _currentHP = maxHP;
@@ -51,14 +51,14 @@ public abstract class EnemyBase : Entity
         CurrentHP -= dmg;
     }
 
-    public void RecieveEffect(Effect _effect)
+    public virtual void RecieveEffect(Effect _effect)
     {
         switch (_effect.type)
         {
             case TypeOfEffect.Damage:
                 TakeDamage(_effect.modifier1);
                 break;
-            case TypeOfEffect.KnocBack:
+            case TypeOfEffect.KnockBack:
 
                 break;
             case TypeOfEffect.Stun:

@@ -79,7 +79,7 @@ public class Effect
 public enum TypeOfEffect
 {
     Damage,
-    KnocBack,
+    KnockBack,
     Stun,
     DamageOverTime,
     MindControl

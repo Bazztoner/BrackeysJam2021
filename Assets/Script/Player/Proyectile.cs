@@ -250,9 +250,9 @@ public class Proyectile : BaseProjectile
         }
     }
 
-    private new void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.LayerMatchesWith(enemyLayer.value))
+        if (collision.gameObject.LayerMatchesWith(enemyLayer.value))
         {
             EnemyBase _enemy = collision.collider.gameObject.GetComponent<EnemyBase>();
 
@@ -264,6 +264,23 @@ public class Proyectile : BaseProjectile
             }
         }
         
+        OnImpact();
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.LayerMatchesWith("Enemy") && collider.gameObject != Owner.gameObject)
+        {
+            EnemyBase _enemy = collider.gameObject.GetComponent<EnemyBase>();
+
+            _enemy.RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
+
+            for (int i = 0; i < effects.Count; i++)
+            {
+                _enemy.RecieveEffect(effects[i]);
+            }
+        }
+
         OnImpact();
     }
 

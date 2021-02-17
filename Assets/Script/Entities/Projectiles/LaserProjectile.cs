@@ -25,11 +25,11 @@ public class LaserProjectile : BaseProjectile
         Destroy(gameObject);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.LayerMatchesWith("Enemy", "Player") && collision.gameObject != Owner.gameObject)
+        if (collider.gameObject.LayerMatchesWith("Enemy", "Player") && collider.gameObject != Owner.gameObject)
         {
-            var ent = collision.GetComponent<Entity>();
+            var ent = collider.GetComponent<Entity>();
             ent.TakeDamage(damage);
             CancelInvoke();
             Destroy(gameObject);

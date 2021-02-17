@@ -13,6 +13,8 @@ public class PlayerController : Entity
     Queue<SeedTypes> _currentSeedCombo;
     public byte maxCombo;
 
+    public Transform muzzle;
+
     public int maxHP;
     int _currentHP;
 
@@ -150,7 +152,8 @@ public class PlayerController : Entity
             }
 
             print("Combo: " + st);
-            _comboSystem.DefineCombo(_currentSeedCombo);
+            var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
+            projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
             _currentSeedCombo = new Queue<SeedTypes>();
             UIManager.Instance.ClearCombo();
         }
@@ -222,7 +225,8 @@ public class PlayerController : Entity
         CurrentHP -= Mathf.RoundToInt(dmg);
 
         UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
-        //implement later
+
+        //death stuff
     }
 }
 
