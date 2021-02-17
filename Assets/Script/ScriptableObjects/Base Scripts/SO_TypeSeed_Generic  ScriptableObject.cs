@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class SO_TypeSeed_Generic : ScriptableObject
 {
+    [Tooltip("Plant spawned from this seed.")]
+    [SerializeField]
+    GameObject plant;
+
     [Tooltip("Type-seed name.")]
     [SerializeField]
     new string name;
@@ -27,30 +31,19 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
 
     internal Transform tfmProyectil;
 
-    public Effect specialEffect = new Effect(TypeOfEffect.Damage, 0f, 0f);
+    internal int amount;
 
-    public float parameter;
-
-    public float variationRate;
-
-    public virtual void Define(int amount, Proyectile _proyectile)
+    public void Define(int _amount, Proyectile _proyectile)
     {
         proyectile = _proyectile;
-        tfmProyectil = proyectile.gameObject.transform;
-
-        float value = variationRate;
-
-        for (int i = 0; i < amount; i++)
-        {
-            float _parameter = parameter;
-
-            parameter += (_parameter * (i * value));
-        }
+        tfmProyectil = proyectile.transform;
+        amount = _amount;
     }
 
-    public abstract void Create();
-    public abstract void Traverse();
-    public abstract void Impact();
+    public GameObject GetSprout()
+    {
+        return plant;
+    }
 }
 
 public class Effect
@@ -83,5 +76,7 @@ public enum TypeOfEffect
     Stun,
     DamageOverTime,
     MindControl,
-    Mutate
+    Mutate,
+    TickBoom,
+    Masochism
 }

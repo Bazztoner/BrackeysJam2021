@@ -2,64 +2,113 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Proyectile : BaseProjectile
 {
-    [SerializeField]
-    List<SO_TypeSeed_Generic> seeds = new List<SO_TypeSeed_Generic>();
+    public SO_TypeSeed_Base seedBase;
 
-    [SerializeField]
-    SO_SeedCombos combos;
+
+    public SO_TypeSeed_Rooter seedRooter;
+
+
+    public SO_TypeSeed_Explosive seedExplosive;
+
+
+    public SO_TypeSeed_Bouncer seedBouncer;
+
+
+    public SO_TypeSeed_Seeker seedSeeker;
+
+
+    public SO_TypeSeed_Parasite seedParasite;
+
+
+    public SO_SeedCombos combos;
 
     List<Effect> effects = new List<Effect>();
+
+    List<GameObject> plants;
 
     [SerializeField]
     LayerMask enemyLayer, scenaryLayer;
 
-    bool isGoing = false;
+    int life = 1;
 
-    event Action onCreate, onImpact, onTraverse;
+    public UnityEvent onImpactEnemy, onCreate, onTraverse, onImpactEnvironment;
+
+    SO_TypeSeed_Generic Seed(int i)
+    {
+        switch ((SeedTypes)i)
+        {
+            case SeedTypes.Base:
+                return seedBase;
+            case SeedTypes.Root:
+                return seedRooter;
+            case SeedTypes.Explosive:
+                return seedExplosive;
+            case SeedTypes.Bouncer:
+                return seedBouncer;
+            case SeedTypes.Seeker:
+                return seedSeeker;
+            case SeedTypes.Parasite:
+                return seedParasite;
+            default:
+                return null;
+        }
+    }
+
+    public void Initialize()
+    {
+        onImpactEnemy.AddListener(EnemyHit);
+    }
+
+    public override void SpawnProjectile(Vector3 position, Vector3 direction, Entity owner)
+    {
+        base.SpawnProjectile(position, direction, owner);
+
+        onCreate.Invoke();
+    }
 
     public void DefineCombo(SeedTypes type, int amount)
     {
-        for (int i = 0; i < seeds.Count; i++)
-        {
-            if (i == (int) type)
-            {
-                seeds[i].Define(amount, this);
-            }
-        }
-
         switch (type)
         {
             case SeedTypes.Base:
-                effects.Add(seeds[0].specialEffect);
+                seedBase.Define(amount, this);
+                effects.Add(seedBase.GetKnockBack());
                 break;
             case SeedTypes.Root:
-                effects.Add(seeds[1].specialEffect);
+                seedRooter.Define(amount, this);
+                effects.Add(seedRooter.GetStun());
                 break;
             case SeedTypes.Explosive:
-                effects.Add(seeds[2].specialEffect);
+                seedExplosive.Define(amount, this);
+                onImpactEnemy.AddListener(seedExplosive.AOE);
                 break;
             case SeedTypes.Bouncer:
-                onImpact += seeds[3].Impact;
+                seedBouncer.Define(amount, this);
+                life = seedBouncer.GetBounces();
+                onImpactEnvironment.AddListener(Bounce);
                 break;
             case SeedTypes.Seeker:
-                onTraverse += seeds[4].Traverse;
+                seedSeeker.Define(amount, this);
+                onTraverse.AddListener(ChangeDirection);
                 break;
             case SeedTypes.Parasite:
-                effects.Add(seeds[5].specialEffect);
+                seedParasite.Define(amount, this);
+                effects.Add(seedParasite.GetMindControl());
                 break;
             default:
                 break;
         }
-    }
+
+        Initialize();
+    } 
 
     public void DefineCombination(SeedTypes _i, SeedTypes _j)
     {
         combos.Initialize(this);
-
-        Debug.Log($"Combination {(SeedTypes) _i} - {(SeedTypes) _j}");
 
         switch (_i)
         {
@@ -67,10 +116,10 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Explosive:
-                        onCreate += combos.ComboBaseExplosive;
+                        onCreate.AddListener(combos.ComboBaseExplosive);
                         break;
                     case SeedTypes.Parasite:
-                        effects.Add(combos.mutateBase);
+                        effects.Add(combos.ComboBaseParasite());
                         break;
                 }
                 break;
@@ -78,16 +127,16 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Explosive:
-                        effects.Add(combos.dot);
+                        effects.Add(combos.ComboRootExplosive());
                         break;
                     case SeedTypes.Bouncer:
-                        onImpact += combos.ComboRootBouncer;
+                        onImpactEnemy.AddListener(combos.ComboRootBouncer);
                         break;
                     case SeedTypes.Seeker:
-                        combos.ComboRootSeeker();
+                        onImpactEnemy.AddListener(combos.ComboRootSeeker);
                         break;
                     case SeedTypes.Parasite:
-                        combos.ComboRootParasite();
+                        effects.Add(combos.ComboRootParasite());
                         break;
                 }
                 break;
@@ -95,13 +144,10 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Bouncer:
-                        combos.ComboExplosiveBouncer();
-                        break;
-                    case SeedTypes.Seeker:
-                        combos.ComboExplosiveSeeker();
+                        onImpactEnemy.AddListener(combos.ComboExplosiveBouncer);
                         break;
                     case SeedTypes.Parasite:
-                        combos.ComboExplosiveParasite();
+                        effects.Add(combos.ComboExplosiveParasite());
                         break;
                 }
                 break;
@@ -109,10 +155,10 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Seeker:
-                        combos.ComboBouncerSeeker();
+                        effects.Add(combos.ComboBouncerSeeker());
                         break;
                     case SeedTypes.Parasite:
-                        combos.ComboBouncerParasite();
+                        effects.Add(combos.ComboBouncerParasite());
                         break;
                 }
                 break;
@@ -120,7 +166,7 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Parasite:
-                        combos.ComboSeekerParasite();
+                        effects.Add(combos.ComboSeekerParasite());
                         break;
                 }
                 break;
@@ -129,11 +175,11 @@ public class Proyectile : BaseProjectile
 
     public void SetSpeed(SeedTypes type)
     {
-        for (int i = 0; i < seeds.Count; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (i.Equals((int)type))
             {
-                if (seeds[i].speed > speed) speed = seeds[i].speed;
+                if (Seed(i).speed > speed) speed = Seed(i).speed;
             }
         }
     }
@@ -144,7 +190,7 @@ public class Proyectile : BaseProjectile
 
         for (int i = 0; i < _seeds.Length; i++)
         {
-            for (int j = 0; j < seeds.Count; j++)
+            for (int j = 0; j < 6; j++)
             {
                 if (_seeds[i].Equals((SeedTypes) j))
                 {
@@ -163,7 +209,7 @@ public class Proyectile : BaseProjectile
             {
                 for (int j = 0; j < amounts[i]; j++)
                 {
-                    damages.Add(seeds[i].damage);
+                    damages.Add(Seed(i).damage);
                     comboSeeds.Add((SeedTypes)i);
                 }
             }
@@ -218,7 +264,7 @@ public class Proyectile : BaseProjectile
         {
             for (int j = 0; j < repetitions[i]; j++)
             {
-                damage += (seeds[(int)seedDamage[i]].damage - j);
+                damage += (Seed((int)seedDamage[i]).damage - j);
             }
         }
 
@@ -227,33 +273,9 @@ public class Proyectile : BaseProjectile
         effects.Add(makeDamage);
     }
 
-    public void OnImpact()
-    {
-        if (onImpact != null)
-        {
-            onImpact();
-        }
-    }
-
-    public void OnTraverse()
-    {
-        if (onTraverse != null)
-        {
-            onTraverse();
-        }
-    }
-
-    public void OnCreate()
-    {
-        if (onCreate != null)
-        {
-            onCreate();
-        }
-    }
-
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.collider.gameObject.name);
+        Debug.Log($"{gameObject.name} collided on {collision.collider.gameObject.name}");
 
         if (collision.gameObject.LayerMatchesWith(enemyLayer.value))
         {
@@ -267,7 +289,7 @@ public class Proyectile : BaseProjectile
             }
         }
         
-        this.OnImpact();
+        //onImpact.Invoke();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collider)
@@ -283,37 +305,48 @@ public class Proyectile : BaseProjectile
                     _enemy.RecieveEffect(effects[i]);
                 }
             }
+
+            onImpactEnemy.Invoke();
         }
-
-        this.OnImpact();
-    }
-
-    void SetOn()
-    {
-        isGoing = true;
     }
 
     protected override void FixedUpdate()
     {
-        if (!isGoing) return;
+        onTraverse.Invoke();
 
         base.FixedUpdate();
-
-        this.OnTraverse();
     }
 
-    public override void SpawnProjectile(Vector3 position, Vector3 direction, Entity owner)
+    void EnemyHit()
     {
-        base.SpawnProjectile(position, direction, owner);
+        onImpactEnemy.Invoke();
 
-        onCreate += SetOn;
-        onTraverse += EmptyTraverse;
-        onImpact += EmptyImpact;
-
-        this.OnCreate();
+        Destroy(gameObject);
     }
 
-    void EmptyTraverse() { }
+    void EnvironmentHit()
+    {
+        onImpactEnvironment.Invoke();
 
-    void EmptyImpact() { }
+        life--;
+
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void ChangeDirection()
+    {
+        Vector3 dir = seedSeeker.Seek();
+
+        transform.up = dir;
+    }
+
+    void Bounce()
+    {
+        Vector3 dir = seedBouncer.Bounce();
+
+        transform.up = dir;
+    }
 }

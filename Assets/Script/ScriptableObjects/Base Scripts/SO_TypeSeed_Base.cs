@@ -5,28 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Base", menuName = "New Base Seed")]
 public class SO_TypeSeed_Base : SO_TypeSeed_Generic
 {
-    public Effect knockBack;
+    public float amountKnockBack;
 
-    public override void Define(int amount, Proyectile _proyectile)
+    public float increaseRate;
+
+    public Effect GetKnockBack()
     {
-        base.Define(amount, _proyectile);
+        float _amountKnockBack = amountKnockBack;
+        float _variationKnockBack = increaseRate;
 
-        knockBack = new Effect(TypeOfEffect.KnockBack, parameter);
-        specialEffect = knockBack;
-    }
+        for (int i = 1; i < amount; i++)
+        {
+            _variationKnockBack = (_variationKnockBack * increaseRate);
+            _amountKnockBack += (amountKnockBack * _variationKnockBack);
+        }
 
-    public override void Create()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Impact()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Traverse()
-    {
-        throw new System.NotImplementedException();
+        return new Effect(TypeOfEffect.KnockBack, _amountKnockBack);
     }
 }

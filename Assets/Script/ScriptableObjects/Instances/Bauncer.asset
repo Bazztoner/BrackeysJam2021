@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc151dda03a89874cbf9c81464285f66, type: 3}
   m_Name: Bauncer
   m_EditorClassIdentifier: 
-  name: 
+  name: Rebouncerous
   description: 
   speed: 4
   damage: 3
   sprSeed: {fileID: 0}
+  bounces: 3
+  bounceIncreaseRate: 0.85

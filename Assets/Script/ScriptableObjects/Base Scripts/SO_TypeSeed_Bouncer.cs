@@ -5,37 +5,29 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Bauncer", menuName = "New Bauncer Seed")]
 public class SO_TypeSeed_Bouncer : SO_TypeSeed_Generic
 {
-    int bounces;
+    public int bounces;
 
-    public override void Define(int amount, Proyectile _proyectile)
+    public float bounceIncreaseRate;
+
+    public int GetBounces()
     {
-        base.Define(amount, _proyectile);
+        float _bounces = bounces;
+        float _bounceIncrease = bounceIncreaseRate;
 
-        bounces = Mathf.RoundToInt(parameter);
-    }
-
-    public override void Create()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Traverse()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Impact()
-    {
-        if (bounces > 0)
+        for (int i = 1; i < amount; i++)
         {
-            Vector3 rotInit = tfmProyectil.up;
-            Vector3 rotObjective = tfmProyectil.right;
-
-            Vector3 rotEnd = rotObjective - rotInit;
-
-            tfmProyectil.rotation = Quaternion.LookRotation(Vector3.zero, rotEnd);
-
-            bounces--;
+            _bounceIncrease = (_bounceIncrease * bounceIncreaseRate);
+            _bounces += _bounceIncrease;
         }
+
+        return Mathf.RoundToInt(_bounces);
+    }
+
+    public Vector3 Bounce()
+    {
+        Vector3 dir = -tfmProyectil.right;
+
+
+        return dir;
     }
 }

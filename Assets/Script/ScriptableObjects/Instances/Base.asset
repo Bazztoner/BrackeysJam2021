@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e725a6b773b04944b0b34e0570c8bc9, type: 3}
   m_Name: Base
   m_EditorClassIdentifier: 
-  name: 
+  name: Pinecone
   description: 
   speed: 5
   damage: 5
   sprSeed: {fileID: 0}
+  amountKnockBack: 3
+  increaseRate: 0.9

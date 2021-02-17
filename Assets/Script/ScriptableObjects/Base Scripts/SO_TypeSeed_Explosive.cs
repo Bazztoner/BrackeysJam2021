@@ -9,45 +9,42 @@ public class SO_TypeSeed_Explosive : SO_TypeSeed_Generic
 
     public float variationArea;
 
-    public Effect damageOverTime;
+    public float amountKnockBack;
 
-    public override void Define(int amount, Proyectile _proyectile)
+    public float variationKnockBack;
+
+    public void AOE()
     {
-        proyectile = _proyectile;
-        tfmProyectil = proyectile.gameObject.transform;
+        float _area = area;
+        float _variation = variationArea;
 
-        for (int i = 0; i < amount; i++)
+        for (int i = 1; i < amount; i++)
         {
-            float _parameter = parameter;
-            float _variationArea = variationArea;
-
-            parameter += (_parameter * (i * variationRate));
-            area += (_variationArea * (i * variationArea));
+            _variation = (_variation * variationArea);
+            _area += (area * _variation);
         }
-    }
 
-    public override void Create()
-    {
-        throw new System.NotImplementedException();
-    }
+        Collider2D[] targets = Physics2D.OverlapCircleAll(tfmProyectil.position, _area);
 
-    public override void Traverse()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Impact()
-    {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(tfmProyectil.position, area);
-
-        foreach (var target in targets)
+        if (targets.Length >= 1)
         {
-            EnemyBase enemy = target.GetComponent<EnemyBase>() ? target.GetComponent<EnemyBase>() : null;
+            float _amountKnockBack = amountKnockBack;
+            float _variationKnockBack = variationKnockBack;
 
-            if (enemy != null)
+            for (int i = 1; i < amount; i++)
             {
-                damageOverTime = new Effect(TypeOfEffect.Damage, parameter);
-                enemy.RecieveEffect(damageOverTime);
+                _variationKnockBack = (_variationKnockBack * variationKnockBack);
+                _amountKnockBack += (amountKnockBack * _variationKnockBack);
+            }
+
+            foreach (var target in targets)
+            {
+                EnemyBase enemy = target.GetComponent<EnemyBase>() ? target.GetComponent<EnemyBase>() : null;
+
+                if (enemy != null)
+                {
+                    enemy.RecieveEffect(new Effect(TypeOfEffect.KnockBack, _amountKnockBack));
+                }
             }
         }
     }

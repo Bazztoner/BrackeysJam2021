@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368870556ac930d4cb15335319a61c9b, type: 3}
   m_Name: Seeker
   m_EditorClassIdentifier: 
-  name: 
+  name: Maliciousous maderasker
   description: 
   speed: 3
   damage: 4
   sprSeed: {fileID: 0}
+  initialPrecision: 0.9
+  precisionChange: 0.75
