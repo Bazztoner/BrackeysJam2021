@@ -20,42 +20,56 @@ public class ComboSystem : MonoBehaviour
 
         for (int i = 0; i < seeds.Length; i++)
         {
-            switch (seeds[i])
-            {
-                case SeedTypes.Base:
-                    amount[0]++;
-                    break;
-                case SeedTypes.Root:
-                    amount[1]++;
-                    break;
-                case SeedTypes.Explosive:
-                    amount[2]++;
-                    break;
-                case SeedTypes.Bouncer:
-                    amount[3]++;
-                    break;
-                case SeedTypes.Seeker:
-                    amount[4]++;
-                    break;
-                case SeedTypes.Parasite:
-                    amount[5]++;
-                    break;
-                default:
-                    break;
-            }
+            amount[(int)seeds[i]]++;
 
             proyectile.DefineCombo((SeedTypes)i, amount[i]);
             proyectile.SetSpeed((SeedTypes)i);
+        }
 
-            if (amount[i] > 0)
+        if (seeds.Length > 1)
+        {
+            for (int i = 0; i < seeds.Length; i++)
             {
-                proyectile.SetSpeed((SeedTypes) i);
+                int value = 0;
 
                 for (int j = i + 1; j < seeds.Length; j++)
                 {
-                    if (amount[j] > 0)
+                    if ((int)seeds[i] > (int)seeds[j])
                     {
-                        proyectile.DefineCombination((SeedTypes) i, (SeedTypes) j);
+                        value = (int)seeds[i];
+                        seeds[i] = seeds[j];
+                        seeds[j] = (SeedTypes)value;
+                    }
+                }
+            }
+
+            List<SeedTypes> _seeds = new List<SeedTypes>();
+
+            int index = 0;
+            _seeds.Add(seeds[0]);
+
+            for (int i = 0; i < seeds.Length - 1; i++)
+            {
+                if (seeds.Length >= (i + 1))
+                {
+                    for (int j = i + 1; j < seeds.Length; j++)
+                    {
+                        if (!seeds[j].Equals(seeds[i]))
+                        {
+                            _seeds.Add(seeds[j]);
+                            index++;
+                        }
+                    }
+                }
+            }
+
+            if (_seeds.Count > 1)
+            {
+                for (int i = 0; i < _seeds.Count; i++)
+                {
+                    for (int j = i + 1; j < seeds.Length; j++)
+                    {
+                        proyectile.DefineCombination(_seeds[i], _seeds[j]);
                     }
                 }
             }

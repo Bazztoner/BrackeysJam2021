@@ -46,7 +46,8 @@ public class SO_TypeSeed_Explosive : SO_TypeSeed_Generic
 
             if (enemy != null)
             {
-                enemy.RecieveEffect(new Effect(TypeOfEffect.Damage, parameter));
+                damageOverTime = new Effect(TypeOfEffect.Damage, parameter);
+                enemy.RecieveEffect(damageOverTime);
             }
         }
     }

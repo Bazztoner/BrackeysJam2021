@@ -35,6 +35,7 @@ public class BaseProjectile : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         _rb.MovePosition(_rb.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
+        //_rb.velocity = ((Vector2)transform.up * speed * Time.fixedDeltaTime);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)

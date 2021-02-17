@@ -53,6 +53,8 @@ public abstract class EnemyBase : Entity
 
     public virtual void RecieveEffect(Effect _effect)
     {
+        //print($"{gameObject.name} is suffering from {_effect.type} effect.");
+
         switch (_effect.type)
         {
             case TypeOfEffect.Damage:
@@ -69,6 +71,19 @@ public abstract class EnemyBase : Entity
                 break;
             case TypeOfEffect.MindControl:
 
+                break;
+            case TypeOfEffect.Mutate:
+                switch (_effect.modifier1)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;

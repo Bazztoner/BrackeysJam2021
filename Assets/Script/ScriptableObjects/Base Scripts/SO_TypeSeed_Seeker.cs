@@ -29,23 +29,28 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
 
         EnemyBase[] enemies = FindObjectsOfType<EnemyBase>();
 
-        Vector3 closestEnemy = enemies[0].gameObject.transform.position;
+        Debug.Log(enemies.Length);
 
-        for (int i = 0; i < enemies.Length; i++)
+        if (enemies.Length >= 1)
         {
-            Vector3 curEnemy = enemies[i].gameObject.transform.position;
+            Vector3 closestEnemy = enemies[0].gameObject.transform.position;
 
-            if (Vector3.Distance(closestEnemy, tfmProyectil.position) < Vector3.Distance(curEnemy, tfmProyectil.position))
+            for (int i = 0; i < enemies.Length; i++)
             {
-                closestEnemy = enemies[i].gameObject.transform.position;
+                Vector3 curEnemy = enemies[i].gameObject.transform.position;
+
+                if (Vector3.Distance(closestEnemy, tfmProyectil.position) < Vector3.Distance(curEnemy, tfmProyectil.position))
+                {
+                    closestEnemy = enemies[i].gameObject.transform.position;
+                }
             }
+
+            Vector3 dir = closestEnemy - tfmProyectil.position;
+
+            Debug.Log(realAim);
+
+            tfmProyectil.up = Vector3.Lerp(tfmProyectil.up, dir, realAim);
         }
-
-        Vector3 dir = closestEnemy - tfmProyectil.position;
-
-        Quaternion rotEnd = Quaternion.LookRotation(Vector3.zero, dir);
-
-        tfmProyectil.rotation = Quaternion.Lerp(tfmProyectil.rotation, rotEnd, realAim);
     }
 
     public override void Impact()

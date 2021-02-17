@@ -6,7 +6,7 @@ using UnityEngine;
 public class Proyectile : BaseProjectile
 {
     [SerializeField]
-    List<SO_TypeSeed_Generic> seeds;
+    List<SO_TypeSeed_Generic> seeds = new List<SO_TypeSeed_Generic>();
 
     [SerializeField]
     SO_SeedCombos combos;
@@ -15,6 +15,8 @@ public class Proyectile : BaseProjectile
 
     [SerializeField]
     LayerMask enemyLayer, scenaryLayer;
+
+    bool isGoing = false;
 
     event Action onCreate, onImpact, onTraverse;
 
@@ -55,25 +57,20 @@ public class Proyectile : BaseProjectile
 
     public void DefineCombination(SeedTypes _i, SeedTypes _j)
     {
+        combos.Initialize(this);
+
+        Debug.Log($"Combination {(SeedTypes) _i} - {(SeedTypes) _j}");
+
         switch (_i)
         {
             case SeedTypes.Base:
                 switch (_j)
                 {
-                    case SeedTypes.Root:
-                        combos.ComboBaseRoot(); // Modify SeedBase
-                        break;
                     case SeedTypes.Explosive:
-                        combos.ComboBaseExplosive();
-                        break;
-                    case SeedTypes.Bouncer:
-                        combos.ComboBaseBouncer();
-                        break;
-                    case SeedTypes.Seeker:
-                        combos.ComboBaseSeeker();
+                        onCreate += combos.ComboBaseExplosive;
                         break;
                     case SeedTypes.Parasite:
-                        combos.ComboBaseParasite();
+                        effects.Add(combos.mutateBase);
                         break;
                 }
                 break;
@@ -81,10 +78,10 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Explosive:
-                        combos.ComboRootExplosive();
+                        effects.Add(combos.dot);
                         break;
                     case SeedTypes.Bouncer:
-                        combos.ComboRootBouncer();
+                        onImpact += combos.ComboRootBouncer;
                         break;
                     case SeedTypes.Seeker:
                         combos.ComboRootSeeker();
@@ -224,6 +221,10 @@ public class Proyectile : BaseProjectile
                 damage += (seeds[(int)seedDamage[i]].damage - j);
             }
         }
+
+        Effect makeDamage = new Effect(TypeOfEffect.Damage, damage);
+
+        effects.Add(makeDamage);
     }
 
     public void OnImpact()
@@ -246,12 +247,14 @@ public class Proyectile : BaseProjectile
     {
         if (onCreate != null)
         {
-            OnCreate();
+            onCreate();
         }
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        print(collision.collider.gameObject.name);
+
         if (collision.gameObject.LayerMatchesWith(enemyLayer.value))
         {
             EnemyBase _enemy = collision.collider.gameObject.GetComponent<EnemyBase>();
@@ -264,7 +267,7 @@ public class Proyectile : BaseProjectile
             }
         }
         
-        OnImpact();
+        this.OnImpact();
     }
 
     protected override void OnTriggerEnter2D(Collider2D collider)
@@ -273,19 +276,44 @@ public class Proyectile : BaseProjectile
         {
             EnemyBase _enemy = collider.gameObject.GetComponent<EnemyBase>();
 
-            _enemy.RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
-
-            for (int i = 0; i < effects.Count; i++)
+            if (effects.Count >= 1)
             {
-                _enemy.RecieveEffect(effects[i]);
+                for (int i = 0; i < effects.Count; i++)
+                {
+                    _enemy.RecieveEffect(effects[i]);
+                }
             }
         }
 
-        OnImpact();
+        this.OnImpact();
     }
 
-    private void Update()
+    void SetOn()
     {
-        OnTraverse();
+        isGoing = true;
     }
+
+    protected override void FixedUpdate()
+    {
+        if (!isGoing) return;
+
+        base.FixedUpdate();
+
+        this.OnTraverse();
+    }
+
+    public override void SpawnProjectile(Vector3 position, Vector3 direction, Entity owner)
+    {
+        base.SpawnProjectile(position, direction, owner);
+
+        onCreate += SetOn;
+        onTraverse += EmptyTraverse;
+        onImpact += EmptyImpact;
+
+        this.OnCreate();
+    }
+
+    void EmptyTraverse() { }
+
+    void EmptyImpact() { }
 }

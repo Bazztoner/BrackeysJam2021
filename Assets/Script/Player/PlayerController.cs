@@ -151,7 +151,7 @@ public class PlayerController : Entity
                 st += item.ToString() + " ";
             }
 
-            print("Combo: " + st);
+            //print("Combo: " + st);
             var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
             projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
             _currentSeedCombo = new Queue<SeedTypes>();
@@ -162,7 +162,7 @@ public class PlayerController : Entity
             //delete queue
             UIManager.Instance.ClearCombo();
             _currentSeedCombo = new Queue<SeedTypes>();
-            print("Combo was emptied");
+            //print("Combo was emptied");
         }
     }
 

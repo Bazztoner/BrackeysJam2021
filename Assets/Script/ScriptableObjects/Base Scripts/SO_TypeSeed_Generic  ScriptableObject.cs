@@ -27,7 +27,7 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
 
     internal Transform tfmProyectil;
 
-    public Effect specialEffect;
+    public Effect specialEffect = new Effect(TypeOfEffect.Damage, 0f, 0f);
 
     public float parameter;
 
@@ -82,5 +82,6 @@ public enum TypeOfEffect
     KnockBack,
     Stun,
     DamageOverTime,
-    MindControl
+    MindControl,
+    Mutate
 }
