@@ -5,13 +5,30 @@ using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     public float movementSpeed;
     public Dictionary<SeedTypes, bool> unlockedSeeds;
     public Dictionary<KeyControl, SeedTypes> seedInputs;
     Queue<SeedTypes> _currentSeedCombo;
     public byte maxCombo;
+
+    public Transform muzzle;
+
+    public int maxHP;
+    int _currentHP;
+
+    public int CurrentHP
+    {
+        get => _currentHP;
+        private set
+        {
+            _currentHP = value;
+            if (_currentHP <= 0) _currentHP = 0;
+            else if (_currentHP >= maxHP) _currentHP = maxHP;
+        }
+    }
+
 
     Keyboard _kb;
     Mouse _mb;
@@ -21,9 +38,13 @@ public class PlayerController : MonoBehaviour
     Vector3 _camOffset;
     Quaternion _camRotOffset;
     Vector3 _dumpSpeed;
+    ComboSystem _comboSystem;
 
     void Start()
     {
+        CurrentHP = maxHP;
+        _comboSystem = GetComponent<ComboSystem>();
+
         _kb = Keyboard.current;
         _mb = Mouse.current;
         _rb = GetComponent<Rigidbody2D>();
@@ -36,6 +57,9 @@ public class PlayerController : MonoBehaviour
         //Normally 0, 2.46, -10
         _camOffset = _cam.transform.position;
         _camRotOffset = _cam.transform.rotation;
+
+        Cursor.lockState = CursorLockMode.Confined;
+
     }
 
     void Update()
@@ -57,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
     void InitializeDictionaries()
     {
+        //Remember to put false in everything except Base for the final game
+        //Root will get unlocked on the first level, tho
         unlockedSeeds = new Dictionary<SeedTypes, bool>
         {
             { SeedTypes.Base, true },
@@ -109,14 +135,14 @@ public class PlayerController : MonoBehaviour
     {
         _mousePos = _mb.position.ReadValue();
 
-        Vector3 targetDir = Camera.main.ScreenToWorldPoint(_mousePos) - transform.position;
-        float angle = (Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg) - 90f;
+        var targetDir = Camera.main.ScreenToWorldPoint(_mousePos) - transform.position;
+        var angle = (Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg) - 90f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     void CheckMouseInput()
     {
-        if (_mb.leftButton.wasPressedThisFrame)
+        if (_mb.leftButton.wasPressedThisFrame && _currentSeedCombo != null && _currentSeedCombo.Any())
         {
             //shoot shit
             string st = "";
@@ -125,22 +151,18 @@ public class PlayerController : MonoBehaviour
                 st += item.ToString() + " ";
             }
 
-            print("Combo: " + st);
+            //print("Combo: " + st);
+            var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
+            projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
             _currentSeedCombo = new Queue<SeedTypes>();
+            UIManager.Instance.ClearCombo();
         }
         else if (_mb.rightButton.wasPressedThisFrame)
         {
             //delete queue
+            UIManager.Instance.ClearCombo();
             _currentSeedCombo = new Queue<SeedTypes>();
-            print("Queue was emptied");
-
-            string st = "";
-            foreach (var item in _currentSeedCombo)
-            {
-                st += item.ToString() + " ";
-            }
-
-            print("Combo:" + st);
+            //print("Combo was emptied");
         }
     }
 
@@ -185,7 +207,7 @@ public class PlayerController : MonoBehaviour
         if (_currentSeedCombo.Count < maxCombo)
         {
             _currentSeedCombo.Enqueue(addTo);
-            //add graphics to UI
+            UIManager.Instance.AddSeedToCombo(_currentSeedCombo.Count - 1, addTo);
         }
         else
         {
@@ -197,14 +219,23 @@ public class PlayerController : MonoBehaviour
     {
         unlockedSeeds[newSeed] = true;
     }
+
+    public override void TakeDamage(float dmg)
+    {
+        CurrentHP -= Mathf.RoundToInt(dmg);
+
+        UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
+
+        //death stuff
+    }
 }
 
 public enum SeedTypes
 {
-    Base,
-    Root,
-    Explosive,
-    Bouncer,
-    Seeker,
-    Parasite
+    Base = 0,
+    Root = 1,
+    Explosive = 2,
+    Bouncer = 3,
+    Seeker = 4,
+    Parasite = 5
 }

@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   description: 
-  speed: 0
-  life: 0
-  damage: 0
+  speed: 5
+  damage: 1
   sprSeed: {fileID: 0}

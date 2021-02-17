@@ -4,23 +4,47 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    Rigidbody2D rb;
+    protected Rigidbody2D _rb;
 
     public float damage;
 
     public float speed;
 
-    private void Awake()
+    protected Entity _owner;
+
+    public Entity Owner { get => _owner; protected set => _owner = value; }
+
+    protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    public virtual void SpawnProjectile(Vector3 position, Vector3 direction)
     {
-        rb.MovePosition(transform.up * speed * Time.deltaTime);
+        transform.position = position;
+        transform.up = direction;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public virtual void SpawnProjectile(Vector3 position, Vector3 direction, Entity owner)
+    {
+        transform.position = position;
+        transform.up = direction;
+        Owner = owner;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        _rb.MovePosition(_rb.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
+        //_rb.velocity = ((Vector2)transform.up * speed * Time.fixedDeltaTime);
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
+        Destroy(gameObject);
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
         Destroy(gameObject);
