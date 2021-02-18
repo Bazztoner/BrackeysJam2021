@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeOfTypeSeedBase : BaseTree
+public class TreeOfTypeSeedParasite : BaseTree
 {
-    public int life = 3;
+    [SerializeField]
+    protected GameObject collectible;
+
+    public int countdown = 3;
 
     public override void Behave() { }
 
@@ -16,10 +19,12 @@ public class TreeOfTypeSeedBase : BaseTree
         {
             Destroy(_col);
 
-            life--;
+            countdown--;
 
-            if (life <= 0)
+            if (countdown <= 0)
             {
+                Instantiate(collectible, transform.position, Quaternion.identity);
+
                 Destroy(gameObject);
             }
         }

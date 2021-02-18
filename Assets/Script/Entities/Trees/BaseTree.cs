@@ -11,7 +11,7 @@ public abstract class BaseTree : MonoBehaviour
         StartCoroutine(Sprouting());
     }
 
-    IEnumerator Sprouting()
+    protected IEnumerator Sprouting()
     {
         //Sprouting animation?
 
@@ -19,4 +19,6 @@ public abstract class BaseTree : MonoBehaviour
 
         col.enabled = true;
     }
+
+    public abstract void Behave();
 }
