@@ -9,7 +9,7 @@ public class SO_TypeSeed_Bouncer : SO_TypeSeed_Generic
 
     public float bounceIncreaseRate;
 
-    public int GetBounces()
+    public int GetBounces(int amount)
     {
         float _bounces = bounces;
         float _bounceIncrease = bounceIncreaseRate;
@@ -23,7 +23,7 @@ public class SO_TypeSeed_Bouncer : SO_TypeSeed_Generic
         return Mathf.RoundToInt(_bounces);
     }
 
-    public Vector3 Bounce()
+    public Vector3 Bounce(Transform tfmProyectil)
     {
         Vector3 dir = -tfmProyectil.right;
 

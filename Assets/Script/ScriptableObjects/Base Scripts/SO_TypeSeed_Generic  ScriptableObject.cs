@@ -27,19 +27,6 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
     [SerializeField]
     Sprite sprSeed;
 
-    internal Proyectile proyectile;
-
-    internal Transform tfmProyectil;
-
-    internal int amount;
-
-    public void Define(int _amount, Proyectile _proyectile)
-    {
-        proyectile = _proyectile;
-        tfmProyectil = proyectile.transform;
-        amount = _amount;
-    }
-
     public GameObject GetSprout()
     {
         return plant;

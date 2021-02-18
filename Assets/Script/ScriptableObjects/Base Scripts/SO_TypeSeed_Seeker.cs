@@ -6,12 +6,9 @@ using UnityEngine;
 public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
 {
     [Range(0f, .9f)]
-    public float initialPrecision;
-
-    [Range(0f, .9f)]
     public float precisionChange;
 
-    public Vector3 Seek()
+    public Vector3 Seek(int amount, Transform tfmProyectil)
     {
         Vector3 dir = tfmProyectil.up;
 
@@ -31,14 +28,17 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
                 }
             }
 
-            float _realAim = initialPrecision;
+            float _perfectAim = 1f * Time.fixedDeltaTime;
+            float _realAim = _perfectAim / 5f;
             float _precision = precisionChange;
 
-            for (int i = 1; i < amount; i++)
+            for (int i = 0; i < amount; i++)
             {
-                _precision = (_precision * precisionChange);
+                _precision = (_realAim * precisionChange);
                 _realAim += _precision;
             }
+
+            Debug.Log($"Real aim for {amount} is {_realAim}");
 
             Vector3 dirInit = dir;
             Vector3 dirEnd = Vector3.Normalize(closestEnemy - tfmProyectil.position);

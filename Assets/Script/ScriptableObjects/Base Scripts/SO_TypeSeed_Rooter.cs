@@ -9,7 +9,7 @@ public class SO_TypeSeed_Rooter : SO_TypeSeed_Generic
 
     public float stunChangeRate;
 
-    public Effect GetStun()
+    public Effect GetStun(int amount)
     {
         float _tickStun = tickStun;
         float _stunChangeRate = stunChangeRate;

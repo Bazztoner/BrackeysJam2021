@@ -14,6 +14,8 @@ public class ComboSystem : MonoBehaviour
 
     public Proyectile DefineCombo(Queue<SeedTypes> _combo)
     {
+        amount = new int[6];
+
         proyectile = Instantiate(prefabProyectile).GetComponent<Proyectile>();
 
         SeedTypes[] seeds = _combo.ToArray();
@@ -21,9 +23,15 @@ public class ComboSystem : MonoBehaviour
         for (int i = 0; i < seeds.Length; i++)
         {
             amount[(int)seeds[i]]++;
+        }
 
-            proyectile.DefineCombo((SeedTypes)i, amount[i]);
-            proyectile.SetSpeed((SeedTypes)i);
+        for (int i = 0; i < amount.Length; i++)
+        {
+            if (amount[i] >= 1)
+            {
+                proyectile.DefineCombo((SeedTypes)i, amount[i]);
+                proyectile.SetSpeed((SeedTypes)i);
+            }
         }
 
         if (seeds.Length > 1)

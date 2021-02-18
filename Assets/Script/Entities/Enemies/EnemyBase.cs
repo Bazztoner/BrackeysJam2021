@@ -18,7 +18,7 @@ public abstract class EnemyBase : Entity
 
     bool isStunned = false, isMindControlled = false, isTicking;
 
-    List<SeedTypes> inyectedSeeds;
+    List<SeedTypes> inyectedSeeds = new List<SeedTypes>();
 
     public float CurrentHP
     {
