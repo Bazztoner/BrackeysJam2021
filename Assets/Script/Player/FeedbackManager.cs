@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class FeedbackManager : MonoBehaviour
 {
-    [SerializeField]
-    protected ParticleSystem damage, dot, heal, explosion;
-
     public void Heal()
     {
 

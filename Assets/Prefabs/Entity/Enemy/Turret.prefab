@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8901151702108059593}
   - component: {fileID: 8901151702108059598}
   - component: {fileID: 549310143}
+  - component: {fileID: 2512573294991029399}
   m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
@@ -119,8 +120,7 @@ MonoBehaviour:
   movementSpeed: 0
   defaultProjectile: {fileID: 3678966045819775343, guid: 2fd94f7d3102725409ad6a5ce206de74,
     type: 3}
-  inyectedProjectile: {fileID: 1047217519940896085, guid: 6ff6050956c7d7d4d8d4d969448d1193,
-    type: 3}
+  comboSystem: {fileID: 0}
   muzzle: {fileID: 1350041569}
   startingPosition: {x: 0, y: 0, z: 0}
   rotationSpeed: 90
@@ -140,6 +140,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProyectile: {fileID: 1047217519940896085, guid: 6ff6050956c7d7d4d8d4d969448d1193,
     type: 3}
+--- !u!114 &2512573294991029399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8901151702108059594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc13c4fcce55f4b96a56f118284289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8901151703837407889
 GameObject:
   m_ObjectHideFlags: 0

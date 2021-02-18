@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 using FSM;
 
-[RequireComponent(typeof(FeedbackManager))]
 public abstract class EnemyBase : Entity
 {
     public float maxHP, movementSpeed;
@@ -14,8 +13,6 @@ public abstract class EnemyBase : Entity
     public BaseProyectile defaultProjectile;
     public EnemyComboSystem comboSystem;
     protected PlayerController _player;
-
-    protected FeedbackManager fbMan;
 
     [Header("Point where the projectiles spawn")]
     public Transform muzzle;
