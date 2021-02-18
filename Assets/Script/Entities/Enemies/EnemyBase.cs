@@ -18,11 +18,7 @@ public abstract class EnemyBase : Entity
 
     protected bool _isStunned, _isMindControlled, _isTicking;
 
-<<<<<<< HEAD
-    List<SeedTypes> inyectedSeeds = new List<SeedTypes>();
-=======
-    protected List<SeedTypes> _inyectedSeeds;
->>>>>>> 0d0d2888307858810208ec433f1dbb7461c77113
+    protected List<SeedTypes> _inyectedSeeds = new List<SeedTypes>();
 
     public float CurrentHP
     {
