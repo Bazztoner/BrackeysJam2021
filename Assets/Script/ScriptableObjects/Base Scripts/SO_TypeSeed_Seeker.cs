@@ -30,20 +30,22 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
 
             float _perfectAim = 1f * Time.fixedDeltaTime;
             float _realAim = _perfectAim / 5f;
-            float _precision = precisionChange;
+            float _aimCorrection = 0f;
+            float _aim = 0f;
 
-            for (int i = 0; i < amount; i++)
+            for (int i = 1; i < amount; i++)
             {
-                _precision = (_realAim * precisionChange);
-                _realAim += _precision;
+                _realAim += (_aimCorrection * precisionChange);
             }
 
-            Debug.Log($"Real aim for {amount} is {_realAim}");
+            _aim += _realAim;
+
+            Debug.Log($"Real aim for {amount} is {_aim}");
 
             Vector3 dirInit = dir;
             Vector3 dirEnd = Vector3.Normalize(closestEnemy - tfmProyectil.position);
 
-            dir = Vector3.Lerp(dirInit, dirEnd, _realAim);
+            dir = Vector3.Lerp(dirInit, dirEnd, _aim);
         }
 
         return dir;
