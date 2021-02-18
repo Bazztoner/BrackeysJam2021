@@ -22,6 +22,11 @@ public class MiniProjectile : MonoBehaviour
         destination = _destination;
     }
 
+    public void SetDestination(Vector3 _destination)
+    {
+        destination.position = _destination;
+    }
+
     private void LateUpdate()
     {
         if (destination != null) dir = destination.position - transform.position;
