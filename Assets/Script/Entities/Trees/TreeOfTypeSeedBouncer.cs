@@ -26,7 +26,7 @@ public class TreeOfTypeSeedBouncer : BaseTree
     {
         GameObject _col = collision.gameObject;
 
-        if (_col.GetComponent<BaseProjectile>())
+        if (_col.GetComponent<BaseProyectile>())
         {
             Vector3 dir = Vector3.Normalize(col.transform.up - transform.position);
             _col.transform.up = dir;

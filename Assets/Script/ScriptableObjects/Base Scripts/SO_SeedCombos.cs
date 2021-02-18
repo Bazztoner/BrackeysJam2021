@@ -75,7 +75,7 @@ public class SO_SeedCombos : ScriptableObject
 
             GameObject _mini = Instantiate(miniProyectile, proyectile.transform.position, Quaternion.identity);
 
-            _mini.GetComponent<MiniProjectile>().SetDestination(closest.transform.position);
+            _mini.GetComponent<MiniProyectile>().SetDestination(closest.transform.position);
         }
     }
 

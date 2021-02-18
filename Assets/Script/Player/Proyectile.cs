@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Proyectile : BaseProjectile
+public class Proyectile : BaseProyectile
 {
     public SO_TypeSeed_Base seedBase;
 
@@ -273,7 +273,7 @@ public class Proyectile : BaseProjectile
             }
         }
 
-        Effect makeDamage = new Effect(TypeOfEffect.Damage, damage);
+        Effect makeDamage = new Effect(TypeOfEffect.Damage, damage, transform.position);
 
         effects.Add(makeDamage);
     }

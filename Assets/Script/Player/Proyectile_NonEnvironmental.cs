@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Proyectile_NonEnvironmental : BaseProjectile
+public class Proyectile_NonEnvironmental : BaseProyectile
 {
     public SO_TypeSeed_Base seedBase;
 

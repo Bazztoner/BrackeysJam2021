@@ -34,7 +34,7 @@ public class TreeOfTypeSeedSeeker : BaseTree
                 }
             }
 
-            MiniProjectile mini = Instantiate(miniProjectile, transform.position, Quaternion.identity).GetComponent<MiniProjectile>();
+            MiniProyectile mini = Instantiate(miniProjectile, transform.position, Quaternion.identity).GetComponent<MiniProyectile>();
 
             mini.SetDestination(closestEnemy.transform);
         }

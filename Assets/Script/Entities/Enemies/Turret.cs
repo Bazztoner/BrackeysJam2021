@@ -148,7 +148,7 @@ public class Turret : EnemyBase
     }
     protected override void Shoot()
     {
-        BaseProjectile instancedProjectile;
+        BaseProyectile instancedProjectile;
 
         if (_isMindControlled && _inyectedSeeds.Any())
         {

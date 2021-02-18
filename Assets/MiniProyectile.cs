@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniProjectile : MonoBehaviour
+public class MiniProyectile : MonoBehaviour
 {
     Rigidbody2D rb;
 

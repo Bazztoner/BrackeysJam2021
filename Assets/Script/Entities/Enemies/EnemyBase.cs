@@ -10,7 +10,7 @@ public abstract class EnemyBase : Entity
     protected float _currentHP;
 
     protected Rigidbody2D _rb;
-    public BaseProjectile defaultProjectile;
+    public BaseProyectile defaultProjectile;
     public EnemyComboSystem comboSystem;
     protected PlayerController _player;
 
@@ -38,6 +38,7 @@ public abstract class EnemyBase : Entity
         _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindObjectOfType<PlayerController>();
         comboSystem = GetComponent<EnemyComboSystem>();
+        fbMan = GetComponent<FeedbackManager>();
     }
 
     protected virtual void Update()
@@ -55,6 +56,12 @@ public abstract class EnemyBase : Entity
     public override void TakeDamage(float dmg)
     {
         CurrentHP -= dmg;
+    }
+
+    public override void TakeHeal(float hp)
+    {
+        CurrentHP += hp;
+        fbMan.Heal();
     }
 
     IEnumerator Stunned(float tick)
@@ -90,6 +97,7 @@ public abstract class EnemyBase : Entity
         while (_tick > 0f)
         {
             TakeDamage(damage);
+            fbMan.LocalDamage();
 
             yield return new WaitForEndOfFrame();
 
@@ -99,7 +107,7 @@ public abstract class EnemyBase : Entity
 
     public virtual void Explode()
     {
-
+        fbMan.Explode();
     }
 
     IEnumerator TickBoom(float tick)
@@ -124,6 +132,7 @@ public abstract class EnemyBase : Entity
         {
             case TypeOfEffect.Damage:
                 TakeDamage(_effect.modifier1);
+                fbMan.DirectionalDamage(_effect.dir);
                 break;
             case TypeOfEffect.KnockBack:
                 Vector3 dir = transform.position - _effect.dir;

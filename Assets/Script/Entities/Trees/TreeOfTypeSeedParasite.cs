@@ -15,7 +15,7 @@ public class TreeOfTypeSeedParasite : BaseTree
     {
         GameObject _col = collision.gameObject;
 
-        if (_col.GetComponent<BaseProjectile>())
+        if (_col.GetComponent<BaseProyectile>())
         {
             Destroy(_col);
 

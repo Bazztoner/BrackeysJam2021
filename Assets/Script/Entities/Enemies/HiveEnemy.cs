@@ -234,7 +234,7 @@ public class HiveEnemy : EnemyBase
     {
         for (int i = 0; i < _ships.Where(x => x.gameObject != null).Count(); i++)
         {
-            BaseProjectile instancedProjectile;
+            BaseProyectile instancedProjectile;
 
             if (_isMindControlled && _inyectedSeeds.Any())
             {

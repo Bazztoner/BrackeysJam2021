@@ -49,6 +49,8 @@ public class PlayerController : Entity
         _mb = Mouse.current;
         _rb = GetComponent<Rigidbody2D>();
 
+        fbMan = GetComponent<FeedbackManager>();
+
         _currentSeedCombo = new Queue<SeedTypes>();
 
         InitializeDictionaries();
@@ -228,6 +230,12 @@ public class PlayerController : Entity
         UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
 
         //death stuff
+    }
+
+    public override void TakeHeal(float hp)
+    {
+        CurrentHP += Mathf.RoundToInt(hp);
+        fbMan.Heal();
     }
 }
 
