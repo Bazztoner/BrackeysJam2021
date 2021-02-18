@@ -3,7 +3,12 @@ guid: a99a51e13953a435a9dc98ad4ecd4043
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: polydesert_atlas
+    second: {fileID: 2100000, guid: fb29ce62cafac4785a37f06af852f6e7, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
