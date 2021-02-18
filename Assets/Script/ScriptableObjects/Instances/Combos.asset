@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccb9c17e5f4fa04bae4ac40f8d7baeb, type: 3}
   m_Name: Combos
   m_EditorClassIdentifier: 
+  miniProyectile: {fileID: 3155091902348634597, guid: 2f4d484b5837ab147a6a8b5d3bdee919,
+    type: 3}
+  dotDuration: 0
+  dotDamageOverTime: 0
+  tickboomDuration: 0
+  tickboomDamage: 0

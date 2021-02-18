@@ -11,7 +11,7 @@ public class SO_TypeSeed_Parasite : SO_TypeSeed_Generic
 
     public float rateMindcontrolIncrease;
 
-    public Effect GetMindControl()
+    public Effect GetMindControl(int amount)
     {
         float _mindControlDuration = baseMinControlDuration;
 

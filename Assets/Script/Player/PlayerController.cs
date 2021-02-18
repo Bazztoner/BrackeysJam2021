@@ -54,9 +54,10 @@ public class PlayerController : Entity
         InitializeDictionaries();
 
         _cam = Camera.main;
+        _camOffset = new Vector3(0,0,-10);
         //Normally 0, 2.46, -10
-        _camOffset = _cam.transform.position;
-        _camRotOffset = _cam.transform.rotation;
+        /*_camOffset = _cam.transform.position;
+        _camRotOffset = _cam.transform.rotation;*/
 
         Cursor.lockState = CursorLockMode.Confined;
 

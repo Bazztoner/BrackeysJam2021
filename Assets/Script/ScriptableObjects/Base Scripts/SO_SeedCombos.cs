@@ -5,16 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Combos", menuName = "New Seed-combo")]
 public class SO_SeedCombos : ScriptableObject
 {
-    GameObject proyectile;
-
     public GameObject miniProyectile;
 
-    public void Initialize(Proyectile _proyectile)
-    {
-        proyectile = _proyectile.gameObject;
-    }
+    public float dotDuration, dotDamageOverTime, tickboomDuration, tickboomDamage;
 
-    public void ComboBaseExplosive()
+    public void ComboBaseExplosive(GameObject proyectile)
     {
         Queue<SeedTypes> _seed = new Queue<SeedTypes>();
 
@@ -30,7 +25,7 @@ public class SO_SeedCombos : ScriptableObject
         por2.GetComponent<Proyectile>().SpawnProjectile(proyectile.gameObject.transform.position, dir2, proyectile.GetComponent<Proyectile>().Owner);
     }
 
-    public void ComboRootBouncer()
+    public void ComboRootBouncer(GameObject proyectile)
     {
         Queue<SeedTypes> _seed = new Queue<SeedTypes>();
 
@@ -43,7 +38,7 @@ public class SO_SeedCombos : ScriptableObject
         pro.GetComponent<Proyectile>().SpawnProjectile(proyectile.gameObject.transform.position, dir1, proyectile.GetComponent<Proyectile>().Owner);
     }
 
-    public void ComboRootSeeker()
+    public void ComboRootSeeker(GameObject proyectile)
     {
         Queue<SeedTypes> _seed = new Queue<SeedTypes>();
 
@@ -56,7 +51,7 @@ public class SO_SeedCombos : ScriptableObject
         pro.GetComponent<Proyectile>().SpawnProjectile(proyectile.gameObject.transform.position, dir1, proyectile.GetComponent<Proyectile>().Owner);
     }
 
-    public void ComboExplosiveBouncer()
+    public void ComboExplosiveBouncer(GameObject proyectile)
     {
         EnemyBase[] enemies = FindObjectsOfType<EnemyBase>();
 
@@ -80,9 +75,7 @@ public class SO_SeedCombos : ScriptableObject
 
             GameObject _mini = Instantiate(miniProyectile, proyectile.transform.position, Quaternion.identity);
 
-            Vector3 dir = closest.transform.position - _mini.transform.position;
-
-            _mini.transform.up = dir;
+            _mini.GetComponent<MiniProjectile>().SetDestination(closest.transform);
         }
     }
 
@@ -108,12 +101,12 @@ public class SO_SeedCombos : ScriptableObject
 
     public Effect ComboRootExplosive()
     {
-        return new Effect(TypeOfEffect.DamageOverTime, 1f);
+        return new Effect(TypeOfEffect.DamageOverTime, dotDuration, dotDamageOverTime);
     }
 
     public Effect ComboExplosiveParasite()
     {
-        return new Effect(TypeOfEffect.TickBoom, 2f);
+        return new Effect(TypeOfEffect.TickBoom, tickboomDuration, tickboomDamage);
     }
 
     public Effect ComboBouncerSeeker()

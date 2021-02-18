@@ -7,6 +7,10 @@ using FSM;
 public class ScoutShip : EnemyBase
 {
     //FSM
+    /// <summary>
+    /// 0 if rooted, 1 if normal
+    /// </summary>
+    float _movementModifier = 1f;
     //engage
     public float distanceToEngage;
     public float directionMovementCheckTime;
@@ -92,13 +96,13 @@ public class ScoutShip : EnemyBase
             //move to player if distance > attackRange/2
             if (Vector3.Distance(_player.transform.position, transform.position) >= attackRange / 2)
             {
-                _rb.MovePosition(_rb.position + (Vector2)dir * movementSpeed * Time.fixedDeltaTime);
+                _rb.MovePosition(_rb.position + (Vector2)dir * (movementSpeed * _movementModifier) * Time.fixedDeltaTime);
             }
             else
             {
                 //else move left or right
                 var movMultiplicator = _hoverLeft ? -1 : 1;
-                _rb.MovePosition(_rb.position + (Vector2)transform.right * (hoverSpeed * movMultiplicator) * Time.fixedDeltaTime);
+                _rb.MovePosition(_rb.position + (Vector2)transform.right * (hoverSpeed * movMultiplicator * _movementModifier) * Time.fixedDeltaTime);
                 _currentDirectionTime += Time.fixedDeltaTime;
                 if (_currentDirectionTime >= directionMovementCheckTime)
                 {
@@ -142,6 +146,7 @@ public class ScoutShip : EnemyBase
 
     protected override void Update()
     {
+        CheckState();
         CheckSensors();
         _stateMachine.Update();
     }
@@ -149,6 +154,11 @@ public class ScoutShip : EnemyBase
     protected override void FixedUpdate()
     {
         _stateMachine.FixedUpdate();
+    }
+
+    void CheckState()
+    {
+        _movementModifier = _isStunned ? 0 : 1;
     }
 
     public override void TakeDamage(float dmg)
@@ -219,7 +229,7 @@ public class ScoutShip : EnemyBase
         //dash time
         var dashDirection = UnityEngine.Random.Range(0, 100) >= 50 ? 1 : -1;
 
-        _rb.AddForce(transform.right * (dashForce * dashDirection), ForceMode2D.Impulse);
+        _rb.AddForce(transform.right * (dashForce * dashDirection * _movementModifier), ForceMode2D.Impulse);
         yield return new WaitForSeconds(dashDuration);
 
         //Reset after dash - this may fuck up the knockback from the base seed but who the fucking fuck cares

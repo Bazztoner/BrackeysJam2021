@@ -9,7 +9,7 @@ public class SO_TypeSeed_Base : SO_TypeSeed_Generic
 
     public float increaseRate;
 
-    public Effect GetKnockBack()
+    public Effect GetKnockBack(int amount, Transform tfmProyectil)
     {
         float _amountKnockBack = amountKnockBack;
         float _variationKnockBack = increaseRate;
@@ -20,6 +20,6 @@ public class SO_TypeSeed_Base : SO_TypeSeed_Generic
             _amountKnockBack += (amountKnockBack * _variationKnockBack);
         }
 
-        return new Effect(TypeOfEffect.KnockBack, _amountKnockBack);
+        return new Effect(TypeOfEffect.KnockBack, _amountKnockBack, tfmProyectil.position);
     }
 }

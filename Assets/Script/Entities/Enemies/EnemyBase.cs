@@ -16,6 +16,10 @@ public abstract class EnemyBase : Entity
     [Header("Point where the projectiles spawn")]
     public Transform muzzle;
 
+    protected bool _isStunned, _isMindControlled, _isTicking;
+
+    protected List<SeedTypes> _inyectedSeeds = new List<SeedTypes>();
+
     public float CurrentHP
     {
         get => _currentHP;
@@ -51,49 +55,90 @@ public abstract class EnemyBase : Entity
         CurrentHP -= dmg;
     }
 
+    IEnumerator Stunned(float tick)
+    {
+        _isStunned = true;
+
+        yield return new WaitForSeconds(tick);
+
+        _isStunned = false;
+    }
+
+    IEnumerator MindControlled(float tick)
+    {
+        _isMindControlled = true;
+
+        yield return new WaitForSeconds(tick);
+
+        _isMindControlled = false;
+    }
+
+    IEnumerator DoT(float tick, float damage)
+    {
+        float _tick = tick;
+
+        while (_tick > 0f)
+        {
+            TakeDamage(damage);
+
+            yield return new WaitForEndOfFrame();
+
+            _tick -= Time.fixedDeltaTime;
+        }
+    }
+
+    public virtual void Explode()
+    {
+
+    }
+
+    IEnumerator TickBoom(float tick)
+    {
+        float _tick = tick;
+
+        _isTicking = true;
+
+        while (_tick > 0f)
+        {
+            yield return new WaitForEndOfFrame();
+
+            _tick -= Time.fixedDeltaTime;
+        }
+
+        Explode();
+    }
+
     public virtual void RecieveEffect(Effect _effect)
     {
-        print($"{gameObject.name} is suffering from {_effect.type} effect.");
-
         switch (_effect.type)
         {
             case TypeOfEffect.Damage:
                 TakeDamage(_effect.modifier1);
                 break;
             case TypeOfEffect.KnockBack:
+                Vector3 dir = transform.position - _effect.dir;
 
+                Vector2 _dir = new Vector2(dir.x, dir.y) * _effect.modifier1;
+
+                _rb.AddForce(_dir, ForceMode2D.Impulse);
                 break;
             case TypeOfEffect.Stun:
-
+                StartCoroutine(Stunned(_effect.modifier1));
                 break;
             case TypeOfEffect.DamageOverTime:
-
+                StartCoroutine(DoT(_effect.modifier1, _effect.modifier2));
                 break;
             case TypeOfEffect.MindControl:
-
+                StartCoroutine(MindControlled(_effect.modifier1));
                 break;
             case TypeOfEffect.Mutate:
-                switch ((SeedTypes) _effect.modifier1)
-                {
-                    case SeedTypes.Base:
-                        break;
-                    case SeedTypes.Root:
-                        break;
-                    case SeedTypes.Explosive:
-                        break;
-                    case SeedTypes.Bouncer:
-                        break;
-                    case SeedTypes.Seeker:
-                        break;
-                    case SeedTypes.Parasite:
-                        break;
-                    default:
-                        break;
-                }
+                _inyectedSeeds.Add((SeedTypes)_effect.modifier1);
                 break;
             case TypeOfEffect.TickBoom:
+                StartCoroutine(TickBoom(_effect.modifier1));
                 break;
             default:
+                print("No effects received");
                 break;
         }
     }

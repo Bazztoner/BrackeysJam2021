@@ -23,12 +23,15 @@ public class Proyectile : BaseProjectile
 
     public SO_TypeSeed_Parasite seedParasite;
 
-
     public SO_SeedCombos combos;
+
+    public GameObject foresation;
 
     List<Effect> effects = new List<Effect>();
 
-    List<GameObject> plants;
+    List<SeedTypes> plants = new List<SeedTypes>();
+
+    int[] seedAmounts = new int[6];
 
     [SerializeField]
     LayerMask enemyLayer, scenaryLayer;
@@ -72,32 +75,36 @@ public class Proyectile : BaseProjectile
 
     public void DefineCombo(SeedTypes type, int amount)
     {
+        seedAmounts[(int)type] += amount;
+
+        Debug.Log($"Total amount of type-seed {type} is {seedAmounts[(int)type]}");
+
         switch (type)
         {
             case SeedTypes.Base:
-                seedBase.Define(amount, this);
-                effects.Add(seedBase.GetKnockBack());
+                effects.Add(seedBase.GetKnockBack(seedAmounts[0], gameObject.transform));
+                plants.Add(SeedTypes.Base);
                 break;
             case SeedTypes.Root:
-                seedRooter.Define(amount, this);
-                effects.Add(seedRooter.GetStun());
+                effects.Add(seedRooter.GetStun(seedAmounts[(int)SeedTypes.Root]));
+                plants.Add(SeedTypes.Root);
                 break;
             case SeedTypes.Explosive:
-                seedExplosive.Define(amount, this);
-                onImpactEnemy.AddListener(seedExplosive.AOE);
+                onImpactEnemy.AddListener(delegate { seedExplosive.AOE(seedAmounts[(int)SeedTypes.Explosive], gameObject.transform); });
+                plants.Add(SeedTypes.Explosive);
                 break;
             case SeedTypes.Bouncer:
-                seedBouncer.Define(amount, this);
-                life = seedBouncer.GetBounces();
+                life = seedBouncer.GetBounces(seedAmounts[(int)SeedTypes.Bouncer]);
                 onImpactEnvironment.AddListener(Bounce);
+                plants.Add(SeedTypes.Bouncer);
                 break;
             case SeedTypes.Seeker:
-                seedSeeker.Define(amount, this);
                 onTraverse.AddListener(ChangeDirection);
+                plants.Add(SeedTypes.Seeker);
                 break;
             case SeedTypes.Parasite:
-                seedParasite.Define(amount, this);
-                effects.Add(seedParasite.GetMindControl());
+                effects.Add(seedParasite.GetMindControl(seedAmounts[(int)SeedTypes.Parasite]));
+                plants.Add(SeedTypes.Parasite);
                 break;
             default:
                 break;
@@ -108,15 +115,13 @@ public class Proyectile : BaseProjectile
 
     public void DefineCombination(SeedTypes _i, SeedTypes _j)
     {
-        combos.Initialize(this);
-
         switch (_i)
         {
             case SeedTypes.Base:
                 switch (_j)
                 {
                     case SeedTypes.Explosive:
-                        onCreate.AddListener(combos.ComboBaseExplosive);
+                        onCreate.AddListener(delegate { combos.ComboBaseExplosive(gameObject); });
                         break;
                     case SeedTypes.Parasite:
                         effects.Add(combos.ComboBaseParasite());
@@ -130,10 +135,10 @@ public class Proyectile : BaseProjectile
                         effects.Add(combos.ComboRootExplosive());
                         break;
                     case SeedTypes.Bouncer:
-                        onImpactEnemy.AddListener(combos.ComboRootBouncer);
+                        onImpactEnemy.AddListener(delegate { combos.ComboRootBouncer(gameObject); });
                         break;
                     case SeedTypes.Seeker:
-                        onImpactEnemy.AddListener(combos.ComboRootSeeker);
+                        onImpactEnemy.AddListener(delegate { combos.ComboRootSeeker(gameObject); });
                         break;
                     case SeedTypes.Parasite:
                         effects.Add(combos.ComboRootParasite());
@@ -144,7 +149,7 @@ public class Proyectile : BaseProjectile
                 switch (_j)
                 {
                     case SeedTypes.Bouncer:
-                        onImpactEnemy.AddListener(combos.ComboExplosiveBouncer);
+                        onImpactEnemy.AddListener(delegate { combos.ComboExplosiveBouncer(gameObject); });
                         break;
                     case SeedTypes.Parasite:
                         effects.Add(combos.ComboExplosiveParasite());
@@ -308,6 +313,11 @@ public class Proyectile : BaseProjectile
 
             onImpactEnemy.Invoke();
         }
+
+        if (collider.gameObject.LayerMatchesWith("Environment"))
+        {
+            EnvironmentHit();
+        }
     }
 
     protected override void FixedUpdate()
@@ -319,8 +329,6 @@ public class Proyectile : BaseProjectile
 
     void EnemyHit()
     {
-        onImpactEnemy.Invoke();
-
         Destroy(gameObject);
     }
 
@@ -332,21 +340,32 @@ public class Proyectile : BaseProjectile
 
         if (life <= 0)
         {
+            SproutNewPlants();
+
             Destroy(gameObject);
         }
     }
 
     void ChangeDirection()
     {
-        Vector3 dir = seedSeeker.Seek();
+        Vector3 dir = seedSeeker.Seek(seedAmounts[(int)SeedTypes.Seeker], gameObject.transform);
 
         transform.up = dir;
     }
 
     void Bounce()
     {
-        Vector3 dir = seedBouncer.Bounce();
+        Vector3 dir = seedBouncer.Bounce(gameObject.transform);
 
         transform.up = dir;
     }
+
+    void SproutNewPlants()
+    {
+        Forestation forest = Instantiate(foresation, transform.position, Quaternion.identity).GetComponent<Forestation>();
+
+        forest.Sprout(plants);
+    }
 }
+
+

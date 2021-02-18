@@ -27,19 +27,6 @@ public abstract class SO_TypeSeed_Generic : ScriptableObject
     [SerializeField]
     Sprite sprSeed;
 
-    internal Proyectile proyectile;
-
-    internal Transform tfmProyectil;
-
-    internal int amount;
-
-    public void Define(int _amount, Proyectile _proyectile)
-    {
-        proyectile = _proyectile;
-        tfmProyectil = proyectile.transform;
-        amount = _amount;
-    }
-
     public GameObject GetSprout()
     {
         return plant;
@@ -52,11 +39,22 @@ public class Effect
 
     public float modifier1, modifier2;
 
+    public Vector3 dir;
+
     public Effect(TypeOfEffect _effect, float _mod1)
     {
         type = _effect;
 
         modifier1 = _mod1;
+    }
+
+    public Effect(TypeOfEffect _effect, float _mod1, Vector3 _dir)
+    {
+        type = _effect;
+
+        modifier1 = _mod1;
+
+        dir = _dir;
     }
 
     public Effect(TypeOfEffect _effect, float _mod1, float _mod2)
