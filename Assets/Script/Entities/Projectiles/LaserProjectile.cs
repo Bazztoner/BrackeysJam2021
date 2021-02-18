@@ -6,7 +6,7 @@ using PhoenixDevelopment;
 
 public class LaserProjectile : BaseProjectile
 {
-	public float timeOut;
+    public float timeOut;
 
     public override void SpawnProjectile(Vector3 position, Vector3 direction)
     {
@@ -27,7 +27,7 @@ public class LaserProjectile : BaseProjectile
 
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.LayerMatchesWith("Enemy", "Player") && collider.gameObject != Owner.gameObject)
+        if (collider.gameObject.LayerMatchesWith("Enemy", "Player") && Owner != null && collider.gameObject != Owner.gameObject)
         {
             var ent = collider.GetComponent<Entity>();
             ent.TakeDamage(damage);
@@ -38,7 +38,7 @@ public class LaserProjectile : BaseProjectile
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.LayerMatchesWith("Enemy", "Player") && collision.gameObject != Owner.gameObject)
+        if (collision.gameObject.LayerMatchesWith("Enemy", "Player") && Owner != null && collision.gameObject != Owner.gameObject)
         {
             var ent = collision.gameObject.GetComponent<Entity>();
             ent.TakeDamage(damage);

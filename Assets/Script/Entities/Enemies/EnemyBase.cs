@@ -16,9 +16,9 @@ public abstract class EnemyBase : Entity
     [Header("Point where the projectiles spawn")]
     public Transform muzzle;
 
-    bool isStunned = false, isMindControlled = false, isTicking;
+    protected bool _isStunned, _isMindControlled, _isTicking;
 
-    List<SeedTypes> inyectedSeeds;
+    protected List<SeedTypes> _inyectedSeeds;
 
     public float CurrentHP
     {
@@ -57,20 +57,20 @@ public abstract class EnemyBase : Entity
 
     IEnumerator Stunned(float tick)
     {
-        isStunned = true;
+        _isStunned = true;
 
         yield return new WaitForSeconds(tick);
 
-        isStunned = false;
+        _isStunned = false;
     }
 
     IEnumerator MindControlled(float tick)
     {
-        isMindControlled = true;
+        _isMindControlled = true;
 
         yield return new WaitForSeconds(tick);
 
-        isMindControlled = false;
+        _isMindControlled = false;
     }
 
     IEnumerator DoT(float tick, float damage)
@@ -96,7 +96,7 @@ public abstract class EnemyBase : Entity
     {
         float _tick = tick;
 
-        isTicking = true;
+        _isTicking = true;
 
         while (_tick > 0f)
         {
@@ -132,12 +132,13 @@ public abstract class EnemyBase : Entity
                 StartCoroutine(MindControlled(_effect.modifier1));
                 break;
             case TypeOfEffect.Mutate:
-                inyectedSeeds.Add((SeedTypes)_effect.modifier1);
+                _inyectedSeeds.Add((SeedTypes)_effect.modifier1);
                 break;
             case TypeOfEffect.TickBoom:
                 StartCoroutine(TickBoom(_effect.modifier1));
                 break;
             default:
+                print("No effects received");
                 break;
         }
     }
