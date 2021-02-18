@@ -58,20 +58,28 @@ public abstract class EnemyBase : Entity
     IEnumerator Stunned(float tick)
     {
         _isStunned = true;
+        StunHandler(_isStunned);
 
         yield return new WaitForSeconds(tick);
 
         _isStunned = false;
+        StunHandler(_isStunned);
     }
+
+    protected abstract void StunHandler(bool state);
 
     IEnumerator MindControlled(float tick)
     {
         _isMindControlled = true;
+        MindControlHandler(_isMindControlled);
 
         yield return new WaitForSeconds(tick);
 
         _isMindControlled = false;
+        MindControlHandler(_isMindControlled);
     }
+
+    protected abstract void MindControlHandler(bool state);
 
     IEnumerator DoT(float tick, float damage)
     {

@@ -21,6 +21,18 @@ public class Turret : EnemyBase
 
     public float attackRange;
 
+    Entity _currentTarget;
+
+    public Entity CurrentTarget
+    {
+        get
+        {
+            if (_currentTarget == null) _currentTarget = _player;
+            return _currentTarget;
+        }
+        protected set => _currentTarget = value;
+    }
+
     private EventFSM<Inputs> _stateMachine;
     public enum Inputs { EnemyInAttackRange, StateEnd, Die };
 
@@ -68,13 +80,13 @@ public class Turret : EnemyBase
         attack.OnEnter += x =>
         {
             _currentAttackCooldown = 0;
-            var dir = _player.transform.position - transform.position;
+            var dir = CurrentTarget.transform.position - transform.position;
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
         };
 
         attack.OnUpdate += () =>
         {
-            var dir = _player.transform.position - transform.position;
+            var dir = CurrentTarget.transform.position - transform.position;
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
             if (_currentAttackCooldown >= attackCooldown)
@@ -145,10 +157,25 @@ public class Turret : EnemyBase
     {
         if (GetCurrentState() == "Death") return;
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= attackRange)
+        if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= attackRange)
         {
             ProcessInput(Inputs.EnemyInAttackRange);
         }
         else ProcessInput(Inputs.StateEnd);
+    }
+
+    protected override void StunHandler(bool state)
+    {
+       //Does not apply here
+    }
+    protected override void MindControlHandler(bool state)
+    {
+        if (state)
+        {
+            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            if (newTarget != null) CurrentTarget = newTarget;
+            else CurrentTarget = _player;
+        }
+        else CurrentTarget = _player;
     }
 }

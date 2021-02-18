@@ -36,6 +36,18 @@ public class ScoutShip : EnemyBase
     private EventFSM<Inputs> _stateMachine;
     public enum Inputs { EnemyFound, EnemyInAttackRange, StateEnd, Die };
 
+    Entity _currentTarget;
+
+    public Entity CurrentTarget
+    {
+        get
+        {
+            if (_currentTarget == null) _currentTarget = _player;
+            return _currentTarget;
+        }
+        protected set => _currentTarget = value;
+    }
+
     public string GetCurrentState()
     {
         return _stateMachine.Current.Name;
@@ -45,6 +57,7 @@ public class ScoutShip : EnemyBase
     {
         base.Start();
         if (muzzle == null) muzzle = transform.Find("Muzzle");
+        CurrentTarget = _player;
         InitFsm();
     }
 
@@ -84,17 +97,17 @@ public class ScoutShip : EnemyBase
         //engage
         engage.OnEnter += x =>
         {
-            var dir = _player.transform.position - transform.position;
+            var dir = CurrentTarget.transform.position - transform.position;
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
         };
 
         engage.OnFixedUpdate += () =>
         {
-            var dir = _player.transform.position - transform.position;
+            var dir = CurrentTarget.transform.position - transform.position;
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
             //move to player if distance > attackRange/2
-            if (Vector3.Distance(_player.transform.position, transform.position) >= attackRange / 2)
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) >= attackRange / 2)
             {
                 _rb.MovePosition(_rb.position + (Vector2)dir * (movementSpeed * _movementModifier) * Time.fixedDeltaTime);
             }
@@ -146,7 +159,6 @@ public class ScoutShip : EnemyBase
 
     protected override void Update()
     {
-        CheckState();
         CheckSensors();
         _stateMachine.Update();
     }
@@ -154,11 +166,6 @@ public class ScoutShip : EnemyBase
     protected override void FixedUpdate()
     {
         _stateMachine.FixedUpdate();
-    }
-
-    void CheckState()
-    {
-        _movementModifier = _isStunned ? 0 : 1;
     }
 
     public override void TakeDamage(float dmg)
@@ -192,13 +199,13 @@ public class ScoutShip : EnemyBase
 
         if (GetCurrentState() == "Idle")
         {
-            if (Vector3.Distance(_player.transform.position, transform.position) <= distanceToEngage)
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= distanceToEngage)
             {
                 ProcessInput(Inputs.EnemyFound);
             }
         }
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= attackRange && _currentAttackCooldown <= 0 && !_isAttacking)
+        if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= attackRange && _currentAttackCooldown <= 0 && !_isAttacking)
         {
             if (Random.Range(0, 100) >= attackPerc)
             {
@@ -218,7 +225,7 @@ public class ScoutShip : EnemyBase
 
         while (currentChannelTime <= attackChannelTime)
         {
-            dir = _player.transform.position - transform.position;
+            dir = CurrentTarget.transform.position - transform.position;
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
             yield return new WaitForEndOfFrame();
@@ -236,7 +243,7 @@ public class ScoutShip : EnemyBase
         _rb.velocity = Vector2.zero;
 
         //shoot shit
-        dir = _player.transform.position - transform.position;
+        dir = CurrentTarget.transform.position - transform.position;
         transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
         //do shooting
@@ -268,4 +275,19 @@ public class ScoutShip : EnemyBase
         _currentAttackCooldown = 0;
     }
 
+    protected override void StunHandler(bool state)
+    {
+        _movementModifier = state ? 0 : 1;
+    }
+
+    protected override void MindControlHandler(bool state)
+    {
+        if (state)
+        {
+            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            if (newTarget != null) CurrentTarget = newTarget;
+            else CurrentTarget = _player;
+        }
+        else CurrentTarget = _player;
+    }
 }
