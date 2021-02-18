@@ -148,7 +148,16 @@ public class Turret : EnemyBase
     }
     protected override void Shoot()
     {
-        var instancedProjectile = GameObject.Instantiate(projectile, muzzle.transform.position, Quaternion.identity);
+        BaseProjectile instancedProjectile;
+
+        if (_isMindControlled)
+        {
+            instancedProjectile = comboSystem.DefineCombo(_inyectedSeeds);
+        }
+        else
+        {
+            instancedProjectile = GameObject.Instantiate(defaultProjectile, muzzle.transform.position, Quaternion.identity);
+        }
         instancedProjectile.SpawnProjectile(muzzle.transform.position, transform.up, this);
     }
 

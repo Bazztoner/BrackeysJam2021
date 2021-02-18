@@ -24,11 +24,7 @@ public class Proyectile_NonEnvironmental : BaseProjectile
 
     public SO_SeedCombos combos;
 
-    public GameObject foresation;
-
     List<Effect> effects = new List<Effect>();
-
-    List<SeedTypes> plants = new List<SeedTypes>();
 
     int[] seedAmounts = new int[6];
 
@@ -82,28 +78,22 @@ public class Proyectile_NonEnvironmental : BaseProjectile
         {
             case SeedTypes.Base:
                 effects.Add(seedBase.GetKnockBack(seedAmounts[0], gameObject.transform));
-                plants.Add(SeedTypes.Base);
                 break;
             case SeedTypes.Root:
                 effects.Add(seedRooter.GetStun(seedAmounts[(int)SeedTypes.Root]));
-                plants.Add(SeedTypes.Root);
                 break;
             case SeedTypes.Explosive:
                 onImpactEnemy.AddListener(delegate { seedExplosive.AOE(seedAmounts[(int)SeedTypes.Explosive], gameObject.transform); });
-                plants.Add(SeedTypes.Explosive);
                 break;
             case SeedTypes.Bouncer:
                 life = seedBouncer.GetBounces(seedAmounts[(int)SeedTypes.Bouncer]);
                 onImpactEnvironment.AddListener(Bounce);
-                plants.Add(SeedTypes.Bouncer);
                 break;
             case SeedTypes.Seeker:
                 onTraverse.AddListener(ChangeDirection);
-                plants.Add(SeedTypes.Seeker);
                 break;
             case SeedTypes.Parasite:
                 effects.Add(seedParasite.GetMindControl(seedAmounts[(int)SeedTypes.Parasite]));
-                plants.Add(SeedTypes.Parasite);
                 break;
             default:
                 break;
@@ -310,7 +300,7 @@ public class Proyectile_NonEnvironmental : BaseProjectile
                 }
             }
 
-            //onImpactEnemy.Invoke();
+            onImpactEnemy.Invoke();
         }
 
         if (collider.gameObject.LayerMatchesWith("Environment"))
@@ -339,8 +329,6 @@ public class Proyectile_NonEnvironmental : BaseProjectile
 
         if (life <= 0)
         {
-            SproutNewPlants();
-
             Destroy(gameObject);
         }
     }
@@ -357,12 +345,5 @@ public class Proyectile_NonEnvironmental : BaseProjectile
         Vector3 dir = seedBouncer.Bounce(gameObject.transform);
 
         transform.up = dir;
-    }
-
-    void SproutNewPlants()
-    {
-        Forestation forest = Instantiate(foresation, transform.position, Quaternion.identity).GetComponent<Forestation>();
-
-        forest.Sprout(plants);
     }
 }

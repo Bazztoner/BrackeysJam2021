@@ -10,7 +10,8 @@ public abstract class EnemyBase : Entity
     protected float _currentHP;
 
     protected Rigidbody2D _rb;
-    public BaseProjectile projectile;
+    public BaseProjectile defaultProjectile;
+    public EnemyComboSystem comboSystem;
     protected PlayerController _player;
 
     [Header("Point where the projectiles spawn")]
@@ -36,6 +37,7 @@ public abstract class EnemyBase : Entity
         CurrentHP = maxHP;
         _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindObjectOfType<PlayerController>();
+        comboSystem = GetComponent<EnemyComboSystem>();
     }
 
     protected virtual void Update()
