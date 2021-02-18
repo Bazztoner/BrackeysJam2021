@@ -28,17 +28,17 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
                 }
             }
 
-            float _perfectAim = 1f * Time.fixedDeltaTime;
-            float _realAim = _perfectAim / 5f;
-            float _aimCorrection = 0f;
+            float _aimInit = .005f;
+            float _aimCorrected = _aimInit;
             float _aim = 0f;
 
             for (int i = 1; i < amount; i++)
             {
-                _realAim += (_aimCorrection * precisionChange);
+                _aimInit *= precisionChange;
+                _aimCorrected += _aimInit;
             }
 
-            _aim += _realAim;
+            _aim += _aimCorrected;
 
             Debug.Log($"Real aim for {amount} is {_aim}");
 
