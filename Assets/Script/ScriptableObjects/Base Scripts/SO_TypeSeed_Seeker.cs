@@ -28,22 +28,24 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
                 }
             }
 
-            float _perfectAim = 1f * Time.fixedDeltaTime;
-            float _realAim = _perfectAim / 5f;
-            float _precision = precisionChange;
+            float _aimInit = .005f;
+            float _aimCorrected = _aimInit;
+            float _aim = 0f;
 
-            for (int i = 0; i < amount; i++)
+            for (int i = 1; i < amount; i++)
             {
-                _precision = (_realAim * precisionChange);
-                _realAim += _precision;
+                _aimInit *= precisionChange;
+                _aimCorrected += _aimInit;
             }
 
-            Debug.Log($"Real aim for {amount} is {_realAim}");
+            _aim += _aimCorrected;
+
+            Debug.Log($"Real aim for {amount} is {_aim}");
 
             Vector3 dirInit = dir;
             Vector3 dirEnd = Vector3.Normalize(closestEnemy - tfmProyectil.position);
 
-            dir = Vector3.Lerp(dirInit, dirEnd, _realAim);
+            dir = Vector3.Lerp(dirInit, dirEnd, _aim);
         }
 
         return dir;
