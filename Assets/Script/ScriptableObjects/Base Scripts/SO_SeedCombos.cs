@@ -9,6 +9,8 @@ public class SO_SeedCombos : ScriptableObject
 
     public GameObject miniProyectile;
 
+    public float dotDuration, dotDamageOverTime, tickboomDuration, tickboomDamage;
+
     public void Initialize(Proyectile _proyectile)
     {
         proyectile = _proyectile.gameObject;
@@ -108,12 +110,12 @@ public class SO_SeedCombos : ScriptableObject
 
     public Effect ComboRootExplosive()
     {
-        return new Effect(TypeOfEffect.DamageOverTime, 1f);
+        return new Effect(TypeOfEffect.DamageOverTime, dotDuration, dotDamageOverTime);
     }
 
     public Effect ComboExplosiveParasite()
     {
-        return new Effect(TypeOfEffect.TickBoom, 2f);
+        return new Effect(TypeOfEffect.TickBoom, tickboomDuration, tickboomDamage);
     }
 
     public Effect ComboBouncerSeeker()

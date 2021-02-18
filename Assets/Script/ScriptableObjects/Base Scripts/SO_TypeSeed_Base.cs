@@ -20,6 +20,6 @@ public class SO_TypeSeed_Base : SO_TypeSeed_Generic
             _amountKnockBack += (amountKnockBack * _variationKnockBack);
         }
 
-        return new Effect(TypeOfEffect.KnockBack, _amountKnockBack);
+        return new Effect(TypeOfEffect.KnockBack, _amountKnockBack, tfmProyectil.position);
     }
 }

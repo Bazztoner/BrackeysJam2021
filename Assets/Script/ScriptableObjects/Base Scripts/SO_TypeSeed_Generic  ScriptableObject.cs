@@ -52,11 +52,22 @@ public class Effect
 
     public float modifier1, modifier2;
 
+    public Vector3 dir;
+
     public Effect(TypeOfEffect _effect, float _mod1)
     {
         type = _effect;
 
         modifier1 = _mod1;
+    }
+
+    public Effect(TypeOfEffect _effect, float _mod1, Vector3 _dir)
+    {
+        type = _effect;
+
+        modifier1 = _mod1;
+
+        dir = _dir;
     }
 
     public Effect(TypeOfEffect _effect, float _mod1, float _mod2)
