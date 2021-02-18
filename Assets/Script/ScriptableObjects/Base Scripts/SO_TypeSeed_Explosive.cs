@@ -43,7 +43,7 @@ public class SO_TypeSeed_Explosive : SO_TypeSeed_Generic
 
                 if (enemy != null)
                 {
-                    enemy.RecieveEffect(new Effect(TypeOfEffect.KnockBack, _amountKnockBack));
+                    enemy.RecieveEffect(new Effect(TypeOfEffect.KnockBack, _amountKnockBack, tfmProyectil.position));
                 }
             }
         }
