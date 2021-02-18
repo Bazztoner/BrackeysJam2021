@@ -259,7 +259,7 @@ public class ScoutShip : EnemyBase
     {
         BaseProjectile instancedProjectile;
 
-        if (_isMindControlled)
+        if (_isMindControlled && _inyectedSeeds.Any())
         {
             instancedProjectile = comboSystem.DefineCombo(_inyectedSeeds);
         }
