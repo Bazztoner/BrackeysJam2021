@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseProjectile : MonoBehaviour
+public class BaseProyectile : MonoBehaviour
 {
     protected Rigidbody2D _rb;
 

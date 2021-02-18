@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using PhoenixDevelopment;
 
-public class LaserProjectile : BaseProjectile
+public class LaserProjectile : BaseProyectile
 {
     public float timeOut;
 

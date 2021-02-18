@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class EnemyProjectileDefault : BaseProjectile
+public class EnemyProjectileDefault : BaseProyectile
 {
 
 }

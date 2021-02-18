@@ -11,7 +11,7 @@ public class HPCollectible : MonoBehaviour
     {
         if (collision.gameObject.LayerMatchesWith("Enemy") || collision.gameObject.LayerMatchesWith("Player"))
         {
-            collision.gameObject.GetComponent<Entity>().TakeDamage(-value);
+            collision.gameObject.GetComponent<Entity>().TakeHeal(value);
 
             Destroy(gameObject);
         }

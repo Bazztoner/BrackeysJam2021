@@ -6,4 +6,6 @@ using System.Linq;
 public abstract class Entity : MonoBehaviour
 {
     public abstract void TakeDamage(float dmg);
+
+    public abstract void TakeHeal(float hp);
 }
