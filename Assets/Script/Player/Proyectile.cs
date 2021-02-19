@@ -77,8 +77,6 @@ public class Proyectile : BaseProyectile
     {
         seedAmounts[(int)type] += amount;
 
-        Debug.Log($"Total amount of type-seed {type} is {seedAmounts[(int)type]}");
-
         switch (type)
         {
             case SeedTypes.Base:

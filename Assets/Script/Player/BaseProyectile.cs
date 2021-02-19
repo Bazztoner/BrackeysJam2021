@@ -40,13 +40,11 @@ public class BaseProyectile : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
         Destroy(gameObject);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}");
         Destroy(gameObject);
     }
 }
