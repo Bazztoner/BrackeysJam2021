@@ -2030,7 +2030,7 @@ MonoBehaviour:
     type: 3}
   comboSystem: {fileID: 0}
   muzzle: {fileID: 3158805639041853269}
-  distanceToEngage: 12
+  distanceToEngage: 10
   directionMovementCheckTime: 2
   attackCooldown: 1.25
   projectile: {fileID: 3678966045819775343, guid: 0548203578da0314cba411bea9a72e19,
