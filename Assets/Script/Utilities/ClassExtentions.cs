@@ -130,4 +130,10 @@ public static class ClassExtentions
             seed = generator(seed);
         }
     }
+
+    public static Vector2 Vector2FromAngle(this Vector2 v, float a)
+    {
+        a *= Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+    }
 }

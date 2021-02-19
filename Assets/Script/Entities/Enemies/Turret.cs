@@ -44,6 +44,7 @@ public class Turret : EnemyBase
     protected override void Start()
     {
         base.Start();
+        if (muzzle == null) muzzle = transform.Find("Muzzle");
         startingPosition = transform.position;
         InitFsm();
     }
@@ -186,5 +187,36 @@ public class Turret : EnemyBase
             else CurrentTarget = _player;
         }
         else CurrentTarget = _player;
+    }
+
+    public virtual void RecieveEffect(Effect _effect)
+    {
+        switch (_effect.type)
+        {
+            case TypeOfEffect.Damage:
+                TakeDamage(_effect.modifier1);
+                fbMan.DirectionalDamage(_effect.dir);
+                break;
+            case TypeOfEffect.KnockBack:
+                break;
+            case TypeOfEffect.Stun:
+                StartCoroutine(Stunned(_effect.modifier1));
+                break;
+            case TypeOfEffect.DamageOverTime:
+                StartCoroutine(DoT(_effect.modifier1, _effect.modifier2));
+                break;
+            case TypeOfEffect.MindControl:
+                StartCoroutine(MindControlled(_effect.modifier1));
+                break;
+            case TypeOfEffect.Mutate:
+                _inyectedSeeds.Add((SeedTypes)_effect.modifier1);
+                break;
+            case TypeOfEffect.TickBoom:
+                StartCoroutine(TickBoom(_effect.modifier1));
+                break;
+            default:
+                print("No effects received");
+                break;
+        }
     }
 }

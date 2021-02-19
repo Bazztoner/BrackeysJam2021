@@ -113,22 +113,22 @@ public class PlayerController : Entity
 
         if (_kb.wKey.isPressed)
         {
-            movementVector += new Vector2(transform.up.x * movementSpeed * Time.fixedDeltaTime, transform.up.y * movementSpeed * Time.fixedDeltaTime);
+            movementVector += Vector2.up * movementSpeed * Time.fixedDeltaTime;
         }
 
         if (_kb.sKey.isPressed)
         {
-            movementVector -= new Vector2(transform.up.x * movementSpeed * Time.fixedDeltaTime, transform.up.y * movementSpeed * Time.fixedDeltaTime);
+            movementVector -= Vector2.up * movementSpeed * Time.fixedDeltaTime;
         }
 
         if (_kb.aKey.isPressed)
         {
-            movementVector -= new Vector2(transform.right.x * movementSpeed * Time.fixedDeltaTime, transform.right.y * movementSpeed * Time.fixedDeltaTime);
+            movementVector -= Vector2.right * movementSpeed * Time.fixedDeltaTime;
         }
 
         if (_kb.dKey.isPressed)
         {
-            movementVector += new Vector2(transform.right.x * movementSpeed * Time.fixedDeltaTime, transform.right.y * movementSpeed * Time.fixedDeltaTime);
+            movementVector += Vector2.right * movementSpeed * Time.fixedDeltaTime;
         }
 
         _rb.MovePosition(_rb.position + movementVector);
