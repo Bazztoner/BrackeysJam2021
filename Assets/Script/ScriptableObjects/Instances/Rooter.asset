@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d598c44f34406488f99f7361c6d9e5, type: 3}
   m_Name: Rooter
   m_EditorClassIdentifier: 
+  plant: {fileID: 0}
   name: Feetcramper
   description: 
   speed: 2
   damage: 1
   sprSeed: {fileID: 0}
-  tickStun: 2
+  tickStun: 5
   stunChangeRate: 0.9
