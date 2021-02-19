@@ -111,7 +111,7 @@ public class Proyectile : BaseProyectile
         }
 
         Initialize();
-    } 
+    }
 
     public void DefineCombination(SeedTypes _i, SeedTypes _j)
     {
@@ -197,7 +197,7 @@ public class Proyectile : BaseProyectile
         {
             for (int j = 0; j < 6; j++)
             {
-                if (_seeds[i].Equals((SeedTypes) j))
+                if (_seeds[i].Equals((SeedTypes)j))
                 {
                     amounts[j]++;
                 }
@@ -293,7 +293,7 @@ public class Proyectile : BaseProyectile
                 _enemy.RecieveEffect(effects[i]);
             }
         }
-        
+
         //onImpact.Invoke();
     }
 
@@ -303,7 +303,7 @@ public class Proyectile : BaseProyectile
         {
             EnemyBase _enemy = collider.gameObject.GetComponent<EnemyBase>();
 
-            if (effects.Count >= 1)
+            if (effects.Count >= 1 && _enemy != null)
             {
                 for (int i = 0; i < effects.Count; i++)
                 {

@@ -64,7 +64,7 @@ public abstract class EnemyBase : Entity
         fbMan.Heal();
     }
 
-    IEnumerator Stunned(float tick)
+    protected virtual IEnumerator Stunned(float tick)
     {
         _isStunned = true;
         StunHandler(_isStunned);
@@ -77,7 +77,7 @@ public abstract class EnemyBase : Entity
 
     protected abstract void StunHandler(bool state);
 
-    IEnumerator MindControlled(float tick)
+    protected virtual IEnumerator MindControlled(float tick)
     {
         _isMindControlled = true;
         MindControlHandler(_isMindControlled);
@@ -90,7 +90,7 @@ public abstract class EnemyBase : Entity
 
     protected abstract void MindControlHandler(bool state);
 
-    IEnumerator DoT(float tick, float damage)
+    protected virtual IEnumerator DoT(float tick, float damage)
     {
         float _tick = tick;
 
@@ -110,7 +110,7 @@ public abstract class EnemyBase : Entity
         fbMan.Explode();
     }
 
-    IEnumerator TickBoom(float tick)
+    protected virtual IEnumerator TickBoom(float tick)
     {
         float _tick = tick;
 
