@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
+
+    [SerializeField]
+    GameObject collectableSeeds;
 
     [SerializeField]
     int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
@@ -14,6 +18,12 @@ public class GameManager : MonoBehaviour
     bool[] unlockedPlanets = new bool[6] { true, false, false, false, false, false };
 
     int[] totalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        manager = this;
+    }
 
     #region Set
     public void UnlockPlanet(int i)
@@ -30,6 +40,11 @@ public class GameManager : MonoBehaviour
     public void RemainingSeeds(int[] _seeds)
     {
         totalSeeds = _seeds;
+    }
+
+    public void GainSeeds(int i)
+    {
+        totalSeeds[i]++;
     }
     #endregion
 
@@ -50,9 +65,24 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void Awake()
+    #region GamePlay
+    public void SpawnSeeds(Vector3 _pos)
     {
-        DontDestroyOnLoad(gameObject);
-        manager = this;
+        for (int i = 0; i < unlockedSeeds.Length; i++)
+        {
+            int maxSeedSpawn = Mathf.RoundToInt(maxSeedsAmount[i] * .25f);
+
+            if (unlockedSeeds[i] && (totalSeeds[i] < ((float)maxSeedsAmount[i] * .75f)))
+            {
+                int iterations = Mathf.RoundToInt(maxSeedSpawn * (totalSeeds[i] / maxSeedsAmount[i]));
+
+                for (int j = 0; j < iterations; j++)
+                {
+                    CollectibleSeed _seed = Instantiate(collectableSeeds, _pos, Quaternion.identity).GetComponent<CollectibleSeed>();
+                    _seed.SetSeed(i);
+                }
+            }
+        }
     }
+    #endregion
 }
