@@ -169,8 +169,9 @@ public class HiveBoss : EnemyBase
         _children = _children.Where(x => x.gameObject != clear.gameObject && x != null).ToArray();
     }
 
-    public void Die()
+    public override void Die()
     {
+        base.Die();
         ProcessInput(Inputs.Die);
         StopAllCoroutines();
     }
