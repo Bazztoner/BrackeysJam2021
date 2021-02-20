@@ -417,6 +417,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MK6_OBJ
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 894c6815b9a817a49819c9eefe82aa94,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 894c6815b9a817a49819c9eefe82aa94, type: 3}
 --- !u!114 &328968332 stripped
@@ -1497,11 +1502,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2084100155, guid: 0431a36066139b64db2f9be4228ee55a, type: 3}
-      propertyPath: prefabProyectile
-      value: 
-      objectReference: {fileID: 7071998372725636851, guid: 03d82329bc8fc984fb15616a4e1141e8,
-        type: 3}
     - target: {fileID: 5495714350737739074, guid: 0431a36066139b64db2f9be4228ee55a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1562,11 +1562,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5495714350737739085, guid: 0431a36066139b64db2f9be4228ee55a,
-        type: 3}
-      propertyPath: _cam
-      value: 
-      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0431a36066139b64db2f9be4228ee55a, type: 3}
 --- !u!1001 &6003490074069823933
