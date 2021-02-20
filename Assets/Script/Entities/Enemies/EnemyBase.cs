@@ -65,7 +65,7 @@ public abstract class EnemyBase : Entity
 
     public virtual void Die()
     {
-        GameManager.manager.SpawnSeeds(transform.position);
+        GameManager.Instance.SpawnSeeds(transform.position);
     }
 
     public override void TakeHeal(float hp)

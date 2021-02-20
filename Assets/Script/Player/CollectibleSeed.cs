@@ -33,7 +33,7 @@ public class CollectibleSeed : MonoBehaviour
     {
         if (collision.gameObject.LayerMatchesWith("Player"))
         {
-            GameManager.manager.GainSeeds((int)thisSeed);
+            GameManager.Instance.GainSeeds((int)thisSeed);
             Destroy(gameObject);
         }
     }

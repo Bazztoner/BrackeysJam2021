@@ -34,10 +34,8 @@ public class PlayerController : Entity
     Mouse _mb;
     Vector2 _mousePos;
     Rigidbody2D _rb;
-    Camera _cam;
+    [SerializeField] Camera _cam;
     Vector3 _camOffset;
-    Quaternion _camRotOffset;
-    Vector3 _dumpSpeed;
     ComboSystem _comboSystem;
 
     void Start()
@@ -55,8 +53,8 @@ public class PlayerController : Entity
 
         InitializeDictionaries();
 
-        _cam = Camera.main;
-        _camOffset = new Vector3(0,0,-10);
+        if (_cam == null) _cam = FindObjectsOfType<Camera>().First(c => c.CompareTag("MainCamera"));
+        _camOffset = new Vector3(0, 0, -10);
         //Normally 0, 2.46, -10
         /*_camOffset = _cam.transform.position;
         _camRotOffset = _cam.transform.rotation;*/
@@ -88,12 +86,12 @@ public class PlayerController : Entity
         //Root will get unlocked on the first level, tho
         unlockedSeeds = new Dictionary<SeedTypes, bool>
         {
-            { SeedTypes.Base, GameManager.manager.GetUnlockedSeeds()[0] },
-            { SeedTypes.Root, GameManager.manager.GetUnlockedSeeds()[1] },
-            { SeedTypes.Explosive, GameManager.manager.GetUnlockedSeeds()[2] },
-            { SeedTypes.Bouncer, GameManager.manager.GetUnlockedSeeds()[3] },
-            { SeedTypes.Seeker, GameManager.manager.GetUnlockedSeeds()[4] },
-            { SeedTypes.Parasite, GameManager.manager.GetUnlockedSeeds()[5] }
+            { SeedTypes.Base, GameManager.Instance.GetUnlockedSeeds()[0] },
+            { SeedTypes.Root, GameManager.Instance.GetUnlockedSeeds()[1] },
+            { SeedTypes.Explosive, GameManager.Instance.GetUnlockedSeeds()[2] },
+            { SeedTypes.Bouncer, GameManager.Instance.GetUnlockedSeeds()[3] },
+            { SeedTypes.Seeker, GameManager.Instance.GetUnlockedSeeds()[4] },
+            { SeedTypes.Parasite, GameManager.Instance.GetUnlockedSeeds()[5] }
         };
 
         seedInputs = new Dictionary<KeyControl, SeedTypes>
