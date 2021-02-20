@@ -24,7 +24,7 @@ public class HUBManager : MonoBehaviour
     {
         for (int i = 0; i < pointsStarting.Length; i++)
         {
-            if (GameManager.manager.GetPlanetUnlocked(i))
+            if (GameManager.Instance.GetPlanetUnlocked(i))
             {
                 planets[i].gameObject.SetActive(false);
                 player.position = pointsStarting[i].position;
@@ -81,22 +81,22 @@ public class HUBManager : MonoBehaviour
         switch (i)
         {
             case 0:
-                GameManager.manager.LoadScene(GameScenes.P1L1);
+                GameManager.Instance.LoadScene(GameScenes.P1L1);
                 break;
             case 1:
-                GameManager.manager.LoadScene(GameScenes.P2L1);
+                GameManager.Instance.LoadScene(GameScenes.P2L1);
                 break;
             case 2:
-                GameManager.manager.LoadScene(GameScenes.P3L1);
+                GameManager.Instance.LoadScene(GameScenes.P3L1);
                 break;
             case 3:
-                GameManager.manager.LoadScene(GameScenes.P4L1);
+                GameManager.Instance.LoadScene(GameScenes.P4L1);
                 break;
             case 4:
-                GameManager.manager.LoadScene(GameScenes.P5L1);
+                GameManager.Instance.LoadScene(GameScenes.P5L1);
                 break;
             case 5:
-                GameManager.manager.LoadScene(GameScenes.FinalBoss);
+                GameManager.Instance.LoadScene(GameScenes.FinalBoss);
                 break;
             default:
                 break;

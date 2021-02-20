@@ -6,8 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager manager;
-
+    static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+                if (_instance == null)
+                {
+                    _instance = new GameObject("GameManager Instance").AddComponent<GameManager>().GetComponent<GameManager>();
+                }
+            }
+            return _instance;
+        }
+    }
     [SerializeField]
     GameObject collectableSeeds;
 
@@ -18,13 +32,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
 
-    bool[] initialUnlockedSeeds = new bool[6] { false, false, false, false, false, false };
+    bool[] initialUnlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
     bool[] initialUnlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
     int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
-    bool[] unlockedSeeds = new bool[6] { false, false, false, false, false, false };
+    bool[] unlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
     bool[] unlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
@@ -33,7 +47,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        manager = this;
+        _instance = this;
     }
 
     #region Set

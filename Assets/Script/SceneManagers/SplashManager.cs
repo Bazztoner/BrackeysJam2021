@@ -100,6 +100,6 @@ public class SplashManager : MonoBehaviour
             t += Time.deltaTime * 2.5f;
         }
 
-        GameManager.manager.LoadScene(GameScenes.Menu);
+        GameManager.Instance.LoadScene(GameScenes.Menu);
     }
 }

@@ -69,7 +69,7 @@ public class MenuManager : MonoBehaviour
 
     void EnableMenu()
     {
-        if (GameManager.manager.GetPlanetUnlocked(0))
+        if (GameManager.Instance.GetPlanetUnlocked(0))
         {
             options[0].button.SetActive(true);
             iOption = 0;
@@ -92,7 +92,7 @@ public class MenuManager : MonoBehaviour
 
         if (iOption >= options.Count)
         {
-            if (GameManager.manager.GetPlanetUnlocked(0))
+            if (GameManager.Instance.GetPlanetUnlocked(0))
                 iOption = 0;
             else iOption = 1;
         }
@@ -106,7 +106,7 @@ public class MenuManager : MonoBehaviour
 
         iOption--;
 
-        if ((GameManager.manager.GetPlanetUnlocked(0) && (iOption < 0)) || (!GameManager.manager.GetPlanetUnlocked(0) && (iOption == 0)))
+        if ((GameManager.Instance.GetPlanetUnlocked(0) && (iOption < 0)) || (!GameManager.Instance.GetPlanetUnlocked(0) && (iOption == 0)))
             iOption = (options.Count - 1);
 
         options[iOption].Select();
@@ -155,17 +155,17 @@ public class MenuManager : MonoBehaviour
         switch (_i)
         {
             case 1:
-                GameManager.manager.LoadScene(GameScenes.HUB);
+                GameManager.Instance.LoadScene(GameScenes.HUB);
                 break;
             case 2:
-                GameManager.manager.ResetGame();
-                GameManager.manager.LoadScene(GameScenes.HUB);
+                GameManager.Instance.ResetGame();
+                GameManager.Instance.LoadScene(GameScenes.HUB);
                 break;
             case 3:
-                GameManager.manager.LoadScene(GameScenes.Credits);
+                GameManager.Instance.LoadScene(GameScenes.Credits);
                 break;
             case 4:
-                GameManager.manager.Quit();
+                GameManager.Instance.Quit();
                 break;
             default:
                 break;
