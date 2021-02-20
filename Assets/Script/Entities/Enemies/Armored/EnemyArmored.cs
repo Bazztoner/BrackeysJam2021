@@ -110,11 +110,12 @@ public class EnemyArmored : EnemyBase
 
     protected override void Shoot()
     {
-        Instantiate(defaultProjectile, muzzle.position, muzzle.rotation);
+        var projectile = Instantiate(defaultProjectile, muzzle.position, muzzle.rotation);
+        projectile.SpawnProjectile(muzzle.position, transform.up, this);
     }
 
     protected override void StunHandler(bool state)
     {
-        throw new System.NotImplementedException();
+        //Inmune
     }
 }

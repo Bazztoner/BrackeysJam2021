@@ -684,11 +684,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Barager
       objectReference: {fileID: 0}
-    - target: {fileID: 8890061260262606214, guid: 39dc65969374b214c90e5a9552402590,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39dc65969374b214c90e5a9552402590, type: 3}
 --- !u!114 &726625041 stripped
@@ -962,11 +957,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8901151702108059594, guid: 465b35a1003dea9409c664edd3dd941f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8901151702108059599, guid: 465b35a1003dea9409c664edd3dd941f,
         type: 3}

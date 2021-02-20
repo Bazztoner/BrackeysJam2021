@@ -1420,11 +1420,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 80
-  movementSpeed: 0.5
+  movementSpeed: 0.05
   defaultProjectile: {fileID: 0}
   comboSystem: {fileID: 1695848635826876854}
   muzzle: {fileID: 0}
-  missileBarage: {fileID: 1305592208129059480, guid: edfbfdee6c4f7684d91d5c605d9389a3,
+  missileBarage: {fileID: 6709131717086675743, guid: edfbfdee6c4f7684d91d5c605d9389a3,
     type: 3}
   barageMuzzles:
   - {fileID: 217984797227383988}
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   - {fileID: 8923120781486168482}
   - {fileID: 5292404479598921427}
   - {fileID: 7807575242694415764}
-  missileAllAround: {fileID: 3565599234217755729, guid: ac958f60558cbfc4e85cedfe7789bef0,
+  missileAllAround: {fileID: 8473020762785235757, guid: ac958f60558cbfc4e85cedfe7789bef0,
     type: 3}
   allaroundMuzzles:
   - {fileID: 661621808504855367}

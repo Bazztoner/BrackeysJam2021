@@ -14,7 +14,7 @@ public class SimpleMissile : BaseProyectile
         }
         else if (collision.gameObject.LayerMatchesWith("Enemy") && collision.gameObject != Owner.gameObject)
         {
-            collision.GetComponent<EnemyBase>().RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
+            collision.GetComponent<EnemyBase>().RecieveEffect(new Effect(TypeOfEffect.Damage, damage, transform.up));
         }
 
         base.OnTriggerEnter2D(collision);
