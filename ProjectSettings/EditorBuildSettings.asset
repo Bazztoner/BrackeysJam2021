@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HubWorld.unity
     guid: 9245d02e4eeb34843b3b7dea101657be
+  - enabled: 1
+    path: Assets/Scenes/Planet 1/Level 1.unity
+    guid: d4549e710911e64419fe3f035a807df1
+  - enabled: 1
+    path: Assets/Scenes/Planet 1/Level 2.unity
+    guid: 7964757f4704e4d499ff85f7b156fb08
   m_configObjects: {}
