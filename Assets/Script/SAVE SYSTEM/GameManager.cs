@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +11,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject collectableSeeds;
 
+    GameScenes curScene = GameScenes.Splash;
+
+    Coroutine load;
+
     [SerializeField]
     int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
 
+    bool[] initialUnlockedSeeds = new bool[6] { false, false, false, false, false, false };
+
+    bool[] initialUnlockedPlanets = new bool[6] { false, false, false, false, false, false };
+
+    int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
+
     bool[] unlockedSeeds = new bool[6] { false, false, false, false, false, false };
 
-    bool[] unlockedPlanets = new bool[6] { true, false, false, false, false, false };
+    bool[] unlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
     int[] totalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
@@ -45,6 +56,13 @@ public class GameManager : MonoBehaviour
     public void GainSeeds(int i)
     {
         totalSeeds[i]++;
+    }
+
+    public void ResetGame()
+    {
+        unlockedSeeds = initialUnlockedSeeds;
+        unlockedPlanets = initialUnlockedPlanets;
+        totalSeeds = initialTotalSeeds;
     }
     #endregion
 
@@ -84,5 +102,48 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void LoadScene(GameScenes scene)
+    {
+        load = StartCoroutine(Load(scene));
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    IEnumerator Load(GameScenes scene)
+    {
+        AsyncOperation ao = SceneManager.LoadSceneAsync((int)scene);
+
+        ao.allowSceneActivation = false;
+
+        while (ao.progress < .9f)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ao.allowSceneActivation = true;
+    }
     #endregion
+}
+
+public enum GameScenes
+{
+    Splash,
+    Menu,
+    Credits,
+    HUB,
+    P1L1,
+    P1L2,
+    P2L1,
+    P2L2,
+    P3L1,
+    P3L2,
+    P4L1,
+    P4L2,
+    P5L1,
+    P5L2,
+    FinalBoss
 }

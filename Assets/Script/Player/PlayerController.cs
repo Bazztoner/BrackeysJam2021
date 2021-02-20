@@ -88,12 +88,12 @@ public class PlayerController : Entity
         //Root will get unlocked on the first level, tho
         unlockedSeeds = new Dictionary<SeedTypes, bool>
         {
-            { SeedTypes.Base, true },
-            { SeedTypes.Root, true },
-            { SeedTypes.Explosive, true },
-            { SeedTypes.Bouncer, true },
-            { SeedTypes.Seeker, true },
-            { SeedTypes.Parasite, true }
+            { SeedTypes.Base, GameManager.manager.GetUnlockedSeeds()[0] },
+            { SeedTypes.Root, GameManager.manager.GetUnlockedSeeds()[1] },
+            { SeedTypes.Explosive, GameManager.manager.GetUnlockedSeeds()[2] },
+            { SeedTypes.Bouncer, GameManager.manager.GetUnlockedSeeds()[3] },
+            { SeedTypes.Seeker, GameManager.manager.GetUnlockedSeeds()[4] },
+            { SeedTypes.Parasite, GameManager.manager.GetUnlockedSeeds()[5] }
         };
 
         seedInputs = new Dictionary<KeyControl, SeedTypes>

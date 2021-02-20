@@ -56,6 +56,16 @@ public abstract class EnemyBase : Entity
     public override void TakeDamage(float dmg)
     {
         CurrentHP -= dmg;
+
+        if (CurrentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        GameManager.manager.SpawnSeeds(transform.position);
     }
 
     public override void TakeHeal(float hp)
@@ -108,6 +118,7 @@ public abstract class EnemyBase : Entity
     public virtual void Explode()
     {
         fbMan.Explode();
+        Die();
     }
 
     protected virtual IEnumerator TickBoom(float tick)

@@ -40,8 +40,6 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
 
             _aim += _aimCorrected;
 
-            Debug.Log($"Real aim for {amount} is {_aim}");
-
             Vector3 dirInit = dir;
             Vector3 dirEnd = Vector3.Normalize(closestEnemy - tfmProyectil.position);
 

@@ -1,0 +1,71 @@
+{
+    "name": "MenuControl",
+    "maps": [
+        {
+            "name": "Navigation",
+            "id": "ee67fd91-5953-4f0a-b396-c642ca1841f3",
+            "actions": [
+                {
+                    "name": "NavigateUp",
+                    "type": "Button",
+                    "id": "b027b843-2a14-4b76-9584-5dba7d41a84d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NavigateDown",
+                    "type": "Button",
+                    "id": "8564bc9b-605f-4842-9991-8424ee185cad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "cacc735e-8c35-4e4e-8af6-0e002880bc6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "81ae81fe-b50c-4a9e-a564-53fef98f4f37",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09028af4-e06f-4c73-b641-4e4cbcfcc05b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51389a9e-861e-450b-bfc8-43139b799c5b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
