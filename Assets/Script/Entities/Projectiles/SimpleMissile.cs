@@ -12,7 +12,7 @@ public class SimpleMissile : BaseProyectile
         {
             collision.GetComponent<PlayerController>().TakeDamage(damage);
         }
-        else if (collision.gameObject.LayerMatchesWith("Enemy"))
+        else if (collision.gameObject.LayerMatchesWith("Enemy") && collision.gameObject != Owner.gameObject)
         {
             collision.GetComponent<EnemyBase>().RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
         }

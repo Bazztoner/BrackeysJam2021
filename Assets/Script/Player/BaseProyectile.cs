@@ -30,6 +30,7 @@ public class BaseProyectile : MonoBehaviour
         transform.position = position;
         transform.up = direction;
         Owner = owner;
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), owner.GetComponent<Collider2D>());
     }
 
     protected virtual void FixedUpdate()

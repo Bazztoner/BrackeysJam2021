@@ -100,7 +100,8 @@ public class EnemyBarager : EnemyBase
     {
         for (int i = 0; i < barageMuzzles.Length; i++)
         {
-            Instantiate(missileBarage, barageMuzzles[i].position, barageMuzzles[i].rotation);
+            var _missile = Instantiate(missileBarage, barageMuzzles[i].position, barageMuzzles[i].rotation).GetComponent<SimpleMissile>();
+            _missile.SpawnProjectile(barageMuzzles[i].position, barageMuzzles[i].transform.up, this);
         }
     }
 
@@ -110,7 +111,7 @@ public class EnemyBarager : EnemyBase
         {
             var _missile = Instantiate(missileAllAround).GetComponent<SeekingMissile>();
             _missile.DefineTarget(GetTarget());
-            _missile.SpawnProjectile(allaroundMuzzles[i].position, allaroundMuzzles[i].transform.up);
+            _missile.SpawnProjectile(allaroundMuzzles[i].position, allaroundMuzzles[i].transform.up, this);
         }
     }
 
