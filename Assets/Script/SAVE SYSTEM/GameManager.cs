@@ -32,11 +32,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
 
-    bool[] initialUnlockedSeeds = new bool[6] { true, false, false, false, false, false };
+    [SerializeField] bool[] initialUnlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
     bool[] initialUnlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
-    int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
+    [SerializeField] int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
     bool[] unlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
@@ -44,10 +44,17 @@ public class GameManager : MonoBehaviour
 
     int[] totalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
-    private void Awake()
+    public bool setDefaultInfo;
+
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
         _instance = this;
+        if (setDefaultInfo)
+        {
+            unlockedSeeds = initialUnlockedSeeds;
+            totalSeeds = initialTotalSeeds;
+        }
     }
 
     #region Set

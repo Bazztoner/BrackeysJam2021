@@ -143,8 +143,9 @@ public class Turret : EnemyBase
         }
     }
 
-    public void Die()
+    public override void Die()
     {
+        base.Die();
         ProcessInput(Inputs.Die);
     }
     protected override void Shoot()

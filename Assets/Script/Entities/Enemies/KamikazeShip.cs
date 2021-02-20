@@ -44,6 +44,18 @@ public class KamikazeShip : EnemyBase
         InitFsm();
     }
 
+    public void SpawnByMother(Vector3 position, float speedMultiplier, Entity target)
+    {
+        Start();
+        transform.position = position;
+        movementSpeed *= speedMultiplier;
+        CurrentTarget = target != null ? target : _player;
+        if (GetCurrentState() == "Idle")
+        {
+            ProcessInput(Inputs.EnemyFound);
+        }
+    }
+
     void InitFsm()
     {
         //-----------------------------------------STATE CREATE-------------------------------------------//
@@ -139,7 +151,7 @@ public class KamikazeShip : EnemyBase
         foreach (var item in ents)
         {
             item.TakeDamage(explosionDamage);
-        }  
+        }
     }
 
     public override void Die()

@@ -66,6 +66,7 @@ public abstract class EnemyBase : Entity
     public virtual void Die()
     {
         GameManager.Instance.SpawnSeeds(transform.position);
+        Destroy(gameObject);
     }
 
     public override void TakeHeal(float hp)
@@ -143,14 +144,14 @@ public abstract class EnemyBase : Entity
         {
             case TypeOfEffect.Damage:
                 TakeDamage(_effect.modifier1);
-                fbMan.DirectionalDamage(_effect.dir);
+                //fbMan.DirectionalDamage(_effect.dir);
                 break;
             case TypeOfEffect.KnockBack:
-                Vector3 dir = transform.position - _effect.dir;
+                /*Vector3 dir = transform.position - _effect.dir;
 
                 Vector2 _dir = new Vector2(dir.x, dir.y) * _effect.modifier1;
 
-                _rb.AddForce(_dir, ForceMode2D.Impulse);
+                _rb.AddForce(_dir, ForceMode2D.Impulse);*/
                 break;
             case TypeOfEffect.Stun:
                 StartCoroutine(Stunned(_effect.modifier1));

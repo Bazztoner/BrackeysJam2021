@@ -184,8 +184,8 @@ public class ScoutShip : EnemyBase
 
     public override void Die()
     {
-        ProcessInput(Inputs.Die);
         base.Die();
+        ProcessInput(Inputs.Die);
     }
 
     public void AttackEnd()

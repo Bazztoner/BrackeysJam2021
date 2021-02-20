@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyBarager : EnemyBase
 {
     [SerializeField]
-    GameObject missileBarage;
+    SimpleMissile missileBarage;
 
     [SerializeField]
     Transform[] barageMuzzles = new Transform[8];
 
     [SerializeField]
-    GameObject missileAllAround;
+    SeekingMissile missileAllAround;
 
     [SerializeField]
     Transform[] allaroundMuzzles = new Transform[6];
@@ -22,7 +22,7 @@ public class EnemyBarager : EnemyBase
     [SerializeField]
     protected float attackeDistance, tickAttack;
 
-    Vector3 left, right;
+    Vector2 left, right;
 
     Coroutine movement, attack;
 
@@ -33,8 +33,8 @@ public class EnemyBarager : EnemyBase
         float minX = transform.position.x - positionVariation;
         float maxX = transform.position.x + positionVariation;
 
-        left = new Vector3(minX, transform.position.y);
-        right = new Vector3(maxX, transform.position.y);
+        left = new Vector2(minX, transform.position.y);
+        right = new Vector2(maxX, transform.position.y);
 
         movement = StartCoroutine(Movement());
         attack = StartCoroutine(Attack());
@@ -54,7 +54,7 @@ public class EnemyBarager : EnemyBase
             {
                 if (!_isStunned)
                 {
-                    _rb.MovePosition(goingRight ? Vector3.Lerp(left, right, t) : Vector3.Lerp(right, left, t));
+                    _rb.MovePosition(goingRight ? Vector2.Lerp(left, right, t) : Vector2.Lerp(right, left, t));
                     curPos = _rb.position;
 
                     t += (Time.deltaTime * movementSpeed);
@@ -100,7 +100,8 @@ public class EnemyBarager : EnemyBase
     {
         for (int i = 0; i < barageMuzzles.Length; i++)
         {
-            Instantiate(missileBarage, barageMuzzles[i].position, barageMuzzles[i].rotation);
+            var _missile = Instantiate(missileBarage, barageMuzzles[i].position, barageMuzzles[i].rotation);
+            _missile.SpawnProjectile(barageMuzzles[i].position, barageMuzzles[i].transform.up, this);
         }
     }
 
@@ -108,9 +109,9 @@ public class EnemyBarager : EnemyBase
     {
         for (int i = 0; i < allaroundMuzzles.Length; i++)
         {
-            var _missile = Instantiate(missileAllAround).GetComponent<SeekingMissile>();
+            var _missile = Instantiate(missileAllAround);
             _missile.DefineTarget(GetTarget());
-            _missile.SpawnProjectile(allaroundMuzzles[i].position, allaroundMuzzles[i].transform.up);
+            _missile.SpawnProjectile(allaroundMuzzles[i].position, allaroundMuzzles[i].transform.up, this);
         }
     }
 

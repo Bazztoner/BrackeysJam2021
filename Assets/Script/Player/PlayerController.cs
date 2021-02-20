@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
@@ -17,6 +18,8 @@ public class PlayerController : Entity
 
     public int maxHP;
     int _currentHP;
+
+    public UnityEvent onDeath;
 
     public int CurrentHP
     {
@@ -227,7 +230,7 @@ public class PlayerController : Entity
 
         UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
 
-        //death stuff
+        if (CurrentHP <= 0) onDeath.Invoke();
     }
 
     public override void TakeHeal(float hp)

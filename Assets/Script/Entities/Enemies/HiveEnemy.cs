@@ -201,8 +201,9 @@ public class HiveEnemy : EnemyBase
         _ships = _ships.Where(x => x.gameObject != clear.gameObject).ToArray();
     }
 
-    public void Die()
+    public override void Die()
     {
+        base.Die();
         ProcessInput(Inputs.Die);
     }
 
