@@ -6,9 +6,15 @@ public class SimpleMissile : BaseProyectile
 {
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"{gameObject.name} collided into {collision.gameObject.name}.");
+
         if (collision.gameObject.LayerMatchesWith("Player"))
         {
             collision.GetComponent<PlayerController>().TakeDamage(damage);
+        }
+        else if (collision.gameObject.LayerMatchesWith("Enemy"))
+        {
+            collision.GetComponent<EnemyBase>().RecieveEffect(new Effect(TypeOfEffect.Damage, damage));
         }
 
         base.OnTriggerEnter2D(collision);

@@ -20,9 +20,6 @@ public class EnemyBarager : EnemyBase
     protected float positionVariation;
 
     [SerializeField]
-    protected float speed;
-
-    [SerializeField]
     protected float attackeDistance, tickAttack;
 
     Vector3 left, right;
@@ -60,7 +57,7 @@ public class EnemyBarager : EnemyBase
                     _rb.MovePosition(goingRight ? Vector3.Lerp(left, right, t) : Vector3.Lerp(right, left, t));
                     curPos = _rb.position;
 
-                    t += (Time.deltaTime * speed);
+                    t += (Time.deltaTime * movementSpeed);
                 }
                 else _rb.position = curPos;
 
