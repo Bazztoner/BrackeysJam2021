@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(GameScenes scene)
     {
         load = StartCoroutine(Load(scene));
-        MusicManager.Instance.OnStartLoadingScene(scene);
+        //MusicManager.Instance.OnStartLoadingScene(scene);
     }
 
     public void Quit()
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        MusicManager.Instance.OnChangeScene(scene);
+        //MusicManager.Instance.OnChangeScene(scene);
         ao.allowSceneActivation = true;
     }
     #endregion

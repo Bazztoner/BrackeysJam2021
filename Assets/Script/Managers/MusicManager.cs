@@ -6,7 +6,7 @@ using PhoenixDevelopment;
 
 public class MusicManager : MonoBehaviour
 {
-    static MusicManager _instance;
+    /*static MusicManager _instance;
     public static MusicManager Instance
     {
         get
@@ -132,5 +132,5 @@ public class MusicManager : MonoBehaviour
         }
 
         _src.Play();
-    }
+    }*/
 }
