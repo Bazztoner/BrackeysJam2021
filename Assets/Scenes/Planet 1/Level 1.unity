@@ -3729,6 +3729,7 @@ MonoBehaviour:
   - {fileID: 328968332}
   - {fileID: 1053921933}
   - {fileID: 1345850784}
+  available: []
   seedImages:
   - {fileID: 21300000, guid: 49da1fe8727f98945baaac3ca8a3232b, type: 3}
   - {fileID: 21300000, guid: dd08174a863a85f49b22b00fd3284dec, type: 3}
@@ -3763,8 +3764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1782981187}
-  foreground: {fileID: 0}
-  txtDefeat: {fileID: 0}
+  foreground: {fileID: 6700753657213440933}
+  txtDefeat: {fileID: 6700753657213440932}
   pointVictory: {fileID: 0}
   pickUp: {fileID: 0}
   nextScene: 5
@@ -4930,6 +4931,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5, type: 3}
+--- !u!114 &6700753657213440932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8527435731672273071, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6700753657213440933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7460533980249061096, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6700753657213440931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8901151703828940835
 PrefabInstance:
   m_ObjectHideFlags: 0

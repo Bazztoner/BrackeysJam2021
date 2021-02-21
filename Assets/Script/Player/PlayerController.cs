@@ -156,11 +156,11 @@ public class PlayerController : Entity
             }
 
             //print("Combo: " + st);
-            if (GameManager.Instance.Consume(_currentSeedCombo))
-            {
-                var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
-                projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
-            }
+
+            var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
+            projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
+
+            GameManager.Instance.onShoot.Invoke();
 
             _currentSeedCombo = new Queue<SeedTypes>();
             UIManager.Instance.ClearCombo();
@@ -179,32 +179,32 @@ public class PlayerController : Entity
         if (_kb.digit1Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit1Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
         if (_kb.digit2Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit2Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
         if (_kb.digit3Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit3Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
         if (_kb.digit4Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit4Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
         if (_kb.digit5Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit5Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
         if (_kb.digit6Key.wasPressedThisFrame)
         {
             var seed = seedInputs[_kb.digit6Key];
-            if (unlockedSeeds[seed]) ManageCombo(seed);
+            if (unlockedSeeds[seed] && GameManager.Instance.AddToCost(seed)) ManageCombo(seed);
         }
     }
 

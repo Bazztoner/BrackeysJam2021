@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -46,6 +47,12 @@ public class GameManager : MonoBehaviour
 
     public bool setDefaultInfo;
 
+    int[] initCosts = new int[6] { -1, -1, -1, -1, -1, -1 };
+
+    int[] costs = new int[6] { -1, -1, -1, -1, -1, -1 };
+
+    public UnityEvent onShoot;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -55,6 +62,7 @@ public class GameManager : MonoBehaviour
             unlockedSeeds = initialUnlockedSeeds;
             totalSeeds = initialTotalSeeds;
         }
+        onShoot.AddListener(Consume);
     }
 
     #region Set
@@ -105,35 +113,29 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region GamePlay
-    public bool Consume(Queue<SeedTypes> _seeds)
+    public bool AddToCost(SeedTypes _seed)
     {
-        SeedTypes[] seeds = _seeds.ToArray();
-
-        int[] costs = new int[6];
-
         for (int i = 0; i < totalSeeds.Length; i++)
         {
-            int cost = -1;
-            int seed = i;
-
-            for (int j = 0; j < seeds.Length; j++)
+            if ((int)_seed == i && (costs[i] + 2) <= totalSeeds[i])
             {
-                if (j.Equals((SeedTypes)i))
-                {
-                    cost += 2;
-                }
+                costs[i] += 2;
 
-                if (cost > totalSeeds[i]) return false;
-                else costs[i] = cost;
+                return true;
             }
         }
 
+        return false;
+    }
+
+    void Consume()
+    {
         for (int i = 0; i < totalSeeds.Length; i++)
         {
             totalSeeds[i] -= costs[i];
         }
 
-        return true;
+        costs = initCosts;
     }
 
     public void SpawnSeeds(Vector3 _pos)
