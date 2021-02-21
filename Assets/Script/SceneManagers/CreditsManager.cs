@@ -92,6 +92,11 @@ public class CreditsManager : MonoBehaviour
             t += Time.deltaTime * tickTextIn;
         }
 
+        BackToMenu();
+    }
+
+    public void BackToMenu()
+    {
         GameManager.Instance.LoadScene(GameScenes.Menu);
     }
 }
