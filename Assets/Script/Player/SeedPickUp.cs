@@ -9,6 +9,13 @@ public class SeedPickUp : MonoBehaviour
 
     public SeedTypes type;
 
+    private void Awake()
+    {
+        onPickUp = new UnityEvent();
+
+        onPickUp.AddListener(delegate { GameManager.Instance.UnlockSeed((int)type); });
+    }
+
     public int GetTypeSeed()
     {
         return (int)type;

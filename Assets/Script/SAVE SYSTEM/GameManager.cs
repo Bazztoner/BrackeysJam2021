@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             totalSeeds = initialTotalSeeds;
         }
         onShoot = new UnityEvent();
+
         onShoot.AddListener(Consume);
     }
 
