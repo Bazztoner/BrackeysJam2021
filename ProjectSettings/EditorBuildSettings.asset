@@ -23,4 +23,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Planet 1/Level 2.unity
     guid: 7964757f4704e4d499ff85f7b156fb08
+  - enabled: 1
+    path: Assets/Scenes/Planet 2/Level 1.unity
+    guid: 04f37b449b93241bfa74f30de9ebdebf
+  - enabled: 1
+    path: Assets/Scenes/Planet 2/Level 2 y Boss Arena.unity
+    guid: 31bff96068c98433891426e2570a06d1
+  - enabled: 1
+    path: Assets/Scenes/Planet 3/Level 1.unity
+    guid: 9309b85b8737045cea05af98ff8f84db
+  - enabled: 1
+    path: Assets/Scenes/Planet 3/Level 2.unity
+    guid: a3bcbded55aa24f74b272b2053034f99
+  - enabled: 1
+    path: Assets/Scenes/Planet 4/Level 1.unity
+    guid: cd791c0d8133344c5a63361109fa9627
+  - enabled: 1
+    path: Assets/Scenes/Planet 4/Level 2.unity
+    guid: 2055a2687574d4f819c197dc75b53614
+  - enabled: 1
+    path: Assets/Scenes/Planet 5/Level 1.unity
+    guid: 386f93b86b0ca4a429fac0d5ecce45a0
+  - enabled: 1
+    path: Assets/Scenes/Planet 5/Level 2.unity
+    guid: 96695acbe8b234a4aaace223869e705f
+  - enabled: 1
+    path: Assets/Scenes/Boss Room/Final Level.unity
+    guid: 3f1cc3dc525d9a94f800354a2eda8e09
   m_configObjects: {}
