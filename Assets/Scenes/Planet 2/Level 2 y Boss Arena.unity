@@ -5140,6 +5140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
+        type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
