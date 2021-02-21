@@ -112,7 +112,7 @@ public class MusicManager : MonoBehaviour
                 case GameScenes.FinalBoss:
                     _src.clip = null;
                     break;
-                case GameScenes.WinScreen:
+                case GameScenes.Victory:
                     _src.clip = win;
                     break;
                 default:

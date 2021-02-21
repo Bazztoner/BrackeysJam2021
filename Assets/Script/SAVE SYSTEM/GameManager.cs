@@ -205,5 +205,5 @@ public enum GameScenes
     P5L1,
     P5L2,
     FinalBoss,
-    WinScreen
+    Victory
 }
