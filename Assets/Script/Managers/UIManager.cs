@@ -23,12 +23,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public UIAvailableSeed[] Available
+    {
+        get
+        {
+            if (available == null) available = FindObjectsOfType<UIAvailableSeed>();
+            return available;
+        }
+        set => available = value;
+    }
+
     public Image hpBar;
 
     public Image[] comboSlots;
     Image[] _comboImages;
 
-    public UIAvailableSeed[] available;
+    private UIAvailableSeed[] available;
 
     [Header("In order like the SeedTypes enum")]
     public Sprite[] seedImages;
@@ -52,7 +62,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.GetUnlockedSeeds().Length; i++)
         {
             //available[i].gameObject.SetActive(GameManager.Instance.GetUnlockedSeeds()[i]);
-            if (GameManager.Instance.GetUnlockedSeeds()[i]) available[i].UpdateAmmo();
+            if (GameManager.Instance.GetUnlockedSeeds()[i]) Available[i].UpdateAmmo();
         }
     }
 
