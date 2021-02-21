@@ -96,6 +96,10 @@ public class PlayableLevelManager : MonoBehaviour
         {
             Color init = new Color(0f, 0f, 0f, 0f);
 
+            txtDefeat.color = init;
+
+            txtDefeat.gameObject.SetActive(true);
+
             float t = 0f;
             float _t = 0f;
 

@@ -233,7 +233,11 @@ public class PlayerController : Entity
 
         UIManager.Instance.UpdateHPBar(CurrentHP, maxHP);
 
-        if (CurrentHP <= 0) onDeath.Invoke();
+        if (CurrentHP <= 0)
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
+            onDeath.Invoke();
+        }
     }
 
     public override void TakeHeal(float hp)
