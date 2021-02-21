@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.GetUnlockedSeeds().Length; i++)
         {
-            available[i].gameObject.SetActive(GameManager.Instance.GetUnlockedSeeds()[i]);
+            //available[i].gameObject.SetActive(GameManager.Instance.GetUnlockedSeeds()[i]);
             if (GameManager.Instance.GetUnlockedSeeds()[i]) available[i].UpdateAmmo();
         }
     }

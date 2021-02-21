@@ -32,11 +32,17 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         _instance = this;
         _src = GetComponent<AudioSource>();
+        if (_src == null)
+        {
+            _instance.gameObject.AddComponent<AudioSource>();
+            _src = GetComponent<AudioSource>();
+        }
     }
 
     void FillFields()
     {
         _instance.gameObject.AddComponent<AudioSource>();
+        _src = GetComponent<AudioSource>();
         var clips = Resources.LoadAll<AudioClip>("Sound/Music/");
         menu = clips.First(x => x.name == "TREEraforming - Menu");
         level1 = clips.First(x => x.name == "TREEraforming - Level 1");
@@ -124,5 +130,7 @@ public class MusicManager : MonoBehaviour
         {
             _src.clip = menu;
         }
+
+        _src.Play();
     }
 }

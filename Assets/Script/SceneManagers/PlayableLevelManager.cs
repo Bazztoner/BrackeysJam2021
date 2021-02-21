@@ -34,7 +34,7 @@ public class PlayableLevelManager : MonoBehaviour
         StartCoroutine(LightUp());
     }
 
-    void EndLevel(bool victory)
+    public void EndLevel(bool victory)
     {
         StartCoroutine(LightDown(victory));
     }

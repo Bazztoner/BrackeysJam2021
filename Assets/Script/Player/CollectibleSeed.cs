@@ -19,12 +19,12 @@ public class CollectibleSeed : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        //_rb = GetComponent<Rigidbody2D>();
 
         rend = GetComponentInChildren<SpriteRenderer>();
         rend.sprite = sprites[(int)thisSeed];
 
-        _rb.velocity = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized * speed;
+        //_rb.velocity = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f)).normalized * speed;
     }
 
     public void SetSeed(int i)

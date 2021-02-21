@@ -57,10 +57,7 @@ public class PlayerController : Entity
         InitializeDictionaries();
 
         if (_cam == null) _cam = FindObjectsOfType<Camera>().First(c => c.CompareTag("MainCamera"));
-        _camOffset = new Vector3(0, 0, -10);
-        //Normally 0, 2.46, -10
-        /*_camOffset = _cam.transform.position;
-        _camRotOffset = _cam.transform.rotation;*/
+        _camOffset = new Vector3(0, 1, -10);
 
         Cursor.lockState = CursorLockMode.Confined;
 
