@@ -80,7 +80,7 @@ public class PlayerController : Entity
         _cam.transform.position = transform.position + _camOffset;
     }
 
-    void InitializeDictionaries()
+    public void InitializeDictionaries()
     {
         //Remember to put false in everything except Base for the final game
         //Root will get unlocked on the first level, tho

@@ -4546,19 +4546,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
+        type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1553710436}
+      objectReference: {fileID: 5495714351923369451}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -4567,12 +4572,12 @@ PrefabInstance:
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnlockSeed
+      value: InitializeDictionaries
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
       propertyPath: onPickUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3300379811409686631, guid: 392724f8b0efbfd48a69997581564627,
         type: 3}
