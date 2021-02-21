@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
     public Image[] comboSlots;
     Image[] _comboImages;
 
+    public UIAvailableSeed[] available;
+
     [Header("In order like the SeedTypes enum")]
     public Sprite[] seedImages;
 
@@ -38,6 +40,12 @@ public class UIManager : MonoBehaviour
         {
             _comboImages[i] = comboSlots[i].GetComponentsInChildren<Image>(true).Where(x => x != comboSlots[i]).First();
             _comboImages[i].enabled = false;
+        }
+
+        for (int i = 0; i < GameManager.Instance.GetUnlockedSeeds().Length; i++)
+        {
+            available[i].gameObject.SetActive(GameManager.Instance.GetUnlockedSeeds()[i]);
+            if (GameManager.Instance.GetUnlockedSeeds()[i]) available[i].UpdateAmmo();
         }
     }
 
