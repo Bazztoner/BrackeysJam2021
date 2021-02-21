@@ -38,6 +38,17 @@ public class CollectibleSeed : MonoBehaviour
         if (collision.gameObject.LayerMatchesWith("Player"))
         {
             GameManager.Instance.GainSeeds((int)thisSeed);
+            GameManager.Instance.UnlockSeed((int)thisSeed);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.LayerMatchesWith("Player"))
+        {
+            GameManager.Instance.GainSeeds((int)thisSeed);
+            GameManager.Instance.UnlockSeed((int)thisSeed);
             Destroy(gameObject);
         }
     }

@@ -26,6 +26,7 @@ public class UIAvailableSeed : MonoBehaviour
 
     public void UpdateAmmo()
     {
+        lockGraphic.SetActive(!GameManager.Instance.GetUnlockedSeeds()[(int)type]);
         ammo.text = GameManager.Instance.GetRemainingSeeds()[(int)type].ToString();
     }
 }
