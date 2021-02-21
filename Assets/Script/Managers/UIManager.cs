@@ -42,6 +42,13 @@ public class UIManager : MonoBehaviour
             _comboImages[i].enabled = false;
         }
 
+        GameManager.Instance.onShoot.AddListener(UpdateAmmoCount);
+
+        UpdateAmmoCount();
+    }
+
+    public void UpdateAmmoCount()
+    {
         for (int i = 0; i < GameManager.Instance.GetUnlockedSeeds().Length; i++)
         {
             available[i].gameObject.SetActive(GameManager.Instance.GetUnlockedSeeds()[i]);
