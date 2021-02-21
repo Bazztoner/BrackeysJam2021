@@ -74,7 +74,7 @@ public class EnemyArmored : EnemyBase
             {
                 for (int i = 0; i < enemies.Length; i++)
                 {
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < detectDistance && !enemies[i].Equals(this))
+                    if (Vector2.Distance(enemies[i].transform.position, transform.position) < detectDistance && !enemies[i].Equals(this))
                     {
                         aimableEnemies.Add(enemies[i]);
                     }

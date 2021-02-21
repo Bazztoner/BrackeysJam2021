@@ -9,6 +9,11 @@ public class SeedPickUp : MonoBehaviour
 
     public SeedTypes type;
 
+    private void Awake()
+    {
+        onPickUp.AddListener(delegate { GameManager.Instance.UnlockSeed((int)type); });
+    }
+
     public int GetTypeSeed()
     {
         return (int)type;
@@ -17,6 +22,9 @@ public class SeedPickUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.LayerMatchesWith("Player"))
+        {
             onPickUp.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

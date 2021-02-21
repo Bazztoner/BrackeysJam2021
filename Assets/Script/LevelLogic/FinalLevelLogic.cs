@@ -8,7 +8,7 @@ public class FinalLevelLogic : MonoBehaviour
     public GameObject arenaTopCollider, arenaBotCollider, endTrigger;
     public BossUndestructible boss;
     bool _bossDead;
-
+    public AudioClip finalTheme;
     void Start()
     {
         if (boss == null) boss = FindObjectOfType<BossUndestructible>();
@@ -27,6 +27,7 @@ public class FinalLevelLogic : MonoBehaviour
             arenaBotCollider.SetActive(false);
             endTrigger.SetActive(true);
             _bossDead = true;
+            FindObjectOfType<AudioSource>().Stop();
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -35,6 +36,10 @@ public class FinalLevelLogic : MonoBehaviour
         {
             arenaTopCollider.SetActive(true);
             arenaBotCollider.SetActive(true);
+            var src = FindObjectOfType<AudioSource>();
+            src.clip = finalTheme;
+            src.loop = true;
+            src.Play();
         }
     }
 }

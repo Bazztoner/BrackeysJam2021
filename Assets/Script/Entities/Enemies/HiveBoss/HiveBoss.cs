@@ -188,7 +188,7 @@ public class HiveBoss : EnemyBase
 
         if (GetCurrentState() == "Idle")
         {
-            if (Vector3.Distance(_player.transform.position, transform.position) <= distanceToEngage)
+            if (Vector2.Distance(_player.transform.position, transform.position) <= distanceToEngage)
             {
                 ProcessInput(Inputs.EnemyFound);
             }

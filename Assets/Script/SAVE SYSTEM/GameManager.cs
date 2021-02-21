@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public GameScenes CurrentScene { get => curScene;}
+
     [SerializeField]
     GameObject collectableSeeds;
 
@@ -30,39 +33,34 @@ public class GameManager : MonoBehaviour
 
     Coroutine load;
 
-    [SerializeField]
-    int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
+    [SerializeField] int[] maxSeedsAmount = new int[] { 100, 50, 25, 50, 30, 15 };
 
-    [SerializeField] bool[] initialUnlockedSeeds = new bool[6] { true, false, false, false, false, false };
+    bool[] initialUnlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
     bool[] initialUnlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
-    [SerializeField] int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
+    int[] initialTotalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
-    bool[] unlockedSeeds = new bool[6] { true, false, false, false, false, false };
+    [SerializeField] bool[] unlockedSeeds = new bool[6] { true, false, false, false, false, false };
 
-    bool[] unlockedPlanets = new bool[6] { false, false, false, false, false, false };
+    [SerializeField] bool[] unlockedPlanets = new bool[6] { false, false, false, false, false, false };
 
-    int[] totalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
-
-    public bool setDefaultInfo;
+    [SerializeField] int[] totalSeeds = new int[6] { 100, 0, 0, 0, 0, 0 };
 
     int[] initCosts = new int[6] { -1, -1, -1, -1, -1, -1 };
 
-    int[] costs = new int[6] { -1, -1, -1, -1, -1, -1 };
+    [SerializeField] int[] costs = new int[6] { -1, -1, -1, -1, -1, -1 };
 
     public UnityEvent onShoot;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
         _instance = this;
-        if (setDefaultInfo)
-        {
-            unlockedSeeds = initialUnlockedSeeds;
-            totalSeeds = initialTotalSeeds;
-        }
-        onShoot.AddListener(Consume);
+
+        unlockedSeeds = initialUnlockedSeeds;
+        totalSeeds = initialTotalSeeds;
     }
 
     #region Set
@@ -128,14 +126,19 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    void Consume()
+    public void Consume()
     {
         for (int i = 0; i < totalSeeds.Length; i++)
         {
-            totalSeeds[i] -= costs[i];
+            if (costs[i] > 0)
+            {
+                totalSeeds[i] -= costs[i];
+            }
+
+            costs[i] = initCosts[i];
         }
 
-        costs = initCosts;
+        onShoot.Invoke();
     }
 
     public void SpawnSeeds(Vector3 _pos)
@@ -160,6 +163,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(GameScenes scene)
     {
         load = StartCoroutine(Load(scene));
+        //MusicManager.Instance.OnStartLoadingScene(scene);
     }
 
     public void Quit()
@@ -177,7 +181,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-
+        //MusicManager.Instance.OnChangeScene(scene);
         ao.allowSceneActivation = true;
     }
     #endregion
@@ -199,5 +203,6 @@ public enum GameScenes
     P4L2,
     P5L1,
     P5L2,
-    FinalBoss
+    FinalBoss,
+    Victory
 }

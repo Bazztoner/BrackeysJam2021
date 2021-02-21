@@ -34,7 +34,7 @@ public class PlayableLevelManager : MonoBehaviour
         StartCoroutine(LightUp());
     }
 
-    void EndLevel(bool victory)
+    public void EndLevel(bool victory)
     {
         StartCoroutine(LightDown(victory));
     }
@@ -117,7 +117,7 @@ public class PlayableLevelManager : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(.25f);
+            yield return new WaitForSeconds(2.5f);
 
             GameManager.Instance.LoadScene(GameScenes.Menu);
         }

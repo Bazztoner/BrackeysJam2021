@@ -63,8 +63,8 @@ public class SO_SeedCombos : ScriptableObject
             {
                 for (int i = 1; i < enemies.Length; i++)
                 {
-                    float disCur = Vector3.Distance(closest.gameObject.transform.position, proyectile.transform.position);
-                    float disPot = Vector3.Distance(enemies[i].gameObject.transform.position, proyectile.transform.position);
+                    float disCur = Vector2.Distance(closest.gameObject.transform.position, proyectile.transform.position);
+                    float disPot = Vector2.Distance(enemies[i].gameObject.transform.position, proyectile.transform.position);
 
                     if (disPot < disCur)
                     {

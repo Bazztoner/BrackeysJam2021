@@ -1052,6 +1052,7 @@ MonoBehaviour:
   - {fileID: 328968332}
   - {fileID: 1053921933}
   - {fileID: 1345850784}
+  available: []
   seedImages:
   - {fileID: 21300000, guid: 49da1fe8727f98945baaac3ca8a3232b, type: 3}
   - {fileID: 21300000, guid: dd08174a863a85f49b22b00fd3284dec, type: 3}
@@ -1090,6 +1091,9 @@ MonoBehaviour:
   initialUnlockedSeeds: 010101010101
   initialTotalSeeds: 640000003200000019000000320000001e0000000f000000
   setDefaultInfo: 1
+  onShoot:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1607239946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +1791,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6700753655935154193, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6700753655935154197, guid: ea16c3aa84c9faa4d8de2a4b5abb35c5,
         type: 3}

@@ -24,8 +24,8 @@ public class TreeOfTypeSeedSeeker : BaseTree
             {
                 for (int i = 1; i < enemies.Length; i++)
                 {
-                    float disInit = Vector3.Distance(transform.position, closestEnemy.transform.position);
-                    float disCompare = Vector3.Distance(transform.position, enemies[i].transform.position);
+                    float disInit = Vector2.Distance(transform.position, closestEnemy.transform.position);
+                    float disCompare = Vector2.Distance(transform.position, enemies[i].transform.position);
 
                     if (disCompare < disInit)
                     {

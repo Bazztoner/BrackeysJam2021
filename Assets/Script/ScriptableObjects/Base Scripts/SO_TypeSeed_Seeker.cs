@@ -22,7 +22,7 @@ public class SO_TypeSeed_Seeker : SO_TypeSeed_Generic
             {
                 Vector3 curEnemy = enemies[i].gameObject.transform.position;
 
-                if (Vector3.Distance(curEnemy, tfmProyectil.position) < Vector3.Distance(closestEnemy, tfmProyectil.position))
+                if (Vector2.Distance(curEnemy, tfmProyectil.position) < Vector2.Distance(closestEnemy, tfmProyectil.position))
                 {
                     closestEnemy = curEnemy;
                 }
