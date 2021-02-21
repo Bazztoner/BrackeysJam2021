@@ -156,8 +156,12 @@ public class PlayerController : Entity
             }
 
             //print("Combo: " + st);
-            var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
-            projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
+            if (GameManager.Instance.Consume(_currentSeedCombo))
+            {
+                var projectile = _comboSystem.DefineCombo(_currentSeedCombo);
+                projectile.SpawnProjectile(muzzle.transform.position, muzzle.transform.up, this);
+            }
+
             _currentSeedCombo = new Queue<SeedTypes>();
             UIManager.Instance.ClearCombo();
         }

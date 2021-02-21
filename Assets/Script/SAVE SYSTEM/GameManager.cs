@@ -105,6 +105,37 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region GamePlay
+    public bool Consume(Queue<SeedTypes> _seeds)
+    {
+        SeedTypes[] seeds = _seeds.ToArray();
+
+        int[] costs = new int[6];
+
+        for (int i = 0; i < totalSeeds.Length; i++)
+        {
+            int cost = -1;
+            int seed = i;
+
+            for (int j = 0; j < seeds.Length; j++)
+            {
+                if (j.Equals((SeedTypes)i))
+                {
+                    cost += 2;
+                }
+
+                if (cost > totalSeeds[i]) return false;
+                else costs[i] = cost;
+            }
+        }
+
+        for (int i = 0; i < totalSeeds.Length; i++)
+        {
+            totalSeeds[i] -= costs[i];
+        }
+
+        return true;
+    }
+
     public void SpawnSeeds(Vector3 _pos)
     {
         for (int i = 0; i < unlockedSeeds.Length; i++)
