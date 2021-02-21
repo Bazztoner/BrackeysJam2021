@@ -199,5 +199,6 @@ public enum GameScenes
     P4L2,
     P5L1,
     P5L2,
-    FinalBoss
+    FinalBoss,
+    Victory
 }

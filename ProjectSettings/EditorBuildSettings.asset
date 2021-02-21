@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 8349123cf3442b348b90202b4649fda6
   - enabled: 1
     path: Assets/Scenes/Credits.unity
-    guid: 3b1665f8c701e2f4bab1dea43f6d22b7
+    guid: c8210439d82b23b429195912234f67b9
   - enabled: 1
     path: Assets/Scenes/HubWorld.unity
     guid: 9245d02e4eeb34843b3b7dea101657be

@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 186781252}
-  speed: 0.005
+  speed: 0.01
 --- !u!1 &278140711
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 357907544}
-  speed: 0.095
+  speed: 0.19
 --- !u!1 &565553120
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 761903893}
-  speed: 0.05
+  speed: 0.1
 --- !u!1 &975671298
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1211012087}
-  speed: 0.075
+  speed: 0.15
 --- !u!1 &1258893838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1433034344}
-  speed: 0.075
+  speed: 0.15
 --- !u!1 &1497863783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1722325722}
-  speed: 0.12
+  speed: 0.24
 --- !u!1 &1739101282
 GameObject:
   m_ObjectHideFlags: 0
