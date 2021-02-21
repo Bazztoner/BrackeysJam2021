@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 186781252}
-  speed: 0.01
+  speed: 0.02
 --- !u!1 &321405771
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 357907544}
-  speed: 0.19
+  speed: 0.38
 --- !u!1 &565553120
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +332,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &637454313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637454314}
+  m_Layer: 5
+  m_Name: PosTextEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &637454314
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637454313}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1013116919}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 3705}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &761903892
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 761903893}
-  speed: 0.1
+  speed: 0.2
 --- !u!1 &1013116915
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +425,7 @@ GameObject:
   - component: {fileID: 1013116918}
   - component: {fileID: 1013116917}
   - component: {fileID: 1013116916}
+  - component: {fileID: 1013116920}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -470,6 +506,8 @@ RectTransform:
   m_Children:
   - {fileID: 1739101283}
   - {fileID: 1881905570}
+  - {fileID: 1879206108}
+  - {fileID: 637454314}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -478,6 +516,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1013116920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013116915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73430cd2b2684441a9731e72e1f4d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bg: {fileID: 1739101284}
+  tfmText: {fileID: 1881905570}
+  posTextInit: {fileID: 1879206108}
+  posTextEnd: {fileID: 637454314}
+  txtCredits: {fileID: 1881905571}
+  tickLightUp: 1.5
+  tickTextIn: 1.5
+  tickTextScroll: 0.01
 --- !u!1 &1211012086
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1211012087}
-  speed: 0.15
+  speed: 0.3
 --- !u!1 &1258893838
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1433034344}
-  speed: 0.15
+  speed: 0.3
 --- !u!1 &1550158297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetarium: {fileID: 1722325722}
-  speed: 0.24
+  speed: 0.48
 --- !u!1 &1739101282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.101960786}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1176,6 +1234,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1879206107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879206108}
+  m_Layer: 5
+  m_Name: PosTextInit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1879206108
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879206107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1013116919}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1881905569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1294,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881905569}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1232,11 +1325,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "TREE-raforming\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLead
-    Game Designer - Iv\xE1n Piccione\n\n\n\nGame Designer - D. Leonardo Vasquez Trimboli\n\n\n\nLevel
+  m_text: "TREE-raforming\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLead Game
+    Designer - Iv\xE1n Piccione\n\n\n\nGame Designer - D. Leonardo Vasquez Trimboli\n\n\n\nLevel
     Designer - Abigail Zubelz\xFA\n\n\n\nMusician - Iv\xE1n PIccione\n\n\n\nUI Artist
     - Abigail Zubelz\xFA\n\n\n\nProgrammer - Iv\xE1n Piccione\n\n\n\nProgrammer -
-    D. Leonardo Vasquez Trimboli\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
+    D. Leonardo Vasquez Trimboli\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTHANKS
     FOR PLAYING"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1300,7 +1393,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 32.916924, y: 539.6263, z: 19.971071, w: -1655.7197}
+  m_margin: {x: 32.916924, y: 539.6263, z: 19.971071, w: -3623.2078}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

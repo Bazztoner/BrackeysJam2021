@@ -10,13 +10,13 @@ public class CreditsManager : MonoBehaviour
     protected Image bg;
 
     [SerializeField]
-    protected Transform tfmText;
+    protected Transform tfmText, posTextInit, posTextEnd;
 
     [SerializeField]
     protected TextMeshProUGUI txtCredits;
 
     [SerializeField]
-    protected float tickLightUp, tickTextIn;
+    protected float tickLightUp, tickTextIn, tickTextScroll;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class CreditsManager : MonoBehaviour
 
         while (t < 1f)
         {
-            txtCredits.color = Color.Lerp(colorInit, colorEnd, t);
+            bg.color = Color.Lerp(colorInit, colorEnd, t);
 
             yield return new WaitForEndOfFrame();
 
@@ -46,11 +46,52 @@ public class CreditsManager : MonoBehaviour
 
         while (t < 1f)
         {
-            bg.color = Color.Lerp(colorInit, colorEnd, t);
+            txtCredits.color = Color.Lerp(colorInit, colorEnd, t);
 
             yield return new WaitForEndOfFrame();
 
             t += Time.deltaTime * tickTextIn;
         }
+
+        t = 0f;
+
+        while (t < 1f)
+        {
+            tfmText.position = Vector3.Lerp(posTextInit.position, posTextEnd.position, t);
+
+            yield return new WaitForEndOfFrame();
+
+            t += Time.deltaTime * tickTextScroll;
+        }
+
+        t = 0f;
+
+        colorInit = new Color(0f, 0f, 0f, .15f); 
+        colorEnd = Color.black;
+
+        while (t < 1f)
+        {
+            bg.color = Color.Lerp(colorInit, colorEnd, t);
+
+            yield return new WaitForEndOfFrame();
+
+            t += Time.deltaTime * tickLightUp;
+        }
+
+        t = 0f;
+
+        colorInit = Color.white; 
+        colorEnd = new Color(1f, 1f, 1f, 0f);
+
+        while (t < 1f)
+        {
+            txtCredits.color = Color.Lerp(colorInit, colorEnd, t);
+
+            yield return new WaitForEndOfFrame();
+
+            t += Time.deltaTime * tickTextIn;
+        }
+
+        GameManager.Instance.LoadScene(GameScenes.Menu);
     }
 }
