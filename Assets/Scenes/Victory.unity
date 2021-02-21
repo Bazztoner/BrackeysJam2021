@@ -425,7 +425,6 @@ GameObject:
   - component: {fileID: 1013116918}
   - component: {fileID: 1013116917}
   - component: {fileID: 1013116916}
-  - component: {fileID: 1013116920}
   - component: {fileID: 1013116921}
   m_Layer: 5
   m_Name: Canvas
@@ -518,26 +517,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1013116920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013116915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73430cd2b2684441a9731e72e1f4d0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bg: {fileID: 1739101284}
-  tfmText: {fileID: 1881905570}
-  posTextInit: {fileID: 1879206108}
-  posTextEnd: {fileID: 637454314}
-  txtCredits: {fileID: 1881905571}
-  tickLightUp: 1.5
-  tickTextIn: 1.5
-  tickTextScroll: 0.01
 --- !u!114 &1013116921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1310837022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,15 +1401,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "And thus, due the humble efforts of a single iron-willed individual, life
-    was saved in many worlds.\r\nWe may never know our saviour\u2019s name, but history
-    will forever remember the space-ship that flew over our heads, taking down fortresses
-    and compounds and, most importantly, raining seeds upon these lands.\r\nSince
-    then, life has sprouted anew. Green covers hills, and trees cast shadows over
-    people\u2019s heads.\r\nTo you, brave explorer. To you, unnamed stranger. To
-    you, your effort and the many sacrifices we know you may have made to save life
-    itself, to save our planets, to save us all. To you, we can only say one thing.
-    From the hopeful bottom of our many living and breathing hearts.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThankyou."
+  m_text: "And thus, due to the humble efforts of a single iron-willed individual,
+    life was saved in many worlds.\r\nWe may never know our saviour\u2019s name,
+    but history will forever remember the space-ship that flew over our heads, taking
+    down fortresses and compounds and, most importantly, raining seeds upon these
+    lands.\r\nSince then, life has sprouted anew. Green covers hills, and trees cast
+    shadows over people\u2019s heads.\r\nTo you, brave explorer. To you, unnamed
+    stranger. To you, your effort and the many sacrifices we know you may have made
+    to save life itself, to save our planets, to save us all. To you, we can only
+    say one thing. From the hopeful bottom of our many living and breathing hearts.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThankyou."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

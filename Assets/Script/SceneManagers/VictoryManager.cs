@@ -99,7 +99,7 @@ public class VictoryManager : MonoBehaviour
 
         imgVictory.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(5f);
 
         GameManager.Instance.LoadScene(GameScenes.Menu);
     }
