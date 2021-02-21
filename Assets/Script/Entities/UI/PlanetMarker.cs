@@ -24,7 +24,7 @@ public class PlanetMarker : MonoBehaviour
 
     void CheckPlayerDistance()
     {
-        _d = Vector3.Distance(transform.position, _player.transform.position);
+        _d = Vector2.Distance(transform.position, _player.transform.position);
         if (_d <= distanceToProc)
         {
             _an.CrossFadeInFixedTime("FadeIn", .1f);

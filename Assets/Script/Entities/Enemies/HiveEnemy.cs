@@ -104,7 +104,7 @@ public class HiveEnemy : EnemyBase
             transform.up = new Vector3(dir.x, dir.y, transform.up.z).normalized;
 
             //move to player if distance > attackRange/2
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) >= attackRange / 2)
+            if (Vector2.Distance(CurrentTarget.transform.position, transform.position) >= attackRange / 2)
             {
                 _rb.MovePosition(_rb.position + (Vector2)dir * (movementSpeed * _movementModifier) * Time.fixedDeltaTime);
             }
@@ -219,13 +219,13 @@ public class HiveEnemy : EnemyBase
 
         if (GetCurrentState() == "Idle")
         {
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= distanceToEngage)
+            if (Vector2.Distance(CurrentTarget.transform.position, transform.position) <= distanceToEngage)
             {
                 ProcessInput(Inputs.EnemyFound);
             }
         }
 
-        if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= attackRange && _currentAttackCooldown <= 0)
+        if (Vector2.Distance(CurrentTarget.transform.position, transform.position) <= attackRange && _currentAttackCooldown <= 0)
         {
             ProcessInput(Inputs.EnemyInAttackRange);
         }
@@ -259,7 +259,7 @@ public class HiveEnemy : EnemyBase
     {
         if (state)
         {
-            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector2.Distance(x.transform.position, transform.position)).FirstOrDefault();
             if (newTarget != null) CurrentTarget = newTarget;
             else CurrentTarget = _player;
         }

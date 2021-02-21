@@ -55,7 +55,7 @@ public class BossUndestructible : EnemyBase
         if (missiles != null) StopCoroutine(missiles);
         if (laser != null) StopCoroutine(laser);
 
-        float curDistance = Vector3.Distance(_player.transform.position, transform.position);
+        float curDistance = Vector2.Distance(_player.transform.position, transform.position);
 
         Vector3 dirInit = transform.up;
         Vector3 dirEnd = Vector3.Normalize(_player.transform.position - transform.position);
@@ -190,7 +190,7 @@ public class BossUndestructible : EnemyBase
             t += (Time.deltaTime * tickRiseShield);
         }
 
-        while (Vector3.Distance(_player.transform.position, transform.position) < distanceToShield)
+        while (Vector2.Distance(_player.transform.position, transform.position) < distanceToShield)
         {
             t = 0f;
 
@@ -203,7 +203,7 @@ public class BossUndestructible : EnemyBase
                 t += (Time.deltaTime / tickRiseShield);
             }
 
-            if (Vector3.Distance(_player.transform.position, transform.position) > distanceToShield)
+            if (Vector2.Distance(_player.transform.position, transform.position) > distanceToShield)
                 break;
 
             t = 0f;

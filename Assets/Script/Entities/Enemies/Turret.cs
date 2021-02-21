@@ -168,7 +168,7 @@ public class Turret : EnemyBase
     {
         if (GetCurrentState() == "Death") return;
 
-        if (Vector3.Distance(CurrentTarget.transform.position, transform.position) <= attackRange)
+        if (Vector2.Distance(CurrentTarget.transform.position, transform.position) <= attackRange)
         {
             ProcessInput(Inputs.EnemyInAttackRange);
         }
@@ -183,7 +183,7 @@ public class Turret : EnemyBase
     {
         if (state)
         {
-            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            var newTarget = FindObjectsOfType<Entity>().Where(x => x.gameObject != this.gameObject && x.gameObject != _player.gameObject).OrderBy(x => Vector2.Distance(x.transform.position, transform.position)).FirstOrDefault();
             if (newTarget != null) CurrentTarget = newTarget;
             else CurrentTarget = _player;
         }

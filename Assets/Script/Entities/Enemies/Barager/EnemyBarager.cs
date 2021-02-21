@@ -42,7 +42,7 @@ public class EnemyBarager : EnemyBase
 
     IEnumerator Movement()
     {
-        float t = Vector3.Distance(transform.position, right) / Vector3.Distance(left, right);
+        float t = Vector2.Distance(transform.position, right) / Vector2.Distance(left, right);
 
         Vector3 curPos = _rb.position;
 
@@ -80,7 +80,7 @@ public class EnemyBarager : EnemyBase
         {
             yield return new WaitForSeconds(tickAttack);
 
-            if (Vector3.Distance(transform.position, _player.transform.position) < attackeDistance)
+            if (Vector2.Distance(transform.position, _player.transform.position) < attackeDistance)
             {
                 if (_attack < 3)
                 {
@@ -131,7 +131,7 @@ public class EnemyBarager : EnemyBase
             {
                 for (int i = 0; i < enemies.Length; i++)
                 {
-                    if (Vector3.Distance(enemies[i].transform.position, transform.position) < attackeDistance && !enemies[i].Equals(this))
+                    if (Vector2.Distance(enemies[i].transform.position, transform.position) < attackeDistance && !enemies[i].Equals(this))
                     {
                         aimableEnemies.Add(enemies[i]);
                     }
