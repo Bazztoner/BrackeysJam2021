@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CreditsManager : MonoBehaviour
+public class VictoryManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject imgVictory;
+
     [SerializeField]
     protected Image bg;
 
@@ -66,7 +69,7 @@ public class CreditsManager : MonoBehaviour
 
         t = 0f;
 
-        colorInit = new Color(0f, 0f, 0f, .15f); 
+        colorInit = new Color(0f, 0f, 0f, .15f);
         colorEnd = Color.black;
 
         while (t < 1f)
@@ -80,7 +83,7 @@ public class CreditsManager : MonoBehaviour
 
         t = 0f;
 
-        colorInit = Color.white; 
+        colorInit = Color.white;
         colorEnd = new Color(1f, 1f, 1f, 0f);
 
         while (t < 1f)
@@ -91,6 +94,12 @@ public class CreditsManager : MonoBehaviour
 
             t += Time.deltaTime * tickTextIn;
         }
+
+        yield return new WaitForSeconds(.1f);
+
+        imgVictory.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
 
         GameManager.Instance.LoadScene(GameScenes.Menu);
     }
