@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             unlockedSeeds = initialUnlockedSeeds;
             totalSeeds = initialTotalSeeds;
         }
+        onShoot = new UnityEvent();
         onShoot.AddListener(Consume);
     }
 
