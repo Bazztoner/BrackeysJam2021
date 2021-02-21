@@ -251,6 +251,7 @@ public class BossUndestructible : EnemyBase
 
             var _missie = Instantiate(defaultProjectile, pointMuzzles[_i].position, pointMuzzles[_i].rotation);
             SeekingMissile missie = _missie.GetComponent<SeekingMissile>();
+            missie.SpawnProjectile(pointMuzzles[_i].position, pointMuzzles[_i].transform.up, this);
             missie.DefineTarget(_player.transform);
 
             yield return new WaitForSeconds(.1f);
@@ -263,16 +264,16 @@ public class BossUndestructible : EnemyBase
 
     protected override void MindControlHandler(bool state)
     {
-        throw new System.NotImplementedException();
+        //INMUNE
     }
 
     protected override void Shoot()
     {
-        throw new System.NotImplementedException();
+        //DOES NOT APPLY
     }
 
     protected override void StunHandler(bool state)
     {
-        throw new System.NotImplementedException();
+        //INMUNE
     }
 }
