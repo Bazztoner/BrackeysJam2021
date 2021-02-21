@@ -516,10 +516,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectableSeeds: {fileID: 6666096042406950976, guid: e817a6cfc5601e44e92c20983c19b6b1,
     type: 3}
-  maxSeedsAmount: 640000003200000019000000320000001e0000000f000000
-  initialUnlockedSeeds: 010000000000
-  initialTotalSeeds: 640000000000000000000000000000000000000000000000
-  setDefaultInfo: 0
+  maxSeedsAmount: f4010000c8000000fa000000960000007d00000042000000
+  unlockedSeeds: 010000000000
+  unlockedPlanets: 000000000000
+  totalSeeds: f40100000000000000000000000000000000000000000000
+  costs: ffffffffffffffffffffffffffffffffffffffffffffffff
   onShoot:
     m_PersistentCalls:
       m_Calls: []
