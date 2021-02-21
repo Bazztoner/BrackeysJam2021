@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public GameScenes CurrentScene { get => curScene;}
+
     [SerializeField]
     GameObject collectableSeeds;
 
@@ -161,6 +164,7 @@ public class GameManager : MonoBehaviour
     public void LoadScene(GameScenes scene)
     {
         load = StartCoroutine(Load(scene));
+        MusicManager.Instance.OnStartLoadingScene(scene);
     }
 
     public void Quit()
@@ -178,7 +182,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-
+        MusicManager.Instance.OnChangeScene(scene);
         ao.allowSceneActivation = true;
     }
     #endregion
@@ -200,5 +204,6 @@ public enum GameScenes
     P4L2,
     P5L1,
     P5L2,
-    FinalBoss
+    FinalBoss,
+    WinScreen
 }
