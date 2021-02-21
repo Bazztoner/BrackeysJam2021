@@ -22,6 +22,9 @@ public class SeedPickUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.LayerMatchesWith("Player"))
+        {
             onPickUp.Invoke();
+            Destroy(gameObject);
+        }
     }
 }
